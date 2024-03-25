@@ -1,25 +1,21 @@
 package pl.polsl.project.restaurantmanagement.model;
 
 import jakarta.persistence.*;
-import jakarta.persistence.Table;
 import lombok.*;
 
 @Entity
 @Table(name = " ")
 @Data
-public class Order {
+public class Table_entity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = " ")
-    private Integer orderId;
+    private Integer tableId;
 
     @Column(name = " ")
-    private Integer menuItem;
+    private Integer seats;
 
     @Column(name = " ")
-    private String totalPrice;
-
-    @Column(name = " ")
-    private String notes;
+    private Boolean isReserved;
 }
