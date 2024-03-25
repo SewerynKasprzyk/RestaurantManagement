@@ -1,4 +1,7 @@
 package pl.polsl.project.restaurantmanagement.repositories;
 
-public class OrderRepository {
+import org.springframework.data.jpa.repository.JpaRepository;
+import pl.polsl.project.restaurantmanagement.model.Order;
+
+public interface OrderRepository extends JpaRepository<Order, Integer> {
 }
