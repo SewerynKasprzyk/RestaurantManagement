@@ -1,30 +1,39 @@
 package pl.polsl.project.restaurantmanagement.model;
 
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import jakarta.persistence.*;
-import jakarta.persistence.Table;
-import lombok.*;
+
+import java.time.LocalTime;
 
 @Entity
-@Table(name = " ")
+@Table(name = "time_schedule")
 @Data
+@NoArgsConstructor
 public class TimeSchedule {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = " ")
-    private Integer timeScheduleId;
+    @Column(name = "time_schedule_id")
+    private Integer id;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = " ")
-    private Day day;
+    @Column(name = "day")
+    private DayOfWeek day;
 
-    @Column(name = " ")
-    private String hour;
+    @Column(name = "start_hour")
+    private LocalTime startHour;
 
-    @Column(name = " ")
+    @Column(name = "end_hour")
+    private LocalTime endHour;
+
+    @Column(name = "is_active")
     private Boolean isActive;
 
-    public enum Day {
-        // Define your enum values here
-    }
+    // Constructors, getters, and setters
 }
+

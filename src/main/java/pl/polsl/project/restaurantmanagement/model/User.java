@@ -1,54 +1,52 @@
 package pl.polsl.project.restaurantmanagement.model;
 
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import jakarta.persistence.*;
-import jakarta.persistence.Table;
-import lombok.*;
+
+import java.util.List;
 
 @Entity
-@Table(name = " ")
+@Table(name = "users")
 @Data
+@NoArgsConstructor
 public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = " ")
-    private Integer userId;
-
-    @Column(name = " ")
-    private Integer orderId;
-
-    @Column(name = " ")
-    private Integer reservationId;
-
-    @Column(name = " ")
-    private Integer timeScheduleId;
+    @Column(name = "user_id")
+    private Integer id;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = " ")
+    @Column(name = "user_type")
     private UserType userType;
 
-    @Column(name = " ")
+    @Column(name = "login")
     private String login;
 
-    @Column(name = " ")
+    @Column(name = "password")
     private String password;
 
-    @Column(name = " ")
+    @Column(name = "name")
     private String name;
 
-    @Column(name = " ")
+    @Column(name = "surname")
     private String surname;
 
-    @Column(name = " ")
+    @Column(name = "phone_number")
     private String phoneNumber;
 
-    @Column(name = " ")
-    private Boolean isVerified;
+    @Column(name = "is_verified")
+    private Boolean verified;
 
-    @Column(name = " ")
-    private Boolean isActive;
+    @Column(name = "is_active")
+    private Boolean active;
 
-    public enum UserType {
-        // Define your enum values here
-    }
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List<TimeSchedule> timeSchedules;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List<Reservation> reservations;
+
+    // Constructors, getters, and setters
 }

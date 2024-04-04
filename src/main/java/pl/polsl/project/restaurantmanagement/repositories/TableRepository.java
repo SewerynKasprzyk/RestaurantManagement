@@ -1,7 +1,11 @@
 package pl.polsl.project.restaurantmanagement.repositories;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import pl.polsl.project.restaurantmanagement.model.Table_entity;
+import org.springframework.stereotype.Repository;
+import pl.polsl.project.restaurantmanagement.model.TableEntity;
 
-public interface TableRepository extends JpaRepository<Table_entity, Integer> {
+@Repository
+public interface TableRepository extends JpaRepository<TableEntity, Integer> {
+    // Define custom queries here if needed
 }
+

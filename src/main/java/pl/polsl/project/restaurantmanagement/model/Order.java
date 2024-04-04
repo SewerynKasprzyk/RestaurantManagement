@@ -1,25 +1,34 @@
 package pl.polsl.project.restaurantmanagement.model;
 
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import jakarta.persistence.*;
-import jakarta.persistence.Table;
-import lombok.*;
+
+import java.util.List;
 
 @Entity
-@Table(name = " ")
+@Table(name = "orders")
 @Data
+@NoArgsConstructor
 public class Order {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = " ")
-    private Integer orderId;
+    @Column(name = "order_id")
+    private Integer id;
 
-    @Column(name = " ")
-    private Integer menuItem;
+    @Column(name = "total_price")
+    private double totalPrice;
 
-    @Column(name = " ")
-    private String totalPrice;
-
-    @Column(name = " ")
+    @Column(name = "notes")
     private String notes;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
+
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
+    private List<OrderItem> orderItems;
+
+    // Constructors, getters, and setters
 }
