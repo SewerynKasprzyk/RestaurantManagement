@@ -1,6 +1,7 @@
 package pl.polsl.project.restaurantmanagement.services;
 
 import jakarta.annotation.PostConstruct;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pl.polsl.project.restaurantmanagement.model.User;
@@ -36,22 +37,24 @@ public class UserService {
         userRepository.deleteById(id);
     }
 
-    @PostConstruct
+    @Transactional
     public void initializeExampleUsers() {
-        List<User> exampleUsers = new ArrayList<>();
-        for (int i = 0; i < 10; i++) {
-            User user = new User();
-            user.setUserType(UserType.CUSTOMER);
-            user.setLogin("user" + i);
-            user.setPassword("password" + i);
-            user.setName("User " + i);
-            user.setSurname("Surname " + i);
-            user.setPhoneNumber("123456789" + i);
-            user.setVerified(true);
-            user.setActive(true);
-            exampleUsers.add(user);
+        if (userRepository.count() == 0) { // Check if there are no users in the database
+            List<User> exampleUsers = new ArrayList<>();
+            for (int i = 1; i <= 10; i++) {
+                User user = new User();
+                user.setUserType(UserType.CUSTOMER);
+                user.setLogin("user" + i);
+                user.setPassword("password" + i);
+                user.setName("User " + i);
+                user.setSurname("Surname " + i);
+                user.setPhoneNumber("123456789" + i);
+                user.setVerified(true);
+                user.setActive(true);
+                exampleUsers.add(user);
+            }
+            userRepository.saveAll(exampleUsers);
         }
-        userRepository.saveAll(exampleUsers);
     }
 
 }
