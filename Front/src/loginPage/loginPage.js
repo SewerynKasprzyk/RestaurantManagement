@@ -7,8 +7,6 @@ function Login({ onLogin }) {
   const [password, setPassword] = useState('');
 
   const handleLogin = () => {
-    // Tutaj możesz dodać logikę weryfikacji użytkownika (np. zapytanie do serwera)
-    // Załóżmy, że po prostu wywołujemy funkcję przekazaną przez props
     onLogin(username);
   };
 
@@ -28,8 +26,6 @@ function Register({ onRegister }) {
   const [password, setPassword] = useState('');
 
   const handleRegister = () => {
-    // Tutaj możesz dodać logikę rejestracji użytkownika (np. zapytanie do serwera)
-    // Załóżmy, że po prostu wywołujemy funkcję przekazaną przez props
     onRegister(username);
   };
 
@@ -65,17 +61,13 @@ function LoginPage() {
     { name: 'Pizza', price: '$10' },
     { name: 'Burger', price: '$8' },
     { name: 'Spaghetti', price: '$12' }
-  ]); // Dostępne dania w menu
+  ]);
 
   const handleLogin = (username) => {
-    // Tutaj możesz dodać logikę weryfikacji użytkownika (np. zapytanie do serwera)
-    // Załóżmy, że po prostu ustawiamy zalogowanego użytkownika w stanie aplikacji
     setUser(username);
   };
 
   const handleRegister = (username) => {
-    // Tutaj możesz dodać logikę rejestracji użytkownika (np. zapytanie do serwera)
-    // Załóżmy, że po prostu ustawiamy zalogowanego użytkownika w stanie aplikacji
     setUser(username);
   };
 
