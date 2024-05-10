@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import '../App.css';
 
 // Komponent logowania
 function Login({ onLogin }) {
@@ -12,7 +13,7 @@ function Login({ onLogin }) {
   };
 
   return (
-    <div>
+    <div className='login-container'>
       <h2>Logowanie</h2>
       <input type="text" placeholder="Nazwa użytkownika" value={username} onChange={(e) => setUsername(e.target.value)} />
       <input type="password" placeholder="Hasło" value={password} onChange={(e) => setPassword(e.target.value)} />
@@ -33,7 +34,7 @@ function Register({ onRegister }) {
   };
 
   return (
-    <div>
+    <div className="login-container">
       <h2>Rejestracja</h2>
       <input type="text" placeholder="Nazwa użytkownika" value={username} onChange={(e) => setUsername(e.target.value)} />
       <input type="password" placeholder="Hasło" value={password} onChange={(e) => setPassword(e.target.value)} />
@@ -57,8 +58,9 @@ function Menu({ items }) {
 }
 
 // Główny komponent aplikacji
-function App() {
+function LoginPage() {
   const [user, setUser] = useState(null); // Aktualnie zalogowany użytkownik
+  const [menuVisible, setMenuVisible] = useState(false);
   const [menuItems, setMenuItems] = useState([
     { name: 'Pizza', price: '$10' },
     { name: 'Burger', price: '$8' },
@@ -77,21 +79,23 @@ function App() {
     setUser(username);
   };
 
+    const handleMenuClick = (menuVisible) => {
+    setMenuVisible(!menuVisible);
+    };
+
   return (
-    <div>
-      {user ? (
-        <div>
-          <h1>Witaj, {user}!</h1>
-          <Menu items={menuItems} />
-        </div>
-      ) : (
-        <div>
+    <div className="box">
+          <div className="login-section">
           <Login onLogin={handleLogin} />
           <Register onRegister={handleRegister} />
-        </div>
-      )}
+          </div>
+          <div className="menu-show">
+          <button onClick={()=>handleMenuClick(menuVisible)} >Pokaż menu</button>
+          {menuVisible && <Menu items={menuItems} />}
+          <p>loginpage</p>
+          </div>
     </div>
   );
 }
 
-export default App;
+export default LoginPage;
