@@ -24,6 +24,7 @@ function Login({ onLogin }) {
             .then(data => onLogin(data.login)) // Wywołanie funkcji onLogin
             .catch((error) => {
                 console.error('Error:', error);
+                alert('Błąd logowania. Sprawdź swoje dane i spróbuj ponownie.'); // Dodane powiadomienie o błędzie
             });
     };
 
@@ -61,6 +62,7 @@ function Register({ onRegister }) {
             .then(data => onRegister(data.login)) // Wywołanie funkcji onRegister
             .catch((error) => {
                 console.error('Error:', error);
+                alert('Błąd rejestracji. Sprawdź swoje dane i spróbuj ponownie.'); // Dodane powiadomienie o błędzie
             });
     };
 
