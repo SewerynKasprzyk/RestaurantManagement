@@ -5,11 +5,27 @@ function Login({ onLogin }) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleLogin = () => {
-    // Tutaj możesz dodać logikę weryfikacji użytkownika (np. zapytanie do serwera)
-    // Załóżmy, że po prostu wywołujemy funkcję przekazaną przez props
-    onLogin(username);
-  };
+  //zmienione metody logowania
+    const handleLogin = () => {
+        fetch('http://localhost:8080/api/auth/login', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ login: username, password: password }),
+        })
+            .then(response => {
+                if (response.ok) {
+                    return response.json();
+                } else {
+                    throw new Error('Błąd logowania');
+                }
+            })
+            .then(data => onLogin(data.login)) // Wywołanie funkcji onLogin
+            .catch((error) => {
+                console.error('Error:', error);
+            });
+    };
 
   return (
     <div className='login-container'>
@@ -26,11 +42,27 @@ function Register({ onRegister }) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleRegister = () => {
-    // Tutaj możesz dodać logikę rejestracji użytkownika (np. zapytanie do serwera)
-    // Załóżmy, że po prostu wywołujemy funkcję przekazaną przez props
-    onRegister(username);
-  };
+    //zmienione metody rejestracji bez reszty danych (do uzupelnienia)
+    const handleRegister = () => {
+        fetch('http://localhost:8080/api/auth/register', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ login: username, password: password }),
+        })
+            .then(response => {
+                if (response.ok) {
+                    return response.json();
+                } else {
+                    throw new Error('Błąd rejestracji');
+                }
+            })
+            .then(data => onRegister(data.login)) // Wywołanie funkcji onRegister
+            .catch((error) => {
+                console.error('Error:', error);
+            });
+    };
 
   return (
     <div>

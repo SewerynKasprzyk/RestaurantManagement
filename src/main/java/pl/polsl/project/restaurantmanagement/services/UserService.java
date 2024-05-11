@@ -57,5 +57,17 @@ public class UserService {
         }
     }
 
+    //do logowania
+    public User findByLogin(String login) {
+        return (User) userRepository.findByLogin(login).orElse(null);
+    }
+
+    //do rejestracji
+    public User registerUser(User user) {
+        // You might want to encode the password here
+        return userRepository.save(user);
+    }
+
+
 }
 
