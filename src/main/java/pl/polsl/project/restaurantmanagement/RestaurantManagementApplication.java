@@ -5,6 +5,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
 import pl.polsl.project.restaurantmanagement.services.IngredientService;
+import pl.polsl.project.restaurantmanagement.services.MenuItemService;
 import pl.polsl.project.restaurantmanagement.services.UserService;
 
 @SpringBootApplication
@@ -14,10 +15,13 @@ public class RestaurantManagementApplication {
 
     private final IngredientService ingredientService;
 
+    private final MenuItemService menuItemService;
+
     @Autowired
-    public RestaurantManagementApplication(UserService userService, IngredientService ingredientService) {
+    public RestaurantManagementApplication(UserService userService, IngredientService ingredientService, MenuItemService menuItemService) {
         this.userService = userService;
         this.ingredientService = ingredientService;
+        this.menuItemService = menuItemService;
     }
 
     public static void main(String[] args) {
@@ -31,6 +35,9 @@ public class RestaurantManagementApplication {
 
         // Dodawanie przykładowych składników
         app.ingredientService.initializeExampleIngredients();
+
+        //Dodawanie przykładowych pozycji menu
+        app.menuItemService.initializeExampleMenuItems();
 
     }
 }
