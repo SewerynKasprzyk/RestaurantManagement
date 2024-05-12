@@ -32,6 +32,5 @@ public class RestaurantManagementApplication {
         // Dodawanie przykładowych składników
         app.ingredientService.initializeExampleIngredients();
 
-
     }
 }

@@ -8,6 +8,7 @@ import pl.polsl.project.restaurantmanagement.model.Ingredient;
 import pl.polsl.project.restaurantmanagement.repositories.IngredientRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class IngredientService {
@@ -27,14 +28,15 @@ public class IngredientService {
         return ingredientRepository.findAll();
     }
 
-    public Ingredient getIngredientById(Integer id) {
-        return ingredientRepository.findById(id).orElse(null);
-    }
+    public Ingredient getIngredientById(Integer id) { return ingredientRepository.findById(id).orElse(null); }
+
+    //public Optional<Ingredient> getIngredientById(Integer id) { return ingredientRepository.findById(id); }
 
     public void deleteIngredient(Integer id) {
         ingredientRepository.deleteById(id);
     }
 
+    //Przykladowe skladniki
     @Transactional
     public void initializeExampleIngredients() {
         if (ingredientRepository.count() == 0) {
@@ -48,6 +50,17 @@ public class IngredientService {
             ingredientRepository.save(ingredient3);
             ingredientRepository.save(ingredient4);
             ingredientRepository.save(ingredient5);
+        }
+    }
+
+    //Update ilosci istniejacych skladnikow za pomoca id skladnika
+    public void updateIngredients(Ingredient ingredientId, Double newAmount) {
+        List<Ingredient> ingredients = ingredientRepository.findAll();
+        for (Ingredient ingredient : ingredients) {
+            if (ingredient.getId().equals(ingredientId.getId())) {
+                ingredient.setAmount(newAmount);
+                ingredientRepository.save(ingredient);
+            }
         }
     }
 }
