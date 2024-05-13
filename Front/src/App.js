@@ -5,6 +5,7 @@ import {BrowserRouter, Routes, Route} from 'react-router-dom'
 import Navbar from "./HomePage/Navbar";
 import { Login, Register } from "./loginPage/Login";
 import MenuItems from "./MenuPage/Menu";
+import AppContent from "./AppContent";
 
 // Główny komponent aplikacji
 function App() {
@@ -24,6 +25,7 @@ function App() {
         <div>
             <div>
                 <Navbar />
+                <AppContent />
             </div>
             <Routes>
                 <Route path="/menu" element = {<MenuItems/>} />
