@@ -13,3 +13,19 @@
    left: 38%; /* Ustawienie 50% od lewej krawędzi */
    top: 20%;
 }
+
+.register-input{
+    margin-left: 1rem;
+    display: flex;
+    flex-direction: column;
+    width: 20rem;
+    gap: 1rem;
+}
+
+.login-container{
+    margin-left: 1rem;
+    display: flex;
+    flex-direction: column;
+    width: 20rem;
+    gap: 1rem;
+}

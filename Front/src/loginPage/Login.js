@@ -77,7 +77,7 @@ export function Register({ onRegister }) {
     };
 
     return (
-        <div>
+        <div className="register-input">
             <h2>Rejestracja</h2>
             <input type="text" placeholder="Nazwa użytkownika" value={username} onChange={(e) => setUsername(e.target.value)} />
             <input type="password" placeholder="Hasło" value={password} onChange={(e) => setPassword(e.target.value)} />
