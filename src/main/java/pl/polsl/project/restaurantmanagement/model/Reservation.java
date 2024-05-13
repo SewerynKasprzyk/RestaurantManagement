@@ -46,5 +46,16 @@ public class Reservation {
     private List<TableEntity> tables;
 
     // Constructors, getters, and setters
+
+    public Reservation(LocalDate reservationDate, LocalTime startHour, LocalTime endHour, Boolean reserved, String notes, User user, List<TableEntity> tables) {
+        this.reservationDate = reservationDate;
+        this.startHour = startHour;
+        this.endHour = endHour;
+        this.reserved = reserved;
+        this.notes = notes;
+        this.user = user;
+        this.tables = tables;
+    }
+
 }
 
