@@ -3,15 +3,12 @@ import "./App.css";
 import "../node_modules/bootstrap/dist/css/bootstrap-grid.min.css"
 import Navbar from "./HomePage/Navbar";
 import { Login, Register } from "./loginPage/Login";
+import MenuItems from "./MenuPage/Menu";
 
 // Główny komponent aplikacji
 function App() {
     const [user, setUser] = useState(null); // Aktualnie zalogowany użytkownik
-    const [menuItems, setMenuItems] = useState([
-        { name: 'Pizza', price: '$10' },
-        { name: 'Burger', price: '$8' },
-        { name: 'Spaghetti', price: '$12' }
-    ]); // Dostępne dania w menu
+
 
     const handleLogin = (username) => {
         setUser(username);
@@ -29,7 +26,7 @@ function App() {
             {user ? (
                 <div>
                     <h1>Witaj, {user}!</h1>
-                    <Menu items={menuItems} />
+                    <MenuItems />
                 </div>
             ) : (
                 <div>
@@ -42,7 +39,7 @@ function App() {
 }
 
 // Komponent menu
-function Menu({ items }) {
+function MenuIt({ items }) {
     return (
         <div>
             <h2>Menu</h2>
