@@ -6,7 +6,7 @@ export default function MenuItems() {
 
     useEffect(() => {
 
-        const fetachMenu = async () => {
+        const fetchMenu = async () => {
             try {
                 const response = await fetch('http://localhost:8080/api/menu');
 
@@ -22,7 +22,7 @@ export default function MenuItems() {
             }
         };
 
-        fetachMenu();
+        fetchMenu();
     },[]);
 
 
