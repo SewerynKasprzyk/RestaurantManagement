@@ -1,10 +1,12 @@
-import React, { useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import "./App.css";
 import "../node_modules/bootstrap/dist/css/bootstrap-grid.min.css"
 import {BrowserRouter, Routes, Route} from 'react-router-dom'
 import Navbar from "./HomePage/Navbar";
 import { Login, Register } from "./loginPage/Login";
 import MenuItems from "./MenuPage/Menu";
+import Ingredients from "./Ingredients";
+import MenuItemForm from "./MenuItem";
 
 // Główny komponent aplikacji
 function App() {
@@ -29,6 +31,8 @@ function App() {
                 <Route path="/menu" element = {<MenuItems/>} />
                 <Route path="/login" element= {<Login onLogin={handleLogin}/>} />
                 <Route path="/register" element = {<Register onRegister = {handleRegister}/>} />
+                <Route path="/ingredients" element = {<Ingredients/>} />
+                <Route path="/menuitem" element = {<MenuItemForm/>} />
             </Routes>
         </div>
     </BrowserRouter>
