@@ -1,4 +1,4 @@
-package pl.polsl.project.restaurantmanagement;
+package pl.polsl.project.restaurantmanagement.controllers;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
