@@ -1,5 +1,6 @@
 package pl.polsl.project.restaurantmanagement.services;
 
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pl.polsl.project.restaurantmanagement.model.OrderItem;
@@ -31,4 +32,5 @@ public class OrderItemService {
     public void deleteOrderItem(Integer id) {
         orderItemRepository.deleteById(id);
     }
+
 }

@@ -2,7 +2,9 @@ package pl.polsl.project.restaurantmanagement.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import pl.polsl.project.restaurantmanagement.model.MenuItem;
 import pl.polsl.project.restaurantmanagement.model.Order;
+import pl.polsl.project.restaurantmanagement.model.OrderItem;
 import pl.polsl.project.restaurantmanagement.repositories.OrderRepository;
 
 import java.util.List;
@@ -32,5 +34,7 @@ public class OrderService {
     public void deleteOrder(Integer id) {
         orderRepository.deleteById(id);
     }
+
+
 }
 

@@ -7,4 +7,6 @@ import pl.polsl.project.restaurantmanagement.model.MenuItem;
 @Repository
 public interface MenuItemRepository extends JpaRepository<MenuItem, Integer> {
     // Define custom queries here if needed
+
+    MenuItem findByName(String name);
 }
