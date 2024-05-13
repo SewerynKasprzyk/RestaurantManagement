@@ -25,7 +25,7 @@ public class MenuItem {
     private MenuItemType type;
 
     @Column(name = "price")
-    private Double price;
+    private BigDecimal price;
 
     @Column(name = "description")
     private String description;
@@ -38,7 +38,7 @@ public class MenuItem {
     )
     private List<Ingredient> ingredients;
 
-    public MenuItem(String name, MenuItemType type, Double price, String description) {
+    public MenuItem(String name, MenuItemType type, BigDecimal price, String description) {
         this.name = name;
         this.type = type;
         this.price = price;

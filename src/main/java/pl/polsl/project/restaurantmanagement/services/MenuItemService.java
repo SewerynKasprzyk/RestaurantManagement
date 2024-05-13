@@ -45,11 +45,11 @@ public class MenuItemService {
     @Transactional
     public void initializeExampleMenuItems() {
         if (menuItemRepository.count() == 0) {
-            MenuItem menuItem1 = new MenuItem("Pizza", MAIN_COURSE, 20.0 , "Pizza with cheese and tomato sauce");
-            MenuItem menuItem2 = new MenuItem("Pasta", MAIN_COURSE, 15.5, "Pasta with tomato sauce");
-            MenuItem menuItem3 = new MenuItem("Salad",APPETIZER, 8.0, "Grece salad");
-            MenuItem menuItem4 = new MenuItem("Soup", MAIN_COURSE, 10.0, "Tomato soup");
-            MenuItem menuItem5 = new MenuItem("Cola", BEVERAGE, 5.5, "Cola 0.33l");
+            MenuItem menuItem1 = new MenuItem("Pizza", MAIN_COURSE, BigDecimal.valueOf(20.0) , "Pizza with cheese and tomato sauce");
+            MenuItem menuItem2 = new MenuItem("Pasta", MAIN_COURSE, BigDecimal.valueOf(15.5), "Pasta with tomato sauce");
+            MenuItem menuItem3 = new MenuItem("Salad",APPETIZER, BigDecimal.valueOf(8.0), "Grece salad");
+            MenuItem menuItem4 = new MenuItem("Soup", MAIN_COURSE, BigDecimal.valueOf(10.0), "Tomato soup");
+            MenuItem menuItem5 = new MenuItem("Cola", BEVERAGE, BigDecimal.valueOf(5.5), "Cola 0.33l");
             menuItemRepository.save(menuItem1);
             menuItemRepository.save(menuItem2);
             menuItemRepository.save(menuItem3);
