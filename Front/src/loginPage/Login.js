@@ -46,6 +46,9 @@ export function Login({ onLogin }) {
 export function Register({ onRegister }) {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+    const [name, setName] = useState('');
+    const [surname, setSurname] = useState('');
+    const [phoneNumber, setPhoneNumber] = useState('');
     const [error, setError] = useState('');
 
     const handleRegister = () => {
@@ -54,7 +57,7 @@ export function Register({ onRegister }) {
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ login: username, password: password }),
+            body: JSON.stringify({ login: username, password: password, name: name, surname: surname, phoneNumber: phoneNumber}),
         })
             .then(response => {
                 if (response.ok) {
@@ -74,10 +77,13 @@ export function Register({ onRegister }) {
     };
 
     return (
-        <div>
+        <div className="register-input">
             <h2>Rejestracja</h2>
             <input type="text" placeholder="Nazwa użytkownika" value={username} onChange={(e) => setUsername(e.target.value)} />
             <input type="password" placeholder="Hasło" value={password} onChange={(e) => setPassword(e.target.value)} />
+            <input type="text" placeholder="Imię" value={name} onChange={(e) => setName(e.target.value)} />
+            <input type="text" placeholder="Nazwisko" value={surname} onChange={(e) => setSurname(e.target.value)} />
+            <input type="number" placeholder="Numer telefonu" value={phoneNumber} onChange={(e) => setPhoneNumber(e.target.value)} />
             {error && <div className="error">{error}</div>}
             <button onClick={handleRegister}>Zarejestruj</button>
         </div>

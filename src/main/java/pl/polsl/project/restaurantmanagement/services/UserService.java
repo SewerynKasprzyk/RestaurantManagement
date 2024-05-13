@@ -65,6 +65,9 @@ public class UserService {
     //do rejestracji
     public User registerUser(User user) {
         // You might want to encode the password here
+        user.setActive(true);
+        user.setVerified(true);
+        user.setUserType(UserType.CUSTOMER);
         return userRepository.save(user);
     }
 

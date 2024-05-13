@@ -1,4 +1,4 @@
-package pl.polsl.project.restaurantmanagement;
+package pl.polsl.project.restaurantmanagement.controllers;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
