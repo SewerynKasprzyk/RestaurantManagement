@@ -8,7 +8,6 @@ import pl.polsl.project.restaurantmanagement.model.Ingredient;
 import pl.polsl.project.restaurantmanagement.repositories.IngredientRepository;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class IngredientService {
@@ -34,6 +33,10 @@ public class IngredientService {
 
     public void deleteIngredient(Integer id) {
         ingredientRepository.deleteById(id);
+    }
+
+    public void addIngredient(Ingredient ingredient) {
+        ingredientRepository.save(ingredient);
     }
 
     //Przykladowe skladniki

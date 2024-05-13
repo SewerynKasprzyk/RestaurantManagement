@@ -3,6 +3,8 @@ package pl.polsl.project.restaurantmanagement.services;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import pl.polsl.project.restaurantmanagement.model.AmountType;
+import pl.polsl.project.restaurantmanagement.model.Ingredient;
 import pl.polsl.project.restaurantmanagement.model.MenuItem;
 import pl.polsl.project.restaurantmanagement.repositories.MenuItemRepository;
 
@@ -53,6 +55,17 @@ public class MenuItemService {
             menuItemRepository.save(menuItem3);
             menuItemRepository.save(menuItem4);
             menuItemRepository.save(menuItem5);
+        }
+    }
+
+    //Dodawanie skladnikow do danego menu itemu (przyklad)
+    private void addIngredientsToMenuItem(Integer menuItemId, List<Ingredient> ingredients){
+        MenuItem menuItem = menuItemRepository.findById(menuItemId).orElse(null);
+        if(menuItem != null){
+            ingredients.add(new Ingredient("Flour", 1000, AmountType.GRAMS));
+            ingredients.add(new Ingredient("Cheese", 10,AmountType.PIECES));
+            menuItem.setIngredients(ingredients);
+            menuItemRepository.save(menuItem);
         }
     }
 }
