@@ -19,5 +19,9 @@ public class TableEntity {
     private Integer seatsAmount;
 
     // Constructors, getters, and setters
+
+    public TableEntity(Integer seatsAmount) {
+        this.seatsAmount = seatsAmount;
+    }
 }
 

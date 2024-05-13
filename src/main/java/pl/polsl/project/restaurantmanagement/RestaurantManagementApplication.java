@@ -6,6 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
 import pl.polsl.project.restaurantmanagement.services.IngredientService;
 import pl.polsl.project.restaurantmanagement.services.MenuItemService;
+import pl.polsl.project.restaurantmanagement.services.TableService;
 import pl.polsl.project.restaurantmanagement.services.UserService;
 
 @SpringBootApplication
@@ -17,11 +18,14 @@ public class RestaurantManagementApplication {
 
     private final MenuItemService menuItemService;
 
+    private final TableService tableService;
+
     @Autowired
-    public RestaurantManagementApplication(UserService userService, IngredientService ingredientService, MenuItemService menuItemService) {
+    public RestaurantManagementApplication(UserService userService, IngredientService ingredientService, MenuItemService menuItemService, TableService tableService) {
         this.userService = userService;
         this.ingredientService = ingredientService;
         this.menuItemService = menuItemService;
+        this.tableService = tableService;
     }
 
     public static void main(String[] args) {
@@ -38,6 +42,9 @@ public class RestaurantManagementApplication {
 
         //Dodawanie przykładowych pozycji menu
         app.menuItemService.initializeExampleMenuItems();
+
+        //Dodawanie przykładowych stolikow
+        app.tableService.initializeExampleTables();
 
     }
 }
