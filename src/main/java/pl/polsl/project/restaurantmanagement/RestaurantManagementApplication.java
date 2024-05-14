@@ -53,9 +53,7 @@ public class RestaurantManagementApplication {
         app.tableService.initializeExampleTables();
 
         //Dawanie nowej rezerwacji TODO Zrobić coś z subListem
-        app.reservationService.saveOrUpdateReservation(new Reservation(LocalDate.now(), LocalTime.of(12, 0),
-                LocalTime.of(14, 0), true, "Brak uwag", app.userService.getUserById(1),
-                Collections.singletonList(app.tableService.getTableById(1))));
+        app.reservationService.initializeExampleReservations();
 
     }
 }
