@@ -63,20 +63,19 @@ public class ReservationService {
 
     @Transactional
     public void initializeExampleReservations() {
-        List<TableEntity> chooseTables= new ArrayList<>();
+        List<TableEntity> chooseTables = new ArrayList<>();
         chooseTables.add(tableService.getTableById(1));
+        chooseTables.add(tableService.getTableById(2));
+
+        List<TableEntity> chooseTables2 = new ArrayList<>();
+        chooseTables2.add(tableService.getTableById(3));
 
         if (reservationRepository.count() == 0) {
             Reservation reservation1 = new Reservation(LocalDate.now(), LocalTime.of(12, 0), LocalTime.of(14,0), true, "Brak uwag", userService.getUserById(1), chooseTables);
-//            Reservation reservation2 = new Reservation(LocalDate.now(), LocalTime.of(14, 0), LocalTime.of(16, 0), true, "Brak uwag",  userService.getUserById(2), );
-//            Reservation reservation3 = new Reservation(LocalDate.now(), LocalTime.of(16, 0), LocalTime.of(18, 0), true, "Brak uwag", userService.getUserById(3), );
-//            Reservation reservation4 = new Reservation(LocalDate.now(), LocalTime.of(18, 0), LocalTime.of(20, 0), true, "Brak uwag",userService.getUserById(4), );
-//            Reservation reservation5 = new Reservation(LocalDate.now(), LocalTime.of(20, 0), LocalTime.of(22, 0),true, "Brak uwag", userService.getUserById(5), );
             reservationRepository.save(reservation1);
-//            reservationRepository.save(reservation2);
-//            reservationRepository.save(reservation3);
-//            reservationRepository.save(reservation4);
-//            reservationRepository.save(reservation5);
+
+            Reservation reservation2 = new Reservation(LocalDate.now(), LocalTime.of(14, 0), LocalTime.of(16,0), true, "Brak uwag", userService.getUserById(2), chooseTables2);
+            reservationRepository.save(reservation2);
         }
     }
 }

@@ -51,7 +51,7 @@ public class Reservation {
         this.reservationDate = reservationDate;
         this.startHour = startHour;
         this.endHour = endHour;
-        this.reserved = reserved;
+        this.reserved = true;
         this.notes = notes;
         this.user = user;
         this.tables = tables;
