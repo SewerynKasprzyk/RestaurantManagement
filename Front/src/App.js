@@ -7,6 +7,7 @@ import { Login, Register } from "./loginPage/Login";
 import MenuItems from "./MenuPage/Menu";
 import Ingredients from "./Ingredients";
 import MenuItemForm from "./MenuItem";
+import Reservation from "./ReservationPage/Reservation";
 
 // Główny komponent aplikacji
 function App() {
@@ -33,23 +34,10 @@ function App() {
                 <Route path="/register" element = {<Register onRegister = {handleRegister}/>} />
                 <Route path="/ingredients" element = {<Ingredients/>} />
                 <Route path="/menuitem" element = {<MenuItemForm/>} />
+                <Route path="/reservations" element = {<Reservation/>} />
             </Routes>
         </div>
     </BrowserRouter>
-    );
-}
-
-// Komponent menu
-function MenuIt({ items }) {
-    return (
-        <div>
-            <h2>Menu</h2>
-            <ul>
-                {items.map((item, index) => (
-                    <li key={index}>{item.name} - {item.price}</li>
-                ))}
-            </ul>
-        </div>
     );
 }
 
