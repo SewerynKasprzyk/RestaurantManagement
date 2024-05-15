@@ -4,6 +4,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
 @Table(name = "tables")
 @Data
@@ -18,7 +20,7 @@ public class TableEntity {
     @Column(name = "seats_amount")
     private Integer seatsAmount;
 
-    // Constructors, getters, and setters
+
 
     public TableEntity(Integer seatsAmount) {
         this.seatsAmount = seatsAmount;

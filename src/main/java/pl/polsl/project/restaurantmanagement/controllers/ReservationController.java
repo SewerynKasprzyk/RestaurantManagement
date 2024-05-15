@@ -24,7 +24,7 @@ public class ReservationController {
     }
     @PostMapping
     public ResponseEntity<Reservation> addReservation (@RequestBody Reservation reservation) {
-        Reservation savedReservation = reservationService.saveOrUpdateReservation(reservation);
+        Reservation savedReservation = reservationService.addReservatiron(reservation);
         return ResponseEntity.ok(savedReservation);
     }
     @GetMapping("/freeTables")
