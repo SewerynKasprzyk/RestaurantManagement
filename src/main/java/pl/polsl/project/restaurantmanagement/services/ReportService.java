@@ -15,7 +15,7 @@ public class ReportService {
         this.reportRepository = reportRepository;
     }
 
-    public List<ReportData> getReportData(String date, String startHour, String endHour){
-        //return reportRepository.fetchReportData(date, startHour, endHour);
-    }
+//    public List<ReportData> getReportData(String date, String startHour, String endHour){
+//        return reportRepository.fetchReportData(date, startHour, endHour);
+//    }
 }
