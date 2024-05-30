@@ -18,13 +18,13 @@ public class ReportController {
         this.reportService = reportService;
     }
 
-    public ResponseEntity<List<ReportData>> getReportData(
-            @RequestParam String date,
-            @RequestParam String startHour,
-            @RequestParam String endHour
-    ){
-        List<ReportData> data = reportService.getReportData(date, startHour, endHour);
-            return ResponseEntity.ok(data);
-
-    }
+//    public ResponseEntity<List<ReportData>> getReportData(
+//            @RequestParam String date,
+//            @RequestParam String startHour,
+//            @RequestParam String endHour
+//    ){
+//        List<ReportData> data = reportService.getReportData(date, startHour, endHour);
+//            return ResponseEntity.ok(data);
+//
+//    }
 }
