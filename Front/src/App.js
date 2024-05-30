@@ -6,6 +6,7 @@ import Navbar from "./HomePage/Navbar";
 import { Login, Register } from "./loginPage/Login";
 import MenuItems from "./MenuPage/Menu";
 import AppContent from "./AppContent";
+import GenerateReport from "./Raport/Raport"
 
 // Główny komponent aplikacji
 function App() {
@@ -31,6 +32,7 @@ function App() {
                 <Route path="/menu" element = {<MenuItems/>} />
                 <Route path="/login" element= {<Login onLogin={handleLogin}/>} />
                 <Route path="/register" element = {<Register onRegister = {handleRegister}/>} />
+                <Route path="/raport" element = {<GenerateReport/>} />
             </Routes>
         </div>
     </BrowserRouter>
