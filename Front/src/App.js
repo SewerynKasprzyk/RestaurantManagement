@@ -35,8 +35,8 @@ function App() {
                 <Route path="/register" element = {<Register onRegister = {handleRegister}/>} />
                 <Route path="/ingredients" element = {<Ingredients/>} />
                 <Route path="/menuitem" element = {<MenuItemForm/>} />
-                <Route path="/reservations" element = {<Reservation/>} />
-                <Route path="/reservation/add" element = {<AddReservation/>} />
+                <Route path="/reservations" element = {<Reservation />} />
+                <Route path="/reservation/add" element = {<AddReservation />} />
             </Routes>
         </div>
     </BrowserRouter>
