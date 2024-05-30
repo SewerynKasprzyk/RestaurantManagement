@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import "./App.css";
 import "../node_modules/bootstrap/dist/css/bootstrap-grid.min.css"
+import {BrowserRouter, Routes, Route} from 'react-router-dom'
 import Navbar from "./HomePage/Navbar";
 import { Login, Register } from "./loginPage/Login";
 import MenuItems from "./MenuPage/Menu";
+import AppContent from "./AppContent";
 
 // Główny komponent aplikacji
 function App() {
@@ -19,22 +21,19 @@ function App() {
     };
 
     return (
+    <BrowserRouter>
         <div>
             <div>
                 <Navbar />
+                <AppContent />
             </div>
-            {user ? (
-                <div>
-                    <h1>Witaj, {user}!</h1>
-                    <MenuItems />
-                </div>
-            ) : (
-                <div>
-                    <Login onLogin={handleLogin} />
-                    <Register onRegister={handleRegister} />
-                </div>
-            )}
+            <Routes>
+                <Route path="/menu" element = {<MenuItems/>} />
+                <Route path="/login" element= {<Login onLogin={handleLogin}/>} />
+                <Route path="/register" element = {<Register onRegister = {handleRegister}/>} />
+            </Routes>
         </div>
+    </BrowserRouter>
     );
 }
 
