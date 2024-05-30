@@ -8,6 +8,7 @@ import MenuItems from "./MenuPage/Menu";
 import Ingredients from "./Ingredients";
 import MenuItemForm from "./MenuItem";
 import Reservation from "./ReservationPage/Reservation";
+import AddReservation from "./ReservationPage/AddReservation";
 
 // Główny komponent aplikacji
 function App() {
@@ -35,6 +36,7 @@ function App() {
                 <Route path="/ingredients" element = {<Ingredients/>} />
                 <Route path="/menuitem" element = {<MenuItemForm/>} />
                 <Route path="/reservations" element = {<Reservation/>} />
+                <Route path="/reservation/add" element = {<AddReservation/>} />
             </Routes>
         </div>
     </BrowserRouter>

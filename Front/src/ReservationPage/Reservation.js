@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, {useState, useEffect} from 'react';
 
 // Komponent wyświetlający rezerwacje
 export default function Reservation() {
@@ -6,37 +6,58 @@ export default function Reservation() {
     const [error, setError] = useState('');
 
     useEffect(() => {
-        fetch('http://localhost:8080/api/reservations')
-            .then(response => {
-                if (response.ok) {
-                    return response.json();
-                } else {
+        const fetchReservations = async () => {
+            try {
+                const response = await fetch('http://localhost:8080/api/reservations');
+                if (!response.ok) {
                     throw new Error('Błąd pobierania rezerwacji');
                 }
-            })
-            .then(data => {
+
+                const data = await response.json();
+
                 setReservations(data);
-                setError('');
-            })
-            .catch((error) => {
-                console.error('Error:', error);
-                setError('Błąd pobierania rezerwacji. Spróbuj ponownie.');
-            });
+            } catch (error) {
+                console.error('Error: Błąd pobierania rezerwacji', error);
+            }
+        };
+
+        fetchReservations();
     }, []);
 
     return (
         <div className='reservation-container'>
             <h2>Twoje rezerwacje</h2>
-            {reservations.map(reservation => (
-                <div key={reservation.id} className='reservation'>
-                    <div className='reservation-info'>
-                        <div>{reservation.date}</div>
-                        <div>{reservation.time}</div>
-                        <div>{reservation.table}</div>
-                    </div>
-                </div>
-            ))}
+            <button onClick={() => window.location.href = '/reservation/add'}>Dodaj rezerwację</button>
+
             {error && <div className="error">{error}</div>}
         </div>
     );
 }
+//     fetch('http://localhost:8080/api/reservations')
+//         .then(response => {
+//             if (response.ok) {
+//                 return response.json();
+//             } else {
+//                 throw new Error('Błąd pobierania strony rezerwacji');
+//             }
+//         })
+//         .then(data => {
+//             setReservations(data);
+//             setError('');
+//         })
+//         .catch((error) => {
+//             console.error('Error:', error);
+//             setError('Błąd pobierania rezerwacji. Spróbuj ponownie.');
+//         });
+// }, []);
+
+// return (
+//     <div className='reservation-container'>
+//         <h2>Twoje rezerwacje</h2>
+//         <button onClick={() => window.location.href = '/reservation/add'}>Dodaj rezerwację</button>
+//
+//
+//         {error && <div className="error">{error}</div>}
+//     </div>
+// );
+//}
