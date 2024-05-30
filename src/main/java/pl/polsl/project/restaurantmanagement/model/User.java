@@ -37,10 +37,10 @@ public class User {
     private String phoneNumber;
 
     @Column(name = "is_verified")
-    private Boolean verified;
+    private Boolean isVerified;
 
     @Column(name = "is_active")
-    private Boolean active;
+    private Boolean isActive;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<TimeSchedule> timeSchedules;

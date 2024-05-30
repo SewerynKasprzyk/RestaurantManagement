@@ -16,13 +16,17 @@ export default function Navbar() {
                     <div className="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul className="navbar-nav me-auto mb-2 mb-lg-0">
                             <li className="nav-item">
-                               <Link className="nav-link" to="/menu">Menu</Link>
+                                <Link className="nav-link" to="/menu">Menu</Link>
                             </li>
                             <li className="nav-item">
-                               <Link className="nav-link" to="/login">Logowanie</Link>
+                                <Link className="nav-link" to="/login">Logowanie</Link>
                             </li>
                             <li className="nav-item">
-                               <Link className="nav-link" to="/register">Rejestracja</Link>
+                                <Link className="nav-link" to="/register">Rejestracja</Link>
+                            </li>
+
+                            <li className="nav-item">
+                                <Link className="nav-link" to="/loginTest">LoginTest2</Link>
                             </li>
                         </ul>
                     </div>

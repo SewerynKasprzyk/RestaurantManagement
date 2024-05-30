@@ -1,9 +1,11 @@
 package pl.polsl.project.restaurantmanagement.services;
 
-import jakarta.annotation.PostConstruct;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import pl.polsl.project.restaurantmanagement.configuration.AppException;
+//import pl.polsl.project.restaurantmanagement.configuration.UserMapper;
 import pl.polsl.project.restaurantmanagement.model.User;
 import pl.polsl.project.restaurantmanagement.model.UserType;
 import pl.polsl.project.restaurantmanagement.repositories.UserRepository;
@@ -15,6 +17,7 @@ import java.util.List;
 public class UserService {
 
     private final UserRepository userRepository;
+    //private final UserMapper userMapper;
 
     @Autowired
     public UserService(UserRepository userRepository) {
@@ -49,8 +52,8 @@ public class UserService {
                 user.setName("User " + i);
                 user.setSurname("Surname " + i);
                 user.setPhoneNumber("123456789" + i);
-                user.setVerified(true);
-                user.setActive(true);
+                user.setIsVerified(true);
+                user.setIsActive(true);
                 exampleUsers.add(user);
             }
             userRepository.saveAll(exampleUsers);
@@ -59,14 +62,14 @@ public class UserService {
 
     //do logowania
     public User findByLogin(String login) {
-        return (User) userRepository.findByLogin(login).orElse(null);
+        return (User) userRepository.findByLogin(login).orElseThrow(() -> new AppException("Unknown user", HttpStatus.NOT_FOUND));
     }
 
     //do rejestracji
     public User registerUser(User user) {
         // You might want to encode the password here
-        user.setActive(true);
-        user.setVerified(true);
+        user.setIsActive(true);
+        user.setIsVerified(true);
         user.setUserType(UserType.CUSTOMER);
         return userRepository.save(user);
     }

@@ -6,6 +6,7 @@ import Navbar from "./HomePage/Navbar";
 import { Login, Register } from "./loginPage/Login";
 import MenuItems from "./MenuPage/Menu";
 import AppContent from "./AppContent";
+import WelcomeContent from "./loginPage/WelcomeContent";
 
 // Główny komponent aplikacji
 function App() {
@@ -25,12 +26,12 @@ function App() {
         <div>
             <div>
                 <Navbar />
-                <AppContent />
             </div>
             <Routes>
                 <Route path="/menu" element = {<MenuItems/>} />
                 <Route path="/login" element= {<Login onLogin={handleLogin}/>} />
                 <Route path="/register" element = {<Register onRegister = {handleRegister}/>} />
+                <Route path="/loginTest" element={<AppContent />} />
             </Routes>
         </div>
     </BrowserRouter>
