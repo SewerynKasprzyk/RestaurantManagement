@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, {useState} from 'react';
+import {useNavigate} from 'react-router-dom';
 
+//TODO Dokończyć implementację dodawania rezerwacji gdy sesja użytkownika bedzie działać
 export default function AddReservation() {
     const [reservationDate, setReservationDate] = useState('');
     const [startHour, setStartHour] = useState('');
@@ -20,8 +21,11 @@ export default function AddReservation() {
             endHour,
             reserved: true,
             notes,
-            user: { id: user },
-            tables: tables.split(',').map(table => ({ id: table.trim() })) // Zakładając, że tables to lista ID oddzielonych przecinkami
+            user,
+            tables
+            //user: { id: user }, // Uzytkownik zalogowany o podanym ID
+            //tables: tables.split(',').map(table => ({ id: table.trim() })) // Zakładając, że tables to lista ID oddzielonych przecinkami
+
         };
 
         try {
@@ -42,6 +46,8 @@ export default function AddReservation() {
             setError('Błąd dodawania rezerwacji. Spróbuj ponownie.');
         }
     };
+
+
 
     return (
         <div className='add-reservation-container'>
