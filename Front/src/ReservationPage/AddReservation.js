@@ -1,7 +1,6 @@
-import React, {useState, useEffect} from 'react';
-import {useNavigate} from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
-//TODO Dokończyć implementację dodawania rezerwacji gdy sesja użytkownika bedzie działać
 export default function AddReservation() {
     const [reservationDate, setReservationDate] = useState('');
     const [startHour, setStartHour] = useState('');
@@ -54,9 +53,7 @@ export default function AddReservation() {
 
     // Efekt pobierający użytkownika po zmianie ID użytkownika
     useEffect(() => {
-        // Sprawdź, czy ID użytkownika jest prawidłowe (niepuste)
         if (userId) {
-            // Pobierz użytkownika z bazy danych na podstawie ID
             fetchUserById(userId)
                 .then(userData => {
                     setUser(userData); // Zaktualizuj stan użytkownika po pobraniu danych
@@ -65,7 +62,7 @@ export default function AddReservation() {
                     console.error('Error:', error);
                 });
         }
-    }, [userId]); // Uruchom ten efekt, gdy zmieni się ID użytkownika
+    }, [userId]);
 
     // Efekt pobierający stolik po zmianie ID stolika
     useEffect(() => {
@@ -89,8 +86,8 @@ export default function AddReservation() {
             endHour,
             reserved: true,
             notes,
-            userId, // Użyj pobranego ID użytkownika
-            tableId: table.id,
+            user, // Użyj pełnego obiektu użytkownika
+            tables: [table] // Użyj pełnego obiektu stolika, zakładając, że stolik może być tylko jeden
         };
 
         try {

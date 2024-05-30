@@ -1,5 +1,6 @@
 package pl.polsl.project.restaurantmanagement.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import jakarta.persistence.*;
@@ -46,6 +47,7 @@ public class User {
     private List<TimeSchedule> timeSchedules;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    @JsonManagedReference
     private List<Reservation> reservations;
 
     // Constructors, getters, and setters

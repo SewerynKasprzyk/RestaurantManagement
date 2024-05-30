@@ -1,5 +1,6 @@
 package pl.polsl.project.restaurantmanagement.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import jakarta.persistence.*;
@@ -34,10 +35,12 @@ public class Reservation {
     private String notes;
 
     @ManyToOne(fetch = FetchType.LAZY)
+    @JsonManagedReference
     @JoinColumn(name = "user_id")
     private User user;
 
     @ManyToMany(fetch = FetchType.LAZY)
+    @JsonManagedReference
     @JoinTable(
             name = "reservation_tables",
             joinColumns = @JoinColumn(name = "reservation_id"),
