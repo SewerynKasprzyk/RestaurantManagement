@@ -17,14 +17,14 @@ export default function AddReservation() {
         try {
             const response = await fetch(`http://localhost:8080/api/users/${userId}`); // Zakładając, że masz ścieżkę /api/users/:id, która zwraca użytkownika po ID
             if (response.ok) {
-                const user = await response.json();
-                return user;
+                const userData = await response.json();
+                setUser(userData);
             } else {
                 throw new Error('Błąd pobierania użytkownika');
             }
         } catch (error) {
             console.error('Error:', error);
-            return null;
+            setError('Błąd pobierania użytkownika');
         }
     };
 
@@ -33,13 +33,13 @@ export default function AddReservation() {
             const response = await fetch(`http://localhost:8080/api/tables/${tableId}`);
             if (response.ok) {
                 const tableData = await response.json();
-                return tableData;
+                return setTable(tableData);
             } else {
                 throw new Error('Błąd pobierania stolika');
             }
         } catch (error) {
             console.error('Error:', error);
-            return null;
+            setError('Błąd pobierania stolika');
         }
     };
 
@@ -54,28 +54,16 @@ export default function AddReservation() {
     // Efekt pobierający użytkownika po zmianie ID użytkownika
     useEffect(() => {
         if (userId) {
-            fetchUserById(userId)
-                .then(userData => {
-                    setUser(userData); // Zaktualizuj stan użytkownika po pobraniu danych
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                });
+            fetchUserById(userId);
         }
     }, [userId]);
 
-    // Efekt pobierający stolik po zmianie ID stolika
     useEffect(() => {
         if (tableId) {
-            fetchTableById(tableId)
-                .then(tableData => {
-                    setTable(tableData); // Zaktualizuj stan stolika po pobraniu danych
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                });
+            fetchTableById(tableId);
         }
     }, [tableId]);
+
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -95,6 +83,7 @@ export default function AddReservation() {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
+                    //'Authorization': `Bearer ${yourAuthToken}`, // Dodaj token autoryzacyjny
                 },
                 body: JSON.stringify(reservation),
             });
@@ -114,7 +103,7 @@ export default function AddReservation() {
             <h2>Dodaj rezerwację</h2>
             <form onSubmit={handleSubmit}>
                 <div>
-                    <label>Data rezerwacji:</label>
+                    <label>Data rezerwacji:</label>\
                     <input
                         type='date'
                         value={reservationDate}

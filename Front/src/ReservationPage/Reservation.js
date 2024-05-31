@@ -28,7 +28,7 @@ export default function Reservation() {
     return (
         <div className='reservation-container'>
             <h2>Twoje rezerwacje</h2>
-            <button onClick={() => window.location.href = '/reservation/add'}>Dodaj rezerwację</button>
+            <button onClick={() => window.location.href = '/reservations/add'}>Dodaj rezerwację</button>
 
 
             {error && <div className="error">{error}</div>}

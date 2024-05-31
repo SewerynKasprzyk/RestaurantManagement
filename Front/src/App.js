@@ -6,7 +6,9 @@ import Navbar from "./HomePage/Navbar";
 import { Login, Register } from "./loginPage/Login";
 import MenuItems from "./MenuPage/Menu";
 import AppContent from "./AppContent";
-import WelcomeContent from "./loginPage/WelcomeContent";
+import Reservation  from "./ReservationPage/Reservation";
+import AddReservation from "./ReservationPage/AddReservation";
+//import WelcomeContent from "./loginPage/WelcomeContent";
 
 // Główny komponent aplikacji
 function App() {
@@ -32,6 +34,8 @@ function App() {
                 <Route path="/login" element= {<Login onLogin={handleLogin}/>} />
                 <Route path="/register" element = {<Register onRegister = {handleRegister}/>} />
                 <Route path="/loginTest" element={<AppContent />} />
+                <Route path="/reservations" element={<Reservation />} />
+                <Route path="/reservations/add" element={<AddReservation />} />
             </Routes>
         </div>
     </BrowserRouter>
