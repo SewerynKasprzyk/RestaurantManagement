@@ -2,7 +2,9 @@ package pl.polsl.project.restaurantmanagement;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
 import org.springframework.context.ConfigurableApplicationContext;
 import pl.polsl.project.restaurantmanagement.model.Reservation;
 import pl.polsl.project.restaurantmanagement.services.*;
@@ -12,6 +14,7 @@ import java.time.LocalTime;
 import java.util.Collections;
 
 @SpringBootApplication
+@EnableAutoConfiguration(exclude = {SecurityAutoConfiguration.class})
 public class RestaurantManagementApplication {
 
     private final UserService userService;

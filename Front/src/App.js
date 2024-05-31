@@ -1,14 +1,12 @@
-import React, {useEffect, useState} from 'react';
+import React, { useState } from 'react';
 import "./App.css";
 import "../node_modules/bootstrap/dist/css/bootstrap-grid.min.css"
 import {BrowserRouter, Routes, Route} from 'react-router-dom'
 import Navbar from "./HomePage/Navbar";
 import { Login, Register } from "./loginPage/Login";
 import MenuItems from "./MenuPage/Menu";
-import Ingredients from "./Ingredients";
-import MenuItemForm from "./MenuItem";
-import Reservation from "./ReservationPage/Reservation";
-import AddReservation from "./ReservationPage/AddReservation";
+import AppContent from "./AppContent";
+import WelcomeContent from "./loginPage/WelcomeContent";
 
 // Główny komponent aplikacji
 function App() {
@@ -33,13 +31,24 @@ function App() {
                 <Route path="/menu" element = {<MenuItems/>} />
                 <Route path="/login" element= {<Login onLogin={handleLogin}/>} />
                 <Route path="/register" element = {<Register onRegister = {handleRegister}/>} />
-                <Route path="/ingredients" element = {<Ingredients/>} />
-                <Route path="/menuitem" element = {<MenuItemForm/>} />
-                <Route path="/reservations" element = {<Reservation />} />
-                <Route path="/reservation/add" element = {<AddReservation />} />
+                <Route path="/loginTest" element={<AppContent />} />
             </Routes>
         </div>
     </BrowserRouter>
+    );
+}
+
+// Komponent menu
+function MenuIt({ items }) {
+    return (
+        <div>
+            <h2>Menu</h2>
+            <ul>
+                {items.map((item, index) => (
+                    <li key={index}>{item.name} - {item.price}</li>
+                ))}
+            </ul>
+        </div>
     );
 }
 
