@@ -52,4 +52,13 @@ public class UserAuthProvider {
 
         return new UsernamePasswordAuthenticationToken(userDto, null, Collections.emptyList());
     }
+
+    public UserDto getUserFromToken(String token) {
+        JWTVerifier verifier = JWT.require(Algorithm.HMAC256(secretKey))
+                .build();
+
+        DecodedJWT decodedJWT = verifier.verify(token);
+
+        return userService.findByLoginDto(decodedJWT.getIssuer());
+    }
 }
