@@ -10,7 +10,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Component;
-import pl.polsl.project.restaurantmanagement.model.User;
+import pl.polsl.project.restaurantmanagement.model.DTO.UserDto;
 import pl.polsl.project.restaurantmanagement.services.UserService;
 
 import java.util.Base64;
@@ -48,8 +48,8 @@ public class UserAuthProvider {
 
         DecodedJWT decodedJWT = verifier.verify(token);
 
-        User user = userService.findByLogin(decodedJWT.getIssuer());
+        UserDto userDto = userService.findByLoginDto(decodedJWT.getIssuer());
 
-        return new UsernamePasswordAuthenticationToken(user, null, Collections.emptyList());
+        return new UsernamePasswordAuthenticationToken(userDto, null, Collections.emptyList());
     }
 }
