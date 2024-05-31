@@ -7,6 +7,7 @@ import { Login, Register } from "./loginPage/Login";
 import MenuItems from "./MenuPage/Menu";
 import AppContent from "./AppContent";
 import WelcomeContent from "./loginPage/WelcomeContent";
+import ReservationsReport from "./ReservationsReport";
 
 // Główny komponent aplikacji
 function App() {
@@ -32,6 +33,7 @@ function App() {
                 <Route path="/login" element= {<Login onLogin={handleLogin}/>} />
                 <Route path="/register" element = {<Register onRegister = {handleRegister}/>} />
                 <Route path="/loginTest" element={<AppContent />} />
+                <Route path="/reports/reservations" element = {<ReservationsReport/>} />
             </Routes>
         </div>
     </BrowserRouter>
