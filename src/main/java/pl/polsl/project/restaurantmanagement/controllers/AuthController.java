@@ -33,6 +33,6 @@ public class AuthController {
         UserDto user = userService.register(signUpDto);
         user.setToken(userAuthProvider.createToken(user.getLogin()));
 
-        return ResponseEntity.created(URI.create("/users/" + user.getId())).body(user);
+        return ResponseEntity.created(URI.create("/api/users/" + user.getId())).body(user);
     }
 }
