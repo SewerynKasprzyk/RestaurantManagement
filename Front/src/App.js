@@ -29,8 +29,8 @@ function App() {
             </div>
             <Routes>
                 <Route path="/menu" element = {<MenuItems/>} />
-                <Route path="/login" element= {<Login onLogin={handleLogin}/>} />
-                <Route path="/register" element = {<Register onRegister = {handleRegister}/>} />
+                {/*<Route path="/login" element= {<Login onLogin={handleLogin}/>} />*/}
+                {/*<Route path="/register" element = {<Register onRegister = {handleRegister}/>} />*/}
                 <Route path="/loginTest" element={<AppContent />} />
             </Routes>
         </div>

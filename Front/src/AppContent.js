@@ -38,13 +38,14 @@ export default class AppContent extends React.Component {
             });
         }
 
-        onRegister = (event, firstName, lastName, login, password) => {
+        onRegister = (event, name, surname, phoneNumber, login, password) => {
             event.preventDefault();
             request("POST",
                 "/register",
                 {
-                    firstName: firstName,
-                    lastName: lastName,
+                    name: name,
+                    surname: surname,
+                    phoneNumber: phoneNumber,
                     login: login,
                     password: password
                 }

@@ -29,6 +29,7 @@ public class SecurityConfig {
         if (disableAuth) {
             http
                     .cors(AbstractHttpConfigurer::disable)
+                    .csrf(AbstractHttpConfigurer::disable)
                     .sessionManagement(sessionManagement ->
                             sessionManagement.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                     )
@@ -42,12 +43,14 @@ public class SecurityConfig {
                     )
                     .addFilterBefore(new JwtAuthFilter(userAuthProvider), BasicAuthenticationFilter.class)
                     .cors(AbstractHttpConfigurer::disable)
+                    .csrf(AbstractHttpConfigurer::disable)
                     .sessionManagement(sessionManagement ->
                             sessionManagement.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                     )
                     .authorizeHttpRequests(authorizeRequests ->
                             authorizeRequests
                                     .requestMatchers(HttpMethod.POST, "/login", "/register").permitAll()
+                                    .requestMatchers(HttpMethod.GET, "/api/menu").permitAll()
                                     .anyRequest().authenticated()
                     );
         }

@@ -85,7 +85,7 @@ public class UserService {
 
     public UserDto register(SignUpDto userDto) {
 
-       Optional<User> optionalUser =  userRepository.findByLogin(userDto.getLogin());
+       Optional<User> optionalUser = userRepository.findByLogin(userDto.getLogin());
 
        if (optionalUser.isPresent()) {
            throw new AppException("User already exists", HttpStatus.CONFLICT);
@@ -94,6 +94,10 @@ public class UserService {
        User user = userMapper.signUpToUser(userDto);
 
        user.setPassword(passwordEncoder.encode(CharBuffer.wrap(userDto.getPassword())));
+
+        user.setIsActive(true);
+        user.setIsVerified(false);
+        user.setUserType(UserType.CUSTOMER);
 
        User savedUser = userRepository.save(user);
 

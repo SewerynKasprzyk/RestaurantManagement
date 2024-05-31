@@ -33,7 +33,7 @@ public class User {
     @Column(name = "surname")
     private String surname;
 
-    @Column(name = "phone_number")
+    @Column(name = "phoneNumber")
     private String phoneNumber;
 
     @Column(name = "is_verified")

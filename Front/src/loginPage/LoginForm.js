@@ -7,11 +7,11 @@ export default class LoginForm extends React.Component {
         super(props);
         this.state = {
             active: "login",
-            login: "",
-            password: "",
             name: "",
             surname: "",
             phoneNumber: "",
+            login: "",
+            password: "",
             onLogin: props.onLogin,
             onRegister: props.onRegister
         }

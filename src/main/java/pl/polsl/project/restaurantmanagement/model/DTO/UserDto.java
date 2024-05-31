@@ -12,10 +12,10 @@ import lombok.NoArgsConstructor;
 public class UserDto {
 
     private Integer id;
-    private String login;
     private String name;
     private String surname;
     private String phoneNumber;
+    private String login;
     private Boolean isVerified;
     private Boolean isActive;
     private String userType;
