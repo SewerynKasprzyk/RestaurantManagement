@@ -4,9 +4,12 @@ import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pl.polsl.project.restaurantmanagement.configuration.ReservationMapper;
+import pl.polsl.project.restaurantmanagement.configuration.UserAuthProvider;
 import pl.polsl.project.restaurantmanagement.model.DTO.ReservationDto;
+import pl.polsl.project.restaurantmanagement.model.DTO.UserDto;
 import pl.polsl.project.restaurantmanagement.model.Reservation;
 import pl.polsl.project.restaurantmanagement.model.TableEntity;
+import pl.polsl.project.restaurantmanagement.model.User;
 import pl.polsl.project.restaurantmanagement.repositories.ReservationRepository;
 import pl.polsl.project.restaurantmanagement.repositories.TableRepository;
 
@@ -24,13 +27,16 @@ public class ReservationService {
     private final TableService tableService;
     private final ReservationMapper reservationMapper;
 
+    private final UserAuthProvider userAuthProvider;
+
     @Autowired
-    public ReservationService(ReservationRepository reservationRepository, UserService userService, TableService tableService, TableRepository tableRepository, ReservationMapper reservationMapper) {
+    public ReservationService(ReservationRepository reservationRepository, UserService userService, TableService tableService, TableRepository tableRepository, ReservationMapper reservationMapper, UserAuthProvider userAuthProvider){
         this.reservationRepository = reservationRepository;
         this.userService = userService;
         this.tableService = tableService;
         this.tableRepository = tableRepository;
         this.reservationMapper = reservationMapper;
+        this.userAuthProvider = userAuthProvider;
     }
 
     public Reservation saveOrUpdateReservation(Reservation reservation) {
@@ -49,16 +55,15 @@ public class ReservationService {
         reservationRepository.deleteById(id);
     }
 
-    public Reservation addReservation(Reservation reservation){
-        return reservationRepository.save(reservation);
-    }
-
     public List<TableEntity> getFreeTables() {
         return tableRepository.findAvailableTables();
     }
 
-    public Reservation addReservation(ReservationDto reservationDto){
+    public Reservation addReservation(ReservationDto reservationDto, String token){
+        UserDto userDto = userAuthProvider.getUserFromToken(token);
+        User user = userService.getUserById(userDto.getId());
         Reservation reservation = reservationMapper.toReservation(reservationDto);
+        reservation.setUser(user);
         return reservationRepository.save(reservation);
     }
 

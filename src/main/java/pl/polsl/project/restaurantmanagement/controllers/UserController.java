@@ -40,11 +40,6 @@ public class UserController {
         return userService.getAllUsers();
     }
 
-//    @GetMapping("/{userId}")
-//    public User getUserById(@PathVariable Integer userId) {
-//        return userService.getUserById(userId);
-//    }
-
     @GetMapping("/{userId}")
     public ResponseEntity<UserDto> getUserById(@PathVariable Integer userId) {
         User user = userService.getUserById(userId);

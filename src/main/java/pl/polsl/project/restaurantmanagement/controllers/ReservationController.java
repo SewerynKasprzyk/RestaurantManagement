@@ -5,8 +5,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import pl.polsl.project.restaurantmanagement.model.DTO.ReservationDto;
+import pl.polsl.project.restaurantmanagement.model.Reservation;
 import pl.polsl.project.restaurantmanagement.model.TableEntity;
 import pl.polsl.project.restaurantmanagement.services.ReservationService;
+import pl.polsl.project.restaurantmanagement.configuration.ReservationMapper;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -16,6 +18,9 @@ import java.util.stream.Collectors;
 public class ReservationController {
 
     private final ReservationService reservationService;
+
+    @Autowired
+    private ReservationMapper reservationMapper;
 
     @Autowired
     public ReservationController(ReservationService reservationService) {
@@ -28,8 +33,10 @@ public class ReservationController {
     }
 
     @PostMapping("/add")
-    public ResponseEntity<ReservationDto> addReservation(@RequestBody ReservationDto reservationDto) {
-        ReservationDto savedReservationDto = reservationService.toReservationDto(reservationService.addReservation(reservationDto));
+    public ResponseEntity<ReservationDto> addReservation(@RequestBody ReservationDto reservationDto, @RequestHeader("Authorization") String token) {
+        Reservation reservation = reservationMapper.toReservation(reservationDto);
+        Reservation savedReservation = reservationService.saveOrUpdateReservation(reservation);
+        ReservationDto savedReservationDto = reservationMapper.toReservationDto(savedReservation);
         return ResponseEntity.ok(savedReservationDto);
     }
 
