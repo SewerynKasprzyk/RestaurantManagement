@@ -3,7 +3,9 @@ package pl.polsl.project.restaurantmanagement.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import pl.polsl.project.restaurantmanagement.configuration.ReservationMapper;
 import pl.polsl.project.restaurantmanagement.configuration.UserAuthProvider;
+import pl.polsl.project.restaurantmanagement.configuration.UserMapper;
 import pl.polsl.project.restaurantmanagement.model.DTO.UserDto;
 import pl.polsl.project.restaurantmanagement.model.User;
 import pl.polsl.project.restaurantmanagement.services.UserService;
@@ -25,6 +27,12 @@ public class UserController {
     @Autowired
     private UserAuthProvider userAuthProvider;
 
+    @Autowired
+    private UserMapper userMapper;
+
+    @Autowired
+    ReservationMapper reservationMapper;
+
     @GetMapping
     public List<User> getAllUsers() {
 
@@ -32,9 +40,16 @@ public class UserController {
         return userService.getAllUsers();
     }
 
+//    @GetMapping("/{userId}")
+//    public User getUserById(@PathVariable Integer userId) {
+//        return userService.getUserById(userId);
+//    }
+
     @GetMapping("/{userId}")
-    public User getUserById(@PathVariable Integer userId) {
-        return userService.getUserById(userId);
+    public ResponseEntity<UserDto> getUserById(@PathVariable Integer userId) {
+        User user = userService.getUserById(userId);
+        UserDto userDto = userMapper.toUserDto(user);
+        return ResponseEntity.ok(userDto);
     }
 
     @PostMapping
@@ -65,5 +80,5 @@ public class UserController {
 
         UserDto user = userAuthProvider.getUserFromToken(token);
         return ResponseEntity.ok(user);
-}
+    }
 }
