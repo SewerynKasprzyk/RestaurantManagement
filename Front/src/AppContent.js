@@ -17,13 +17,10 @@ export default class AppContent extends Component {
 
     login = () => {
         this.updateIsLoggedInState(() => {
-            console.log(this.state.isLoggedIn);
             if (this.state.isLoggedIn === false) {
                 this.setState({ componentToShow: "login" });
-                console.log("showing login");
             } else {
                 this.setState({ componentToShow: "messages" });
-                console.log("showing messages");
             }
         });
     };
@@ -63,10 +60,8 @@ export default class AppContent extends Component {
     updateIsLoggedInState = (callback) => {
         if (getAuthToken() != null) {
             this.setState({ isLoggedIn: true }, callback);
-            console.log("setting isLoggedIn to true");
         } else {
             this.setState({ isLoggedIn: false }, callback);
-            console.log("setting isLoggedIn to false");
         }
     }
 
