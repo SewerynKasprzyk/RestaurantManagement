@@ -59,6 +59,5 @@ public class Reservation {
         this.user = user;
         this.tables = tables;
     }
-
 }
 

@@ -1,23 +1,19 @@
 package pl.polsl.project.restaurantmanagement.services;
 
-import jakarta.persistence.TypedQuery;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import pl.polsl.project.restaurantmanagement.model.MenuItem;
+import pl.polsl.project.restaurantmanagement.configuration.ReservationMapper;
+import pl.polsl.project.restaurantmanagement.model.DTO.ReservationDto;
 import pl.polsl.project.restaurantmanagement.model.Reservation;
 import pl.polsl.project.restaurantmanagement.model.TableEntity;
 import pl.polsl.project.restaurantmanagement.repositories.ReservationRepository;
 import pl.polsl.project.restaurantmanagement.repositories.TableRepository;
 
-import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
-
-import static pl.polsl.project.restaurantmanagement.model.MenuItemType.*;
 
 @Service
 public class ReservationService {
@@ -26,13 +22,15 @@ public class ReservationService {
     private final ReservationRepository reservationRepository;
     private final UserService userService;
     private final TableService tableService;
+    private final ReservationMapper reservationMapper;
 
     @Autowired
-    public ReservationService(ReservationRepository reservationRepository, UserService userService, TableService tableService, TableRepository tableRepository) {
+    public ReservationService(ReservationRepository reservationRepository, UserService userService, TableService tableService, TableRepository tableRepository, ReservationMapper reservationMapper) {
         this.reservationRepository = reservationRepository;
         this.userService = userService;
         this.tableService = tableService;
         this.tableRepository = tableRepository;
+        this.reservationMapper = reservationMapper;
     }
 
     public Reservation saveOrUpdateReservation(Reservation reservation) {
@@ -51,14 +49,21 @@ public class ReservationService {
         reservationRepository.deleteById(id);
     }
 
-    public Reservation addReservatiron(Reservation reservation){
+    public Reservation addReservation(Reservation reservation){
         return reservationRepository.save(reservation);
     }
 
-
-
     public List<TableEntity> getFreeTables() {
         return tableRepository.findAvailableTables();
+    }
+
+    public Reservation addReservation(ReservationDto reservationDto){
+        Reservation reservation = reservationMapper.toReservation(reservationDto);
+        return reservationRepository.save(reservation);
+    }
+
+    public ReservationDto toReservationDto(Reservation reservation){
+        return reservationMapper.toReservationDto(reservation);
     }
 
     @Transactional
@@ -78,5 +83,5 @@ public class ReservationService {
             reservationRepository.save(reservation2);
         }
     }
-}
 
+}

@@ -24,5 +24,4 @@ public class ReservationDto {
     private String notes;
     private UserDto user;
     private List<TableEntity> tables;
-
 }
