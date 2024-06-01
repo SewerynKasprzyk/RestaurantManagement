@@ -5,8 +5,6 @@ const UserComponent = () => {
     const [userName, setUserName] = useState('');
     const token = getAuthToken(); // Replace this with the actual JWT token
 
-    console.log(token);
-
     useEffect(() => {
         const fetchUser = async () => {
             try {
