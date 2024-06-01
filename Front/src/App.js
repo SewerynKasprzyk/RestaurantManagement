@@ -27,7 +27,7 @@ function App() {
             </div>
             <Routes>
                 <Route path="/menu" element = {<MenuItems/>} />
-                <Route path="/loginTest" element={<AppContent />} />
+                <Route path="/loginTest" element={<AppContent/>} />
             </Routes>
         </div>
     </BrowserRouter>

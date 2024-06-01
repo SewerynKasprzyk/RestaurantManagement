@@ -65,5 +65,5 @@ public class UserController {
 
         UserDto user = userAuthProvider.getUserFromToken(token);
         return ResponseEntity.ok(user);
-}
+    }
 }

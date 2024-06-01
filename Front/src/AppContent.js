@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import AuthContent from "./loginPage/AuthContent";
 import LoginForm from "./loginPage/LoginForm";
 import WelcomeContent from "./loginPage/WelcomeContent";
-import { request, setAuthToken } from "./api/axiosConfig";
+import {getAuthToken, removeAuthToken, request, setAuthToken} from "./api/axiosConfig";
 import Buttons from "./loginPage/Buttons";
 import UserComponent from "./loginPage/UserComponent";
 
@@ -16,38 +16,63 @@ export default class AppContent extends Component {
     }
 
     login = () => {
-        this.setState({ componentToShow: "login" });
+        this.updateIsLoggedInState(() => {
+            console.log(this.state.isLoggedIn);
+            if (this.state.isLoggedIn === false) {
+                this.setState({ componentToShow: "login" });
+                console.log("showing login");
+            } else {
+                this.setState({ componentToShow: "messages" });
+                console.log("showing messages");
+            }
+        });
     };
 
     logout = () => {
         this.setState({ componentToShow: "welcome", isLoggedIn: false }); // Update isLoggedIn state on logout
+        removeAuthToken();
+        this.updateIsLoggedInState();
     }
 
     onLogin = (event, login, password) => {
         event.preventDefault();
         request("POST", "/login", { login, password })
             .then((response) => {
-                this.setState({ componentToShow: "messages", isLoggedIn: true }); // Update isLoggedIn state on successful login
+                this.setState({ componentToShow: "messages"}); // Update isLoggedIn state on successful login
                 setAuthToken(response.data.token);
             })
             .catch(() => {
-                this.setState({ componentToShow: "welcome" });
+                this.setState({ componentToShow: "welcome"});
             });
+        this.updateIsLoggedInState();
     }
 
     onRegister = (event, name, surname, phoneNumber, login, password) => {
         event.preventDefault();
         request("POST", "/register", { name, surname, phoneNumber, login, password })
             .then((response) => {
-                this.setState({ componentToShow: "messages", isLoggedIn: true }); // Update isLoggedIn state on successful registration
+                this.setState({ componentToShow: "messages"}); // Update isLoggedIn state on successful registration
                 setAuthToken(response.data.token);
             })
             .catch(() => {
-                this.setState({ componentToShow: "welcome" });
+                this.setState({ componentToShow: "welcome"});
             });
+        this.updateIsLoggedInState();
     }
 
+    updateIsLoggedInState = (callback) => {
+        if (getAuthToken() != null) {
+            this.setState({ isLoggedIn: true }, callback);
+            console.log("setting isLoggedIn to true");
+        } else {
+            this.setState({ isLoggedIn: false }, callback);
+            console.log("setting isLoggedIn to false");
+        }
+    }
+
+
     render() {
+
         return (
             <div>
                 {this.state.isLoggedIn && <UserComponent />} {/* Render UserComponent only when isLoggedIn is true */}
