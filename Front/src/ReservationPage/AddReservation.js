@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from "axios";
-import {getAuthToken, request} from '../api/axiosConfig';
+import { getAuthToken, request } from '../api/axiosConfig';
 
 export default function AddReservation() {
     const [reservationDate, setReservationDate] = useState('');
@@ -11,7 +11,7 @@ export default function AddReservation() {
     const [userId, setUserId] = useState(''); // Stan przechowujący ID użytkownika
     const [user, setUser] = useState(null); // Stan przechowujący dane użytkownika
     const [tableId, setTableId] = useState(''); // Stan przechowujący ID stolika
-    const [table, setTable] = useState(null); // Stan przechowujący dane stolika
+    const [tables, setTables] = useState([]); // Stan przechowujący dane stolików
     const [error, setError] = useState('');
     const navigate = useNavigate();
     const token = getAuthToken(); // Replace this with the actual JWT token
@@ -23,9 +23,9 @@ export default function AddReservation() {
 
                 if (response.status === 200) {
                     const userData = response.data;
-                    setUserId(userData.id) // Adjust according to the UserDto field
-                    setUser(userData)// Set the JWT token into local storage
-                    //setAuthToken(response.data.token);
+                    setUserId(userData.id); // Adjust according to the UserDto field
+                    setUser(userData); // Set the JWT token into local storage
+                    // setAuthToken(response.data.token);
                 } else {
                     console.error('Failed to fetch user data');
                 }
@@ -34,14 +34,13 @@ export default function AddReservation() {
             }
         };
 
-
         fetchUser();
     }, []);
 
     const fetchTableById = async (tableId) => {
         try {
             const response = await axios.get(`/api/tables/${tableId}`);
-            setTable(response.data);
+            setTables(prevTables => [...prevTables, response.data]); // Dodanie stolika do listy
         } catch (error) {
             console.error('Error:', error);
             setError('Błąd pobierania stolika');
@@ -49,14 +48,13 @@ export default function AddReservation() {
     };
 
     const handleTableIdChange = (event) => {
-        setTableId(event.target.value);
-    };
-
-    useEffect(() => {
-        if (tableId) {
-            fetchTableById(tableId);
+        const ids = event.target.value.split(',');
+        setTables([]); // Wyczyszczenie listy stolików
+        for (const id of ids) {
+            fetchTableById(id.trim());
         }
-    }, [tableId]);
+        setTableId(event.target.value); // Ustawienie ID stolika
+    };
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -66,15 +64,14 @@ export default function AddReservation() {
             return;
         }
 
-
         const reservation = {
             reservationDate,
             startHour,
             endHour,
             reserved: true,
             notes,
-            user, // Użyj pełnego obiektu użytkownika
-            tables: [table] // Użyj pełnego obiektu stolika, zakładając, że stolik może być tylko jeden
+            user,
+            tables
         };
 
         try {
@@ -131,7 +128,7 @@ export default function AddReservation() {
                 <div>
                     <label>ID stolika:</label>
                     <input
-                        type='number'
+                        type='text'
                         value={tableId}
                         onChange={handleTableIdChange}
                         required
