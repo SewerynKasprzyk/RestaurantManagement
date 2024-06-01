@@ -3,7 +3,6 @@ import "./App.css";
 import "../node_modules/bootstrap/dist/css/bootstrap-grid.min.css"
 import {BrowserRouter, Routes, Route} from 'react-router-dom'
 import Navbar from "./HomePage/Navbar";
-import { Login, Register } from "./loginPage/Login";
 import MenuItems from "./MenuPage/Menu";
 import AppContent from "./AppContent";
 import Reservation  from "./ReservationPage/Reservation";

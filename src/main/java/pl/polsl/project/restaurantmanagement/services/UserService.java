@@ -1,28 +1,32 @@
 package pl.polsl.project.restaurantmanagement.services;
 
 import jakarta.transaction.Transactional;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import pl.polsl.project.restaurantmanagement.configuration.AppException;
-//import pl.polsl.project.restaurantmanagement.configuration.UserMapper;
+import pl.polsl.project.restaurantmanagement.model.DTO.CredentialsDto;
+import pl.polsl.project.restaurantmanagement.model.DTO.SignUpDto;
+import pl.polsl.project.restaurantmanagement.model.DTO.UserDto;
 import pl.polsl.project.restaurantmanagement.model.User;
 import pl.polsl.project.restaurantmanagement.model.UserType;
+import pl.polsl.project.restaurantmanagement.configuration.UserMapper;
 import pl.polsl.project.restaurantmanagement.repositories.UserRepository;
 
+import java.nio.CharBuffer;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
+@RequiredArgsConstructor
 @Service
 public class UserService {
 
     private final UserRepository userRepository;
-    //private final UserMapper userMapper;
-
-    @Autowired
-    public UserService(UserRepository userRepository) {
-        this.userRepository = userRepository;
-    }
+    private final UserMapper userMapper;
+    private final PasswordEncoder passwordEncoder;
 
     public User saveOrUpdateUser(User user) {
         return userRepository.save(user);
@@ -63,6 +67,41 @@ public class UserService {
     //do logowania
     public User findByLogin(String login) {
         return (User) userRepository.findByLogin(login).orElseThrow(() -> new AppException("Unknown user", HttpStatus.NOT_FOUND));
+    }
+
+    public UserDto findByLoginDto(String login) {
+       User user = userRepository.findByLogin(login).orElseThrow(() -> new AppException("Unknown user", HttpStatus.NOT_FOUND));
+       return userMapper.toUserDto(user);
+    }
+
+    public UserDto login(CredentialsDto credentialsDto) {
+        User user = userRepository.findByLogin(credentialsDto.getLogin()).orElseThrow(() -> new AppException("Unknown user", HttpStatus.NOT_FOUND));
+
+        if (passwordEncoder.matches(CharBuffer.wrap(credentialsDto.getPassword()), user.getPassword())) {
+            return userMapper.toUserDto(user);
+        }
+        throw new AppException("Invalid password", HttpStatus.UNAUTHORIZED);
+    }
+
+    public UserDto register(SignUpDto userDto) {
+
+       Optional<User> optionalUser = userRepository.findByLogin(userDto.getLogin());
+
+       if (optionalUser.isPresent()) {
+           throw new AppException("User already exists", HttpStatus.CONFLICT);
+       }
+
+       User user = userMapper.signUpToUser(userDto);
+
+       user.setPassword(passwordEncoder.encode(CharBuffer.wrap(userDto.getPassword())));
+
+        user.setIsActive(true);
+        user.setIsVerified(false);
+        user.setUserType(UserType.CUSTOMER);
+
+       User savedUser = userRepository.save(user);
+
+       return userMapper.toUserDto(savedUser);
     }
 
     //do rejestracji
