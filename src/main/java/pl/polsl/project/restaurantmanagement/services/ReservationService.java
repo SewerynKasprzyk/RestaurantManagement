@@ -78,6 +78,32 @@ public class ReservationService {
         return reports;
     }
 
+    // Nowa metoda
+    public List<ReservationReport> findReservationsReport(LocalDate start, LocalDate end) {
+        List<Reservation> reservations = reservationRepository.findReservations(start, end);
+
+        Map<LocalDate, List<Reservation>> groupedReservations = reservations.stream()
+                .collect(Collectors.groupingBy(Reservation::getReservationDate));
+
+        List<ReservationReport> reports = new ArrayList<>();
+
+        for (Map.Entry<LocalDate, List<Reservation>> entry : groupedReservations.entrySet()) {
+            LocalDate date = entry.getKey();
+            List<Reservation> dailyReservations = entry.getValue();
+
+            double totalHours = 0;
+            for (Reservation reservation : dailyReservations) {
+                Duration duration = Duration.between(reservation.getStartHour(), reservation.getEndHour());
+                totalHours += duration.toHours();
+            }
+
+            double averageHours = totalHours / dailyReservations.size();
+            reports.add(new ReservationReport(date, dailyReservations.size(), String.format("%.2f", averageHours)));
+        }
+
+        return reports;
+    }
+
     public List<Reservation> getAllReservations() {
         return reservationRepository.findAll();
     }
