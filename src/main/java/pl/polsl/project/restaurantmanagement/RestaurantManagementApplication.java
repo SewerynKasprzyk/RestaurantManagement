@@ -7,7 +7,12 @@ import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
 import org.springframework.context.ConfigurableApplicationContext;
+import pl.polsl.project.restaurantmanagement.model.Reservation;
 import pl.polsl.project.restaurantmanagement.services.*;
+
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.util.Collections;
 
 @SpringBootApplication
 @EnableAutoConfiguration(exclude = {SecurityAutoConfiguration.class})
@@ -20,7 +25,6 @@ public class RestaurantManagementApplication {
     private final TableService tableService;
     private final ReservationService reservationService;
     private final OrderService orderService;
-
 
     public static void main(String[] args) {
         ConfigurableApplicationContext context = SpringApplication.run(RestaurantManagementApplication.class, args);
@@ -43,7 +47,7 @@ public class RestaurantManagementApplication {
         //Dawanie nowej rezerwacji TODO Zrobić coś z subListem
         app.reservationService.initializeExampleReservations();
 
-        //app.orderService.initializeExampleOrders();
-
+        //Basic ordery
+        app.orderService.initializeExampleOrders();
     }
 }
