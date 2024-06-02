@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from "axios";
+import { getAuthToken, request } from '../api/axiosConfig';
 
 export default function AddReservation() {
     const [reservationDate, setReservationDate] = useState('');
@@ -20,7 +21,6 @@ export default function AddReservation() {
                 const response = await request('GET', '/api/users/me');
                 if (response.status === 200) {
                     const userData = response.data;
-                    setUserId(userData.id);
                     setUser(userData);
                 } else {
                     console.error('Failed to fetch user data');
