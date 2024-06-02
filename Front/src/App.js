@@ -27,7 +27,6 @@ function App() {
         <div>
             <div>
                 <Navbar />
-                <AppContent />
             </div>
             <Routes>
                 <Route path="/menu" element = {<MenuItems/>} />
