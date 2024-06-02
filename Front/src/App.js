@@ -1,41 +1,40 @@
-import React, { useState } from 'react';
+import React from 'react';
 import "./App.css";
 import "../node_modules/bootstrap/dist/css/bootstrap-grid.min.css"
-import {BrowserRouter, Routes, Route} from 'react-router-dom'
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Navbar from "./HomePage/Navbar";
 import MenuItems from "./MenuPage/Menu";
 import AppContent from "./AppContent";
-import GenerateReport from "./Raport/Raport"
-import Reservation  from "./ReservationPage/Reservation";
+import GenerateReport from "./Raport/Raport";
+import Reservation from "./ReservationPage/Reservation";
 import AddReservation from "./ReservationPage/AddReservation";
 import Ingredients from "./Ingredients";
-import {EditMenuItems} from "./MenuItem";
+import { EditMenuItems } from "./MenuItem";
 import ReservationsReport from "./ReportPage/ReservationsReport";
 import SalesByCategoryReport from "./ReportPage/SalesByCategoryReport";
 import NavBarControl from "./NavBarControl";
+import PrivateRoute from './PrivateRoute';
 
-// Główny komponent aplikacji
+// Main application component
 function App() {
-
     return (
-    <BrowserRouter>
-        <div>
-            <div>
-                <NavBarControl/>
-            </div>
-            <Routes>
-                <Route path="/menu" element = {<MenuItems/>} />
-                <Route path="/loginTest" element={<AppContent />} />
-                <Route path="/reservations" element={<Reservation />} />
-                <Route path="/reservations/add" element={<AddReservation />} />
-                <Route path="/ingredients" element={<Ingredients/>} />
-                <Route path="/menuitem" element={<EditMenuItems/>} />
-                <Route path="/reports/reservations" element={<ReservationsReport/>} />
-                <Route path="/reports/sales-by-category" element={<SalesByCategoryReport/>} />
-                <Route path="/raport" element = {<GenerateReport/>} />
-            </Routes>
-        </div>
-    </BrowserRouter>
+            <BrowserRouter>
+                <div>
+                    <NavBarControl />
+                    <Routes>
+                        <Route path="/menu" element = {<MenuItems/>} />
+                        <Route path="/loginTest" element={<AppContent />} />
+                        <Route path="/reservations" element={<PrivateRoute element={<Reservation />} roles={['ADMIN', 'EMPLOYEE', 'CUSTOMER']} />} />
+                        <Route path="/reservations/add" element={<PrivateRoute element={<AddReservation />} roles={['ADMIN', 'EMPLOYEE']} />} />
+                        <Route path="/ingredients" element={<PrivateRoute element={<Ingredients />} roles={['ADMIN', 'EMPLOYEE']} />} />
+                        <Route path="/menuitem" element={<PrivateRoute element={<EditMenuItems />} roles={['ADMIN', 'EMPLOYEE']} />} />
+                        <Route path="/reports/reservations" element={<PrivateRoute element={<ReservationsReport />} roles={['ADMIN']} />} />
+                        <Route path="/reports/sales-by-category" element={<PrivateRoute element={<SalesByCategoryReport />} roles={['ADMIN']} />} />
+                        <Route path="/raport" element={<PrivateRoute element={<GenerateReport />} roles={['ADMIN', 'EMPLOYEE']} />} />
+                        <Route path="/unauthorized" element={<div>Unauthorized Access</div>} />
+                    </Routes>
+                </div>
+            </BrowserRouter>
     );
 }
 
