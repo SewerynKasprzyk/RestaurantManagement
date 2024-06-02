@@ -10,6 +10,8 @@ import pl.polsl.project.restaurantmanagement.model.TableEntity;
 import pl.polsl.project.restaurantmanagement.services.ReservationService;
 import pl.polsl.project.restaurantmanagement.configuration.ReservationMapper;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -38,6 +40,12 @@ public class ReservationController {
         return ResponseEntity.ok(reservations);
     }
 
+    @GetMapping("/tables/{id}")
+    public ResponseEntity<List<ReservationDto>> getReservationsByTableId(@PathVariable Integer id) {
+        List<ReservationDto> reservations = reservationService.getReservationsByTableId(id);
+        return ResponseEntity.ok(reservations);
+    }
+
 
     @PostMapping("/add")
     public ResponseEntity<ReservationDto> addReservation(@RequestBody ReservationDto reservationDto, @RequestHeader("Authorization") String token) {
@@ -48,7 +56,14 @@ public class ReservationController {
     }
 
     @GetMapping("/freeTables")
-    public ResponseEntity<List<TableEntity>> getFreeTables() {
-        return new ResponseEntity<>(reservationService.getFreeTables(), HttpStatus.OK);
+    public ResponseEntity<List<TableEntity>> getFreeTables(@RequestParam("reservationDate") String reservationDate,
+                                                           @RequestParam("startHour") String startHour,
+                                                           @RequestParam("endHour") String endHour) {
+        LocalDate date = LocalDate.parse(reservationDate);
+        LocalTime start = LocalTime.parse(startHour);
+        LocalTime end = LocalTime.parse(endHour);
+
+        List<TableEntity> freeTables = reservationService.getFreeTables(date, start, end);
+        return new ResponseEntity<>(freeTables, HttpStatus.OK);
     }
 }

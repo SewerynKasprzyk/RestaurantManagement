@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from "axios";
-import { getAuthToken, request } from '../api/axiosConfig';
+import { request } from '../api/axiosConfig'; // Usunięto nieużywaną funkcję getAuthToken
 
 export default function AddReservation() {
     const [reservationDate, setReservationDate] = useState('');
@@ -30,29 +30,38 @@ export default function AddReservation() {
             }
         };
 
-        const fetchAvailableTables = async () => {
-            try {
-                const response = await axios.get('/api/tables');
-                if (response.status === 200) {
-                    setAvailableTables(response.data);
-                } else {
-                    console.error('Failed to fetch tables');
-                }
-            } catch (error) {
-                console.error('Error fetching tables:', error);
-                setError('Błąd pobierania stolików.');
-            }
-        };
-
         fetchUser();
-        fetchAvailableTables();
     }, []);
+
+    const fetchAvailableTables = async (startTime, endTime) => {
+        try {
+            const response = await axios.get('/api/reservations/freeTables', {
+                params: {
+                    reservationDate,
+                    startHour: startTime,
+                    endHour: endTime
+                }
+            });
+            if (response.status === 200) {
+                setAvailableTables(response.data);
+            } else {
+                console.error('Failed to fetch tables');
+            }
+        } catch (error) {
+            console.error('Error fetching tables:', error);
+            setError('Błąd pobierania stolików.');
+        }
+    };
 
     const handleAddTable = () => {
         const selectedTable = availableTables.find(table => table.id === parseInt(selectedTableId, 10));
         if (selectedTable && !selectedTables.some(table => table.id === selectedTable.id)) {
             setSelectedTables([...selectedTables, selectedTable]);
         }
+    };
+
+    const handleTableSelect = (e) => {
+        setSelectedTableId(e.target.value);
     };
 
     const handleRemoveTable = (tableId) => {
@@ -89,6 +98,22 @@ export default function AddReservation() {
         }
     };
 
+    const handleStartHourChange = (event) => {
+        const startTime = event.target.value;
+        setStartHour(startTime);
+        if (endHour) {
+            fetchAvailableTables(startTime, endHour);
+        }
+    };
+
+    const handleEndHourChange = (event) => {
+        const endTime = event.target.value;
+        setEndHour(endTime);
+        if (startHour) {
+            fetchAvailableTables(startHour, endTime);
+        }
+    };
+
     return (
         <div className='add-reservation-container'>
             <h2>Dodaj rezerwację</h2>
@@ -107,7 +132,7 @@ export default function AddReservation() {
                     <input
                         type='time'
                         value={startHour}
-                        onChange={(event) => setStartHour(event.target.value)}
+                        onChange={handleStartHourChange}
                         required
                     />
                 </div>
@@ -116,7 +141,7 @@ export default function AddReservation() {
                     <input
                         type='time'
                         value={endHour}
-                        onChange={(event) => setEndHour(event.target.value)}
+                        onChange={handleEndHourChange}
                         required
                     />
                 </div>
@@ -130,7 +155,7 @@ export default function AddReservation() {
                 </div>
                 <div>
                     <label>Wybierz stolik:</label>
-                    <select onChange={(e) => setSelectedTableId(e.target.value)} value={selectedTableId}>
+                    <select onChange={handleTableSelect} value={selectedTableId}>
                         <option value="" disabled>Wybierz stolik</option>
                         {availableTables.map((table) => (
                             <option key={table.id} value={table.id}>

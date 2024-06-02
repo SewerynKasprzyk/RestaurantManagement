@@ -63,6 +63,29 @@ public class ReservationService {
         return tableRepository.findAvailableTables();
     }
 
+    public List<TableEntity> getFreeTables(LocalTime startTime, LocalTime endTime) {
+        List<TableEntity> allTables = tableRepository.findAll();
+        List<TableEntity> reservedTables = reservationRepository.findReservedTables(startTime, endTime);
+        return allTables.stream()
+                .filter(table -> !reservedTables.contains(table))
+                .collect(Collectors.toList());
+    }
+
+    public List<TableEntity> getFreeTables(LocalDate reservationDate, LocalTime startHour, LocalTime endHour) {
+        List<TableEntity> allTables = tableRepository.findAll();
+        List<Reservation> conflictingReservations = reservationRepository.findConflictingReservations(reservationDate, startHour, endHour);
+
+        List<TableEntity> occupiedTables = new ArrayList<>();
+        for (Reservation reservation : conflictingReservations) {
+            occupiedTables.addAll(reservation.getTables());
+        }
+
+        return allTables.stream()
+                .filter(table -> !occupiedTables.contains(table))
+                .collect(Collectors.toList());
+    }
+
+
     public Reservation addReservation(ReservationDto reservationDto, String token){
         UserDto userDto = userAuthProvider.getUserFromToken(token);
         User user = userService.getUserById(userDto.getId());
@@ -73,6 +96,13 @@ public class ReservationService {
 
     public ReservationDto toReservationDto(Reservation reservation){
         return reservationMapper.toReservationDto(reservation);
+    }
+
+    public List<ReservationDto> getReservationsByTableId(Integer id) {
+        List<Reservation> reservations = reservationRepository.findByTablesId(id);
+        return reservations.stream()
+                .map(reservationMapper::toReservationDto)
+                .collect(Collectors.toList());
     }
 
     @Transactional
@@ -92,5 +122,6 @@ public class ReservationService {
             reservationRepository.save(reservation2);
         }
     }
+
 
 }
