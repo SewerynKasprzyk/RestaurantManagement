@@ -1,31 +1,27 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from "axios";
-import { getAuthToken, request } from '../api/axiosConfig';
 
 export default function AddReservation() {
     const [reservationDate, setReservationDate] = useState('');
     const [startHour, setStartHour] = useState('');
     const [endHour, setEndHour] = useState('');
     const [notes, setNotes] = useState('');
-    const [userId, setUserId] = useState(''); // Stan przechowujący ID użytkownika
-    const [user, setUser] = useState(null); // Stan przechowujący dane użytkownika
-    const [tableId, setTableId] = useState(''); // Stan przechowujący ID stolika
-    const [tables, setTables] = useState([]); // Stan przechowujący dane stolików
+    const [user, setUser] = useState(null);
+    const [availableTables, setAvailableTables] = useState([]);
+    const [selectedTables, setSelectedTables] = useState([]);
+    const [selectedTableId, setSelectedTableId] = useState('');
     const [error, setError] = useState('');
     const navigate = useNavigate();
-    const token = getAuthToken(); // Replace this with the actual JWT token
 
     useEffect(() => {
         const fetchUser = async () => {
             try {
-                const response = await request('GET', '/api/users/me', getAuthToken());
-
+                const response = await request('GET', '/api/users/me');
                 if (response.status === 200) {
                     const userData = response.data;
-                    setUserId(userData.id); // Adjust according to the UserDto field
-                    setUser(userData); // Set the JWT token into local storage
-                    // setAuthToken(response.data.token);
+                    setUserId(userData.id);
+                    setUser(userData);
                 } else {
                     console.error('Failed to fetch user data');
                 }
@@ -34,26 +30,33 @@ export default function AddReservation() {
             }
         };
 
+        const fetchAvailableTables = async () => {
+            try {
+                const response = await axios.get('/api/tables');
+                if (response.status === 200) {
+                    setAvailableTables(response.data);
+                } else {
+                    console.error('Failed to fetch tables');
+                }
+            } catch (error) {
+                console.error('Error fetching tables:', error);
+                setError('Błąd pobierania stolików.');
+            }
+        };
+
         fetchUser();
+        fetchAvailableTables();
     }, []);
 
-    const fetchTableById = async (tableId) => {
-        try {
-            const response = await axios.get(`/api/tables/${tableId}`);
-            setTables(prevTables => [...prevTables, response.data]); // Dodanie stolika do listy
-        } catch (error) {
-            console.error('Error:', error);
-            setError('Błąd pobierania stolika');
+    const handleAddTable = () => {
+        const selectedTable = availableTables.find(table => table.id === parseInt(selectedTableId, 10));
+        if (selectedTable && !selectedTables.some(table => table.id === selectedTable.id)) {
+            setSelectedTables([...selectedTables, selectedTable]);
         }
     };
 
-    const handleTableIdChange = (event) => {
-        const ids = event.target.value.split(',');
-        setTables([]); // Wyczyszczenie listy stolików
-        for (const id of ids) {
-            fetchTableById(id.trim());
-        }
-        setTableId(event.target.value); // Ustawienie ID stolika
+    const handleRemoveTable = (tableId) => {
+        setSelectedTables(selectedTables.filter(table => table.id !== tableId));
     };
 
     const handleSubmit = async (event) => {
@@ -71,7 +74,7 @@ export default function AddReservation() {
             reserved: true,
             notes,
             user,
-            tables
+            tables: selectedTables
         };
 
         try {
@@ -126,13 +129,25 @@ export default function AddReservation() {
                     />
                 </div>
                 <div>
-                    <label>ID stolika:</label>
-                    <input
-                        type='text'
-                        value={tableId}
-                        onChange={handleTableIdChange}
-                        required
-                    />
+                    <label>Wybierz stolik:</label>
+                    <select onChange={(e) => setSelectedTableId(e.target.value)} value={selectedTableId}>
+                        <option value="" disabled>Wybierz stolik</option>
+                        {availableTables.map((table) => (
+                            <option key={table.id} value={table.id}>
+                                {`Stolik ${table.id} : ${table.seatsAmount}`}
+                            </option>
+                        ))}
+                    </select>
+                    <button type="button" onClick={handleAddTable} disabled={!selectedTableId}>Dodaj stolik</button>
+                </div>
+                <div>
+                    <h3>Wybrane stoliki:</h3>
+                    {selectedTables.map((table) => (
+                        <div key={table.id}>
+                            <p>{`Stolik ${table.id}: Liczba miejsc przy stoliku: ${table.seatsAmount || 'Brak opisu'}`}</p>
+                            <button type="button" onClick={() => handleRemoveTable(table.id)}>Usuń</button>
+                        </div>
+                    ))}
                 </div>
                 <button type='submit'>Dodaj rezerwację</button>
             </form>
