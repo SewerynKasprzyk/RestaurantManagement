@@ -1,5 +1,6 @@
 package pl.polsl.project.restaurantmanagement.controllers;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -11,12 +12,10 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/menu")
+@RequiredArgsConstructor
 public class MenuItemController {
 
     private final MenuItemService menuItemService;
-
-    @Autowired
-    public MenuItemController(MenuItemService menuItemService) { this.menuItemService = menuItemService; }
 
     @GetMapping
     public ResponseEntity<List<MenuItem>> getAllMenuItems() { return new ResponseEntity<List<MenuItem>>(menuItemService.getAllMenuItems(), HttpStatus.OK); }

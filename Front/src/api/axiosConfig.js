@@ -9,8 +9,11 @@ export const getAuthToken = () => {
 }
 
 export const setAuthToken = (token) => {
-    Cookies.set('auth_token', token, { expires: 7 }); // expires in 7 days
+    const expirationMinutes = 240;
+    const expirationDays = expirationMinutes / (24 * 60); // Convert minutes to fraction of a day
+    Cookies.set('auth_token', token, { expires: expirationDays });
 }
+
 
 export const removeAuthToken = () => {
     Cookies.remove('auth_token');

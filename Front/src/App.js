@@ -5,6 +5,7 @@ import {BrowserRouter, Routes, Route} from 'react-router-dom'
 import Navbar from "./HomePage/Navbar";
 import MenuItems from "./MenuPage/Menu";
 import AppContent from "./AppContent";
+import GenerateReport from "./Raport/Raport"
 import Reservation  from "./ReservationPage/Reservation";
 import AddReservation from "./ReservationPage/AddReservation";
 import Ingredients from "./Ingredients";
@@ -41,23 +42,10 @@ function App() {
                 <Route path="/menuitem" element={<EditMenuItems/>} />
                 <Route path="/reports/reservations" element={<ReservationsReport/>} />
                 <Route path="/reports/sales-by-category" element={<SalesByCategoryReport/>} />
+                <Route path="/raport" element = {<GenerateReport/>} />
             </Routes>
         </div>
     </BrowserRouter>
-    );
-}
-
-// Komponent menu
-function MenuIt({ items }) {
-    return (
-        <div>
-            <h2>Menu</h2>
-            <ul>
-                {items.map((item, index) => (
-                    <li key={index}>{item.name} - {item.price}</li>
-                ))}
-            </ul>
-        </div>
     );
 }
 

@@ -1,6 +1,7 @@
 package pl.polsl.project.restaurantmanagement.controllers;
 
 import org.springframework.format.annotation.DateTimeFormat;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,15 +22,11 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/api/orders")
+@RequiredArgsConstructor
 public class OrderController {
 
     private final OrderService orderService;
     private final OrderItemService orderItemService;
-
-    public OrderController(OrderService orderService, OrderItemService orderItemService) {
-        this.orderService = orderService;
-        this.orderItemService = orderItemService;
-    }
 
     @GetMapping
     public ResponseEntity<List<Order>> getAllOrders() { return new ResponseEntity<List<Order>>(orderService.getAllOrders(), HttpStatus.OK); }
