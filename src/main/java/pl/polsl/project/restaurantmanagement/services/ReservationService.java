@@ -12,6 +12,7 @@ import pl.polsl.project.restaurantmanagement.model.TableEntity;
 import pl.polsl.project.restaurantmanagement.model.User;
 import pl.polsl.project.restaurantmanagement.model.report.ReservationReport;
 import pl.polsl.project.restaurantmanagement.repositories.ReservationRepository;
+import pl.polsl.project.restaurantmanagement.repositories.TableRepository;
 
 import java.time.Duration;
 import java.time.LocalDate;

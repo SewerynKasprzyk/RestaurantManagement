@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 import pl.polsl.project.restaurantmanagement.model.Reservation;
 import pl.polsl.project.restaurantmanagement.model.TableEntity;
 
+
 import java.util.ArrayList;
 
 import java.time.LocalDate;

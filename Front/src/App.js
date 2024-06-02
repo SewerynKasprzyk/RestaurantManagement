@@ -3,13 +3,13 @@ import "./App.css";
 import "../node_modules/bootstrap/dist/css/bootstrap-grid.min.css"
 import {BrowserRouter, Routes, Route} from 'react-router-dom'
 import Navbar from "./HomePage/Navbar";
-import { Login, Register } from "./loginPage/Login";
 import MenuItems from "./MenuPage/Menu";
 import AppContent from "./AppContent";
 import Reservation  from "./ReservationPage/Reservation";
 import AddReservation from "./ReservationPage/AddReservation";
 import Ingredients from "./Ingredients";
 import {EditMenuItems} from "./MenuItem";
+import ReservationsReport from "./ReservationsReport";
 
 // Główny komponent aplikacji
 function App() {
@@ -38,6 +38,7 @@ function App() {
                 <Route path="/loginTest" element={<AppContent/>} />
                 <Route path="/ingredients" element={<Ingredients/>} />
                 <Route path="/menuitem" element={<EditMenuItems/>} />
+                <Route path="/reports/reservations" element={<ReservationsReport/>} />
             </Routes>
         </div>
     </BrowserRouter>
