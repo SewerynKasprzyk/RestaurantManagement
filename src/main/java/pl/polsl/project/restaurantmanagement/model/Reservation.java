@@ -1,6 +1,7 @@
 package pl.polsl.project.restaurantmanagement.model;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import jakarta.persistence.*;
@@ -34,9 +35,11 @@ public class Reservation {
     @Column(name = "notes")
     private String notes;
 
+    //dodany @JsonIgnore w celu uniknięcia rekurencyjnego wywoływania (w konsoli wyrzucało błąd)
     @ManyToOne(fetch = FetchType.LAZY)
     @JsonManagedReference
     @JoinColumn(name = "user_id")
+    @JsonIgnore
     private User user;
 
     @ManyToMany(fetch = FetchType.LAZY)

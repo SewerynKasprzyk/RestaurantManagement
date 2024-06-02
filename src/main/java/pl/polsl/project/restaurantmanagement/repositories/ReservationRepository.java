@@ -6,7 +6,9 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import pl.polsl.project.restaurantmanagement.model.Reservation;
 import pl.polsl.project.restaurantmanagement.model.TableEntity;
+import pl.polsl.project.restaurantmanagement.model.report.ReservationReport;
 
+import java.time.LocalDate;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
@@ -26,5 +28,13 @@ public interface ReservationRepository extends JpaRepository<Reservation, Intege
 
     @Query("SELECT r FROM Reservation r WHERE r.reservationDate = :reservationDate AND ((r.startHour < :endHour AND r.endHour > :startHour))")
     List<Reservation> findConflictingReservations(@Param("reservationDate") LocalDate reservationDate, @Param("startHour") LocalTime startHour, @Param("endHour") LocalTime endHour);
+
+    @Query("SELECT r.tables FROM Reservation r WHERE r.reserved = true")
+    ArrayList<TableEntity> findReservedTables();
+
+    List<Reservation> findByReservationDateBetween(LocalDate start, LocalDate end);
+
+    @Query("SELECT r FROM Reservation r WHERE r.reservationDate BETWEEN :start AND :end")
+    List<Reservation> findReservations(@Param("start") LocalDate start, @Param("end") LocalDate end);
 
 }

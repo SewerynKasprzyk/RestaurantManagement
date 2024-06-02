@@ -10,13 +10,20 @@ import pl.polsl.project.restaurantmanagement.model.DTO.UserDto;
 import pl.polsl.project.restaurantmanagement.model.Reservation;
 import pl.polsl.project.restaurantmanagement.model.TableEntity;
 import pl.polsl.project.restaurantmanagement.model.User;
+import pl.polsl.project.restaurantmanagement.model.report.ReservationReport;
 import pl.polsl.project.restaurantmanagement.repositories.ReservationRepository;
 import pl.polsl.project.restaurantmanagement.repositories.TableRepository;
 
+import java.time.Duration;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 import java.util.stream.Collectors;
 
 @Service
@@ -42,6 +49,60 @@ public class ReservationService {
 
     public Reservation saveOrUpdateReservation(Reservation reservation) {
         return reservationRepository.save(reservation);
+    }
+
+    public List<ReservationReport> getReservationsByDateRange(LocalDateTime start, LocalDateTime end) {
+        List<Reservation> reservations = reservationRepository.findByReservationDateBetween(start.toLocalDate(), end.toLocalDate());
+
+        Map<LocalDate, List<Reservation>> groupedReservations = reservations.stream()
+                .collect(Collectors.groupingBy(Reservation::getReservationDate));
+
+        List<ReservationReport> reports = new ArrayList<>();
+
+        for (Map.Entry<LocalDate, List<Reservation>> entry : groupedReservations.entrySet()) {
+            LocalDate date = entry.getKey();
+            List<Reservation> dateReservations = entry.getValue();
+
+            long totalMinutes = dateReservations.stream()
+                    .mapToLong(reservation -> Duration.between(reservation.getStartHour(), reservation.getEndHour()).toMinutes())
+                    .sum();
+
+            long averageMinutes = totalMinutes / dateReservations.size();
+            long hours = averageMinutes / 60;
+            long minutes = averageMinutes % 60;
+
+            String averageHours = hours + "h " + minutes + "min";
+
+            reports.add(new ReservationReport(date, dateReservations.size(), averageHours));
+        }
+
+        return reports;
+    }
+
+    // Nowa metoda
+    public List<ReservationReport> findReservationsReport(LocalDate start, LocalDate end) {
+        List<Reservation> reservations = reservationRepository.findReservations(start, end);
+
+        Map<LocalDate, List<Reservation>> groupedReservations = reservations.stream()
+                .collect(Collectors.groupingBy(Reservation::getReservationDate));
+
+        List<ReservationReport> reports = new ArrayList<>();
+
+        for (Map.Entry<LocalDate, List<Reservation>> entry : groupedReservations.entrySet()) {
+            LocalDate date = entry.getKey();
+            List<Reservation> dailyReservations = entry.getValue();
+
+            double totalHours = 0;
+            for (Reservation reservation : dailyReservations) {
+                Duration duration = Duration.between(reservation.getStartHour(), reservation.getEndHour());
+                totalHours += duration.toHours();
+            }
+
+            double averageHours = totalHours / dailyReservations.size();
+            reports.add(new ReservationReport(date, dailyReservations.size(), String.format("%.2f", averageHours)));
+        }
+
+        return reports;
     }
 
     public List<Reservation> getAllReservations() {
@@ -122,6 +183,5 @@ public class ReservationService {
             reservationRepository.save(reservation2);
         }
     }
-
 
 }

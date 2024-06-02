@@ -4,6 +4,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import jakarta.persistence.*;
 
+import java.math.BigDecimal;
+
 @Entity
 @Table(name = "order_items")
 @Data
@@ -27,5 +29,9 @@ public class OrderItem {
     private Integer quantity;
 
     // Constructors, getters, and setters
+
+    public BigDecimal getPrice() {
+        return this.menuItem.getPrice();
+    }
 }
 

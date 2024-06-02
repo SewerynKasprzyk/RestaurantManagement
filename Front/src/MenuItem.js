@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-export function MenuItems() {
+export function EditMenuItems() {
     const [menuItems, setMenuItems] = useState([]);
     const [selectedItem, setSelectedItem] = useState(null);
     const [menuItemData, setMenuItemData] = useState({name: '', type: '', price: '', description: ''});
@@ -89,4 +89,4 @@ export function MenuItems() {
     );
 }
 
-export default MenuItems;
+export default EditMenuItems;

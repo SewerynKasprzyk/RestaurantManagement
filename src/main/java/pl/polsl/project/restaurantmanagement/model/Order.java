@@ -4,6 +4,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import jakarta.persistence.*;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Entity
@@ -29,6 +30,11 @@ public class Order {
 
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
     private List<OrderItem> orderItems;
+
+    // Add this field
+    @Column(name = "order_date")
+    private LocalDate orderDate;
+
 
     // Constructors, getters, and setters
 }
