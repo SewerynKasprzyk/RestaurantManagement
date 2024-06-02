@@ -17,12 +17,12 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/reports")
-public class ReportController {
+public class ReservationReportController {
 
     private final ReservationService reservationService;
 
     @Autowired
-    public ReportController(ReservationService reservationService) { this.reservationService = reservationService; }
+    public ReservationReportController(ReservationService reservationService) { this.reservationService = reservationService; }
 
     @GetMapping("/reservations")
     public ResponseEntity<List<ReservationReport>> getReservationsReport(@RequestParam("start") String start, @RequestParam("end") String end) {

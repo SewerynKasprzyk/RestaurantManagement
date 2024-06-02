@@ -9,7 +9,8 @@ import Reservation  from "./ReservationPage/Reservation";
 import AddReservation from "./ReservationPage/AddReservation";
 import Ingredients from "./Ingredients";
 import {EditMenuItems} from "./MenuItem";
-import ReservationsReport from "./ReservationsReport";
+import ReservationsReport from "./ReportPage/ReservationsReport";
+import SalesByCategoryReport from "./ReportPage/SalesByCategoryReport";
 
 // Główny komponent aplikacji
 function App() {
@@ -39,6 +40,7 @@ function App() {
                 <Route path="/ingredients" element={<Ingredients/>} />
                 <Route path="/menuitem" element={<EditMenuItems/>} />
                 <Route path="/reports/reservations" element={<ReservationsReport/>} />
+                <Route path="/reports/sales-by-category" element={<SalesByCategoryReport/>} />
             </Routes>
         </div>
     </BrowserRouter>
