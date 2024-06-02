@@ -18,15 +18,24 @@ export default function Navbar() {
                             <li className="nav-item">
                                 <Link className="nav-link" to="/menu">Menu</Link>
                             </li>
-                            <li className="nav-item">
-                                <Link className="nav-link" to="/login">Logowanie</Link>
-                            </li>
-                            <li className="nav-item">
-                                <Link className="nav-link" to="/register">Rejestracja</Link>
-                            </li>
+                            {/*<li className="nav-item">*/}
+                            {/*    <Link className="nav-link" to="/login">Logowanie</Link>*/}
+                            {/*</li>*/}
+                            {/*<li className="nav-item">*/}
+                            {/*    <Link className="nav-link" to="/register">Rejestracja</Link>*/}
+                            {/*</li>*/}
 
                             <li className="nav-item">
                                 <Link className="nav-link" to="/loginTest">LoginTest2</Link>
+                            </li>
+                            <li className="nav-item">
+                                <Link className="nav-link" to="/ingredients">Składniki</Link>
+                            </li>
+                            <li className="nav-item">
+                                <Link className="nav-link" to="/menuitem">Edycja Menu</Link>
+                            </li>
+                            <li className="nav-item">
+                                <Link className="nav-link" to="/reservations">Rezerwacje</Link>
                             </li>
                         </ul>
                     </div>

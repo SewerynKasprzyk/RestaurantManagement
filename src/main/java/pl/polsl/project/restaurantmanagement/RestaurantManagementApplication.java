@@ -6,9 +6,12 @@ import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
 import org.springframework.context.ConfigurableApplicationContext;
-import pl.polsl.project.restaurantmanagement.services.IngredientService;
-import pl.polsl.project.restaurantmanagement.services.MenuItemService;
-import pl.polsl.project.restaurantmanagement.services.UserService;
+import pl.polsl.project.restaurantmanagement.model.Reservation;
+import pl.polsl.project.restaurantmanagement.services.*;
+
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.util.Collections;
 
 @SpringBootApplication
 @EnableAutoConfiguration(exclude = {SecurityAutoConfiguration.class})
@@ -20,11 +23,18 @@ public class RestaurantManagementApplication {
 
     private final MenuItemService menuItemService;
 
+    private final TableService tableService;
+    private final ReservationService reservationService;
+
     @Autowired
-    public RestaurantManagementApplication(UserService userService, IngredientService ingredientService, MenuItemService menuItemService) {
+    public RestaurantManagementApplication(UserService userService, IngredientService ingredientService,
+                                           MenuItemService menuItemService, TableService tableService,
+                                           ReservationService reservationService) {
         this.userService = userService;
         this.ingredientService = ingredientService;
         this.menuItemService = menuItemService;
+        this.tableService = tableService;
+        this.reservationService = reservationService;
     }
 
     public static void main(String[] args) {
@@ -41,6 +51,12 @@ public class RestaurantManagementApplication {
 
         //Dodawanie przykładowych pozycji menu
         app.menuItemService.initializeExampleMenuItems();
+
+        //Dodawanie przykładowych stolikow
+        app.tableService.initializeExampleTables();
+
+        //Dawanie nowej rezerwacji TODO Zrobić coś z subListem
+        app.reservationService.initializeExampleReservations();
 
     }
 }

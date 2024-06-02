@@ -8,6 +8,7 @@ import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
@@ -27,7 +28,8 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         if (disableAuth) {
             http
-                    .cors(cors -> cors.disable())
+                    .cors(AbstractHttpConfigurer::disable)
+                    .csrf(AbstractHttpConfigurer::disable)
                     .sessionManagement(sessionManagement ->
                             sessionManagement.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                     )
@@ -40,13 +42,15 @@ public class SecurityConfig {
                             exceptionHandling.authenticationEntryPoint(authenticationEntryPoint)
                     )
                     .addFilterBefore(new JwtAuthFilter(userAuthProvider), BasicAuthenticationFilter.class)
-                    .cors(cors -> cors.disable())
+                    .cors(AbstractHttpConfigurer::disable)
+                    .csrf(AbstractHttpConfigurer::disable)
                     .sessionManagement(sessionManagement ->
                             sessionManagement.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                     )
                     .authorizeHttpRequests(authorizeRequests ->
                             authorizeRequests
                                     .requestMatchers(HttpMethod.POST, "/login", "/register").permitAll()
+                                    .requestMatchers(HttpMethod.GET, "/api/menu").permitAll()
                                     .anyRequest().authenticated()
                     );
         }

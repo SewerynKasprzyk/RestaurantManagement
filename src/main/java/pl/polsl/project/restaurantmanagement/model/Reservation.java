@@ -1,5 +1,6 @@
 package pl.polsl.project.restaurantmanagement.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -36,11 +37,13 @@ public class Reservation {
 
     //dodany @JsonIgnore w celu uniknięcia rekurencyjnego wywoływania (w konsoli wyrzucało błąd)
     @ManyToOne(fetch = FetchType.LAZY)
+    @JsonManagedReference
     @JoinColumn(name = "user_id")
     @JsonIgnore
     private User user;
 
     @ManyToMany(fetch = FetchType.LAZY)
+    @JsonManagedReference
     @JoinTable(
             name = "reservation_tables",
             joinColumns = @JoinColumn(name = "reservation_id"),
@@ -49,5 +52,15 @@ public class Reservation {
     private List<TableEntity> tables;
 
     // Constructors, getters, and setters
+
+    public Reservation(LocalDate reservationDate, LocalTime startHour, LocalTime endHour, Boolean reserved, String notes, User user, List<TableEntity> tables) {
+        this.reservationDate = reservationDate;
+        this.startHour = startHour;
+        this.endHour = endHour;
+        this.reserved = true;
+        this.notes = notes;
+        this.user = user;
+        this.tables = tables;
+    }
 }
 

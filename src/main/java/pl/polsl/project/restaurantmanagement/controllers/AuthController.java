@@ -1,46 +1,38 @@
 package pl.polsl.project.restaurantmanagement.controllers;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import pl.polsl.project.restaurantmanagement.model.User;
-
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import pl.polsl.project.restaurantmanagement.configuration.UserAuthProvider;
+import pl.polsl.project.restaurantmanagement.model.DTO.CredentialsDto;
+import pl.polsl.project.restaurantmanagement.model.DTO.SignUpDto;
+import pl.polsl.project.restaurantmanagement.model.DTO.UserDto;
 import pl.polsl.project.restaurantmanagement.services.UserService;
 
+import java.net.URI;
 
+@RequiredArgsConstructor
 @RestController
-@RequestMapping("/api/auth")
 public class AuthController {
 
     private final UserService userService;
-
-    @Autowired
-    public AuthController(UserService userService) {
-        this.userService = userService;
-    }
+    private final UserAuthProvider userAuthProvider;
 
     @PostMapping("/login")
-    public ResponseEntity<User> login(@RequestBody User user) {
-        User existingUser = userService.findByLogin(user.getLogin());
-        if (existingUser != null && existingUser.getPassword().equals(user.getPassword())) {
-            return new ResponseEntity<>(existingUser, HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
-        }
+    public ResponseEntity<UserDto> login(@RequestBody CredentialsDto credentialsDto) {
+        UserDto user = userService.login(credentialsDto);
+
+        user.setToken(userAuthProvider.createToken(user.getLogin()));
+        return ResponseEntity.ok(user);
     }
 
     @PostMapping("/register")
-    public ResponseEntity<User> register(@RequestBody User user) {
-        User existingUser = userService.findByLogin(user.getLogin());
-        if (existingUser == null) {
-            User newUser = userService.registerUser(user);
-            return new ResponseEntity<>(newUser, HttpStatus.CREATED);
-        } else {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-        }
+    public ResponseEntity<UserDto> register(@RequestBody SignUpDto signUpDto) {
+        UserDto user = userService.register(signUpDto);
+        user.setToken(userAuthProvider.createToken(user.getLogin()));
+
+        return ResponseEntity.created(URI.create("/api/users/" + user.getId())).body(user);
     }
 }
