@@ -7,6 +7,8 @@ import MenuItems from "./MenuPage/Menu";
 import AppContent from "./AppContent";
 import Reservation  from "./ReservationPage/Reservation";
 import AddReservation from "./ReservationPage/AddReservation";
+import Ingredients from "./Ingredients";
+import {EditMenuItems} from "./MenuItem";
 
 // Główny komponent aplikacji
 function App() {
@@ -33,6 +35,8 @@ function App() {
                 <Route path="/reservations" element={<Reservation />} />
                 <Route path="/reservations/add" element={<AddReservation />} />
                 <Route path="/loginTest" element={<AppContent/>} />
+                <Route path="/ingredients" element={<Ingredients/>} />
+                <Route path="/menuitem" element={<EditMenuItems/>} />
             </Routes>
         </div>
     </BrowserRouter>
