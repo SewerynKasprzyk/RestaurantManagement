@@ -15,16 +15,6 @@ import SalesByCategoryReport from "./ReportPage/SalesByCategoryReport";
 
 // Główny komponent aplikacji
 function App() {
-    const [user, setUser] = useState(null); // Aktualnie zalogowany użytkownik
-
-
-    const handleLogin = (username) => {
-        setUser(username);
-    };
-
-    const handleRegister = (username) => {
-        setUser(username);
-    };
 
     return (
     <BrowserRouter>

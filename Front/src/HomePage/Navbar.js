@@ -18,12 +18,6 @@ export default function Navbar() {
                             <li className="nav-item">
                                 <Link className="nav-link" to="/menu">Menu</Link>
                             </li>
-                            {/*<li className="nav-item">*/}
-                            {/*    <Link className="nav-link" to="/login">Logowanie</Link>*/}
-                            {/*</li>*/}
-                            {/*<li className="nav-item">*/}
-                            {/*    <Link className="nav-link" to="/register">Rejestracja</Link>*/}
-                            {/*</li>*/}
 
                             <li className="nav-item">
                                 <Link className="nav-link" to="/loginTest">LoginTest2</Link>
