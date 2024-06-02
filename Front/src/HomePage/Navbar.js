@@ -37,6 +37,9 @@ export default function Navbar() {
                             <li className="nav-item">
                                 <Link className="nav-link" to="/reservations">Rezerwacje</Link>
                             </li>
+                             <li className="nav-item">
+                                <Link className="nav-link" to="/raport">Raport</Link>
+                            </li>
                         </ul>
                     </div>
 
