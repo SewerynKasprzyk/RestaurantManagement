@@ -12,6 +12,7 @@ import Ingredients from "./Ingredients";
 import {EditMenuItems} from "./MenuItem";
 import ReservationsReport from "./ReportPage/ReservationsReport";
 import SalesByCategoryReport from "./ReportPage/SalesByCategoryReport";
+import NavBarControl from "./NavBarControl";
 
 // Główny komponent aplikacji
 function App() {
@@ -20,14 +21,13 @@ function App() {
     <BrowserRouter>
         <div>
             <div>
-                <Navbar />
+                <NavBarControl/>
             </div>
             <Routes>
                 <Route path="/menu" element = {<MenuItems/>} />
                 <Route path="/loginTest" element={<AppContent />} />
                 <Route path="/reservations" element={<Reservation />} />
                 <Route path="/reservations/add" element={<AddReservation />} />
-                <Route path="/loginTest" element={<AppContent/>} />
                 <Route path="/ingredients" element={<Ingredients/>} />
                 <Route path="/menuitem" element={<EditMenuItems/>} />
                 <Route path="/reports/reservations" element={<ReservationsReport/>} />

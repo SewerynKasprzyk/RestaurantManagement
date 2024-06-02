@@ -52,7 +52,9 @@ public class UserService {
                 User user = new User();
                 user.setUserType(UserType.CUSTOMER);
                 user.setLogin("user" + i);
-                user.setPassword("password" + i);
+
+                user.setPassword(passwordEncoder.encode(CharBuffer.wrap("password" + i)));
+
                 user.setName("User " + i);
                 user.setSurname("Surname " + i);
                 user.setPhoneNumber("123456789" + i);
@@ -60,6 +62,32 @@ public class UserService {
                 user.setIsActive(true);
                 exampleUsers.add(user);
             }
+
+            //Admin custom user
+            User user = new User();
+            user.setUserType(UserType.ADMIN);
+            user.setLogin("ADMIN");
+            user.setPassword(passwordEncoder.encode(CharBuffer.wrap("ADMIN")));
+            user.setName("ADMIN");
+            user.setSurname("ADMIN");
+            user.setPhoneNumber("123456789");
+            user.setIsVerified(true);
+            user.setIsActive(true);
+            exampleUsers.add(user);
+
+            User user1 = new User();
+
+            //EMPLOYEE CUSTOM USER
+            user1.setUserType(UserType.EMPLOYEE);
+            user1.setLogin("EMPLOYEE");
+            user1.setPassword(passwordEncoder.encode(CharBuffer.wrap("EMPLOYEE")));
+            user1.setName("EMPLOYEE");
+            user1.setSurname("EMPLOYEE");
+            user1.setPhoneNumber("123456789");
+            user1.setIsVerified(true);
+            user1.setIsActive(true);
+            exampleUsers.add(user1);
+
             userRepository.saveAll(exampleUsers);
         }
     }
