@@ -6,7 +6,7 @@ import pl.polsl.project.restaurantmanagement.repositories.ReportRepository;
 
 import java.util.List;
 
-@Service
+@Service("newReportService")
 public class ReportService {
 
     private final ReportRepository reportRepository;
