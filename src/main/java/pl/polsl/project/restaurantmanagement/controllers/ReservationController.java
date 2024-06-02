@@ -32,6 +32,13 @@ public class ReservationController {
         return ResponseEntity.ok(reservationService.getAllReservations().stream().map(reservationService::toReservationDto).collect(Collectors.toList()));
     }
 
+    @GetMapping("/user/{userId}")
+    public ResponseEntity<List<ReservationDto>> getReservationsByUserId(@PathVariable Integer userId) {
+        List<ReservationDto> reservations = reservationService.getReservationsByUserId(userId);
+        return ResponseEntity.ok(reservations);
+    }
+
+
     @PostMapping("/add")
     public ResponseEntity<ReservationDto> addReservation(@RequestBody ReservationDto reservationDto, @RequestHeader("Authorization") String token) {
         Reservation reservation = reservationMapper.toReservation(reservationDto);

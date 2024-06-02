@@ -17,6 +17,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class ReservationService {
@@ -47,8 +48,11 @@ public class ReservationService {
         return reservationRepository.findAll();
     }
 
-    public Reservation getReservationById(Integer id) {
-        return reservationRepository.findById(id).orElse(null);
+    public List<ReservationDto> getReservationsByUserId(Integer userId) {
+        List<Reservation> reservations = reservationRepository.findByUserId(userId);
+        return reservations.stream()
+                .map(reservationMapper::toReservationDto)
+                .collect(Collectors.toList());
     }
 
     public void deleteReservation(Integer id) {
