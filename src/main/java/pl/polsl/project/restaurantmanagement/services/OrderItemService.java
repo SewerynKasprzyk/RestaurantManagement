@@ -4,7 +4,10 @@ import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pl.polsl.project.restaurantmanagement.model.OrderItem;
+import pl.polsl.project.restaurantmanagement.model.report.SalesByCategoryReport;
 import pl.polsl.project.restaurantmanagement.repositories.OrderItemRepository;
+
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -31,6 +34,10 @@ public class OrderItemService {
 
     public void deleteOrderItem(Integer id) {
         orderItemRepository.deleteById(id);
+    }
+
+    public List<SalesByCategoryReport> findSalesByCategoryReport(LocalDate start, LocalDate end) {
+        return orderItemRepository.findSalesByCategoryReport(start, end);
     }
 
     public List<OrderItem> getOrderItemsByOrderId(Integer orderId) {

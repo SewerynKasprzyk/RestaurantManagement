@@ -43,7 +43,7 @@ public class RestaurantManagementApplication {
         //Dawanie nowej rezerwacji TODO Zrobić coś z subListem
         app.reservationService.initializeExampleReservations();
 
-        app.orderService.initializeExampleOrders();
+        //app.orderService.initializeExampleOrders();
 
     }
 }
