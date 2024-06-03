@@ -1,10 +1,10 @@
-import React from 'react'
-import {Link} from 'react-router-dom'
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { Dropdown } from "react-bootstrap";
 
 export default function AdminNav() {
     return (
         <div>
-
             <nav className="navbar navbar-expand-lg bg-body-tertiary">
                 <div className="container-fluid">
                     <Link className="navbar-brand" to="/">Navbar</Link>
@@ -16,9 +16,17 @@ export default function AdminNav() {
                     <div className="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul className="navbar-nav me-auto mb-2 mb-lg-0">
                             <li className="nav-item">
-                                <Link className="nav-link" to="/menu">Menu</Link>
-                            </li>
+                                <Dropdown>
+                                    <Dropdown.Toggle variant="success" id="dropdown-basic">
+                                        Menu
+                                    </Dropdown.Toggle>
 
+                                    <Dropdown.Menu>
+                                        <Dropdown.Item as={Link} to="/menu">Menu</Dropdown.Item>
+                                        <Dropdown.Item as={Link} to="/menuitem">Edycja Menu</Dropdown.Item>
+                                    </Dropdown.Menu>
+                                </Dropdown>
+                            </li>
                             <li className="nav-item">
                                 <Link className="nav-link" to="/loginTest">LoginTest2</Link>
                             </li>
@@ -26,27 +34,27 @@ export default function AdminNav() {
                                 <Link className="nav-link" to="/ingredients">Składniki</Link>
                             </li>
                             <li className="nav-item">
-                                <Link className="nav-link" to="/menuitem">Edycja Menu</Link>
-                            </li>
-                            <li className="nav-item">
                                 <Link className="nav-link" to="/reservations">Rezerwacje</Link>
                             </li>
                             <li className="nav-item">
-                                <Link className="nav-link" to="/reports/reservations">Raport rezerwacji</Link>
-                            </li>
-                            <li className="nav-item">
-                                <Link className="nav-link" to="/reports/sales-by-category">Raport sprzedaży</Link>
+                                <Dropdown>
+                                    <Dropdown.Toggle variant="success" id="dropdown-basic">
+                                        Reports
+                                    </Dropdown.Toggle>
+
+                                    <Dropdown.Menu>
+                                        <Dropdown.Item as={Link} to="/reports/reservations">Raport rezerwacji</Dropdown.Item>
+                                        <Dropdown.Item as={Link} to="/reports/sales-by-category">Raport sprzedaży</Dropdown.Item>
+                                    </Dropdown.Menu>
+                                </Dropdown>
                             </li>
                             <li className="nav-item">
                                 <Link className="nav-link" to="/reservations/history">Historia Rezerwacji</Link>
                             </li>
                         </ul>
                     </div>
-
-
                 </div>
             </nav>
-
         </div>
-    )
+    );
 }
