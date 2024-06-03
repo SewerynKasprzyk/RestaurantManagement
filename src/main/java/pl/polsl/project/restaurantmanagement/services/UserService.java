@@ -132,6 +132,27 @@ public class UserService {
        return userMapper.toUserDto(savedUser);
     }
 
+    public UserDto registerEmployee(SignUpDto userDto) {
+
+        Optional<User> optionalUser = userRepository.findByLogin(userDto.getLogin());
+
+        if (optionalUser.isPresent()) {
+            throw new AppException("User already exists", HttpStatus.CONFLICT);
+        }
+
+        User user = userMapper.signUpToUser(userDto);
+
+        user.setPassword(passwordEncoder.encode(CharBuffer.wrap(userDto.getPassword())));
+
+        user.setIsActive(true);
+        user.setIsVerified(true);
+        user.setUserType(UserType.EMPLOYEE);
+
+        User savedUser = userRepository.save(user);
+
+        return userMapper.toUserDto(savedUser);
+    }
+
     //do rejestracji
     public User registerUser(User user) {
         // You might want to encode the password here

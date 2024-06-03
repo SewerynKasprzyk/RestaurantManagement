@@ -43,10 +43,15 @@ export default function AdminNav() {
                                     </Dropdown.Toggle>
 
                                     <Dropdown.Menu>
-                                        <Dropdown.Item as={Link} to="/reports/reservations">Raport rezerwacji</Dropdown.Item>
-                                        <Dropdown.Item as={Link} to="/reports/sales-by-category">Raport sprzedaży</Dropdown.Item>
+                                        <Dropdown.Item as={Link} to="/reports/reservations">Raport
+                                            rezerwacji</Dropdown.Item>
+                                        <Dropdown.Item as={Link} to="/reports/sales-by-category">Raport
+                                            sprzedaży</Dropdown.Item>
                                     </Dropdown.Menu>
                                 </Dropdown>
+                            </li>
+                            <li className="nav-item">
+                                <Link className="nav-link" to="/employee">Dodaj pracownika</Link>
                             </li>
                         </ul>
                     </div>
