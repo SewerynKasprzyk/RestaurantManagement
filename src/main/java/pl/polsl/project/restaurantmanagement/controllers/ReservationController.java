@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import pl.polsl.project.restaurantmanagement.model.DTO.ReservationDto;
+import pl.polsl.project.restaurantmanagement.model.MenuItemType;
 import pl.polsl.project.restaurantmanagement.model.Reservation;
 import pl.polsl.project.restaurantmanagement.model.TableEntity;
 import pl.polsl.project.restaurantmanagement.model.report.ReservationReport;
@@ -15,6 +16,7 @@ import pl.polsl.project.restaurantmanagement.configuration.ReservationMapper;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -45,7 +47,6 @@ public class ReservationController {
         return ResponseEntity.ok(reservations);
     }
 
-
     @PostMapping("/add")
     public ResponseEntity<ReservationDto> addReservation(@RequestBody ReservationDto reservationDto, @RequestHeader("Authorization") String token) {
         Reservation reservation = reservationMapper.toReservation(reservationDto);
@@ -73,5 +74,36 @@ public class ReservationController {
             @RequestParam("end") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate end) {
         List<ReservationReport> reports = reservationService.findReservationsReport(start, end);
         return new ResponseEntity<>(reports, HttpStatus.OK);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<ReservationDto> getReservationById(@PathVariable Integer id) {
+        Reservation existingReservation = reservationService.getReservationById(id);
+        if (existingReservation == null) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>(reservationMapper.toReservationDto(existingReservation), HttpStatus.OK);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<ReservationDto> updateReservation(@PathVariable Integer id, @RequestBody ReservationDto reservationDto) {
+        Reservation existingReservation = reservationService.getReservationById(id);
+        if (existingReservation == null) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        Reservation updatedReservation = reservationMapper.toReservation(reservationDto);
+        updatedReservation.setId(id);
+        reservationService.saveOrUpdateReservation(updatedReservation);
+        return new ResponseEntity<>(reservationMapper.toReservationDto(updatedReservation), HttpStatus.OK);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteReservation(@PathVariable Integer id) {
+        Reservation existingReservation = reservationService.getReservationById(id);
+        if (existingReservation == null) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        reservationService.deleteReservation(id);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }

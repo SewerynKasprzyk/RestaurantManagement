@@ -1,11 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import { getAuthToken, request } from "../api/axiosConfig";
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import * as availableTables from "react-bootstrap/ElementChildren";
 
-// Komponent wyświetlający rezerwacje
 export default function Reservation() {
     const [reservations, setReservations] = useState([]);
     const [error, setError] = useState('');
     const [user, setUser] = useState(null);
+    const navigate = useNavigate();
+    const [availableTables, setAvailableTables] = useState([]);
+
 
     useEffect(() => {
         const fetchUser = async () => {
@@ -47,6 +52,10 @@ export default function Reservation() {
         fetchReservations();
     }, [user]);
 
+    const handleEdit = (id) => {
+        navigate(`/reservations/edit/${id}`);
+    }
+
     return (
         <div className='reservation-container'>
             <h2>Twoje rezerwacje</h2>
@@ -61,12 +70,14 @@ export default function Reservation() {
                             <p>Data: {reservation.reservationDate}</p>
                             <p>Godzina rozpoczęcia: {reservation.startHour}</p>
                             <p>Godzina zakończenia: {reservation.endHour}</p>
+                            <p>Zarezerwowane stoliki: {reservation.tables.map(table => `Stolik ${table.id}`).join(', ')}</p>
                             <p>Uwagi: {reservation.notes}</p>
+                            <button onClick={() => handleEdit(reservation.id)}>Edytuj</button>
                         </li>
                     ))}
                 </ul>
             ) : (
-                <p>Brak rezerwacji</p>
+                <p>Nie masz jeszcze żadnych rezerwacji.</p>
             )}
         </div>
     );

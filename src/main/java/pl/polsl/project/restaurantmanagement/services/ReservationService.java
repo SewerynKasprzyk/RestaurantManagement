@@ -51,6 +51,10 @@ public class ReservationService {
         return reservationRepository.save(reservation);
     }
 
+    public Reservation getReservationById(Integer id) {
+        return reservationRepository.findReservationById(id);
+    }
+
     public List<ReservationReport> getReservationsByDateRange(LocalDateTime start, LocalDateTime end) {
         List<Reservation> reservations = reservationRepository.findByReservationDateBetween(start.toLocalDate(), end.toLocalDate());
 

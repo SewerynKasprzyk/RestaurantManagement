@@ -15,6 +15,7 @@ import SalesByCategoryReport from "./ReportPage/SalesByCategoryReport";
 import NavBarControl from "./NavBarControl";
 import PrivateRoute from './PrivateRoute';
 import UserReservations from './ReservationPage/UserReservations';
+import EditReservation from "./ReservationPage/EditReservation";
 
 // Main application component
 function App() {
@@ -34,6 +35,7 @@ function App() {
                         <Route path="/raport" element={<PrivateRoute element={<GenerateReport />} roles={['ADMIN', 'EMPLOYEE']} />} />
                         <Route path="/unauthorized" element={<div>Unauthorized Access</div>} />
                         <Route path="/reservations/history" element={<PrivateRoute element={<UserReservations />} roles={['ADMIN', 'EMPLOYEE']} />} />
+                        <Route path="/reservations/edit/:id" element={<PrivateRoute element={<EditReservation />} roles={['ADMIN', 'EMPLOYEE']} />} />
                     </Routes>
                 </div>
             </BrowserRouter>
