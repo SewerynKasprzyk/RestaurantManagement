@@ -50,8 +50,18 @@ export default function AdminNav() {
                                     </Dropdown.Menu>
                                 </Dropdown>
                             </li>
+
                             <li className="nav-item">
-                                <Link className="nav-link" to="/employee">Dodaj pracownika</Link>
+                                <Dropdown>
+                                    <Dropdown.Toggle variant="success" id="dropdown-basic">
+                                        Employee Management
+                                    </Dropdown.Toggle>
+
+                                    <Dropdown.Menu>
+                                        <Dropdown.Item as={Link} to="/employee">Add Employee</Dropdown.Item>
+                                        <Dropdown.Item as={Link} to="/employeeList">Delete Employee</Dropdown.Item>
+                                    </Dropdown.Menu>
+                                </Dropdown>
                             </li>
                         </ul>
                     </div>

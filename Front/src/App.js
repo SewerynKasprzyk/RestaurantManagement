@@ -2,7 +2,6 @@ import React from 'react';
 import "./App.css";
 import "../node_modules/bootstrap/dist/css/bootstrap-grid.min.css"
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import Navbar from "./HomePage/Navbar";
 import MenuItems from "./MenuPage/Menu";
 import AppContent from "./AppContent";
 import GenerateReport from "./Raport/Raport";
@@ -15,6 +14,7 @@ import SalesByCategoryReport from "./ReportPage/SalesByCategoryReport";
 import NavBarControl from "./NavBarControl";
 import PrivateRoute from './PrivateRoute';
 import EmployeeRegisterPage from './Employee/EmployeeRegisterPage';
+import EmployeeList from "./Employee/EmployeeList";
 
 // Main application component
 function App() {
@@ -33,6 +33,7 @@ function App() {
                         <Route path="/reports/sales-by-category" element={<PrivateRoute element={<SalesByCategoryReport />} roles={['ADMIN']} />} />
                         <Route path="/raport" element={<PrivateRoute element={<GenerateReport />} roles={['ADMIN', 'EMPLOYEE']} />} />
                         <Route path="/employee" element={<PrivateRoute element={<EmployeeRegisterPage/>} roles={['ADMIN', 'EMPLOYEE']} />} />
+                        <Route path="/employeeList" element={<PrivateRoute element={<EmployeeList/>} roles={['ADMIN', 'EMPLOYEE']} />} />
                         <Route path="/unauthorized" element={<div>Unauthorized Access</div>} />
                     </Routes>
                 </div>

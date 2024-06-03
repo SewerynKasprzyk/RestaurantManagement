@@ -78,4 +78,28 @@ public class UserController {
         UserDto user = userAuthProvider.getUserFromToken(token);
         return ResponseEntity.ok(user);
     }
+
+    @GetMapping("/employees")
+    public List<User> getEmployees() {
+        logger.debug("Getting all employees");
+        return userService.getAllEmployees();
+    }
+
+    @GetMapping("/activeEmployees")
+    public List<User> getActiveEmployees() {
+        logger.debug("Getting all active employees");
+        return userService.getActiveEmployees();
+    }
+
+    @PutMapping("/{userId}/setInactive")
+    public ResponseEntity<UserDto> setUserInactive(@PathVariable Integer userId) {
+        User user = userService.getUserById(userId);
+        if (user != null) {
+            user.setIsActive(false);
+            userService.saveOrUpdateUser(user);
+            return ResponseEntity.ok(userMapper.toUserDto(user));
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
 }

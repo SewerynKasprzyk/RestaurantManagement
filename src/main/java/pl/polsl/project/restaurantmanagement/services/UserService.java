@@ -2,7 +2,6 @@ package pl.polsl.project.restaurantmanagement.services;
 
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -162,6 +161,21 @@ public class UserService {
         return userRepository.save(user);
     }
 
+    public List<User> getAllEmployees() {
+        return userRepository.findByUserType(UserType.EMPLOYEE);
+    }
 
+    public List<User> getActiveEmployees() {
+        return userRepository.findByUserTypeAndIsActive(UserType.EMPLOYEE, true);
+    }
+
+    public User setUserInactive(Integer userId) {
+        User user = getUserById(userId);
+        if (user != null) {
+            user.setIsActive(false);
+            return saveOrUpdateUser(user);
+        }
+        return null;
+    }
 }
 
