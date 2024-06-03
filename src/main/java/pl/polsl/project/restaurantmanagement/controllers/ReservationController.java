@@ -47,6 +47,7 @@ public class ReservationController {
         return ResponseEntity.ok(reservations);
     }
 
+
     @PostMapping("/add")
     public ResponseEntity<ReservationDto> addReservation(@RequestBody ReservationDto reservationDto, @RequestHeader("Authorization") String token) {
         Reservation reservation = reservationMapper.toReservation(reservationDto);
@@ -105,5 +106,16 @@ public class ReservationController {
         }
         reservationService.deleteReservation(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+    //obłożenie stolików
+    @GetMapping("/reservedTables")
+    public ResponseEntity<List<TableEntity>> getReservedTables() {
+        LocalDate date = LocalDate.now();
+        LocalTime start = LocalTime.now();
+        LocalTime end = LocalTime.now().plusMinutes(20);
+
+        List<TableEntity> freeTables = reservationService.getReservedTables(date, start, end);
+        return new ResponseEntity<>(freeTables, HttpStatus.OK);
     }
 }
