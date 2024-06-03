@@ -30,14 +30,23 @@ export default function Navbar() {
                             <li className="nav-item">
                                 <Link className="nav-link" to="/loginTest">LoginTest2</Link>
                             </li>
+
+                            <li className="nav-item">
+                                <Dropdown>
+                                    <Dropdown.Toggle variant="success" id="dropdown-basic">
+                                        Reservation Management
+                                    </Dropdown.Toggle>
+
+                                    <Dropdown.Menu>
+                                        <Dropdown.Item as={Link} to="/reservations">Add reservation</Dropdown.Item>
+                                        <Dropdown.Item as={Link} to="/reservations/history">Reservations
+                                            History</Dropdown.Item>
+                                    </Dropdown.Menu>
+                                </Dropdown>
+                            </li>
+
                             <li className="nav-item">
                                 <Link className="nav-link" to="/ingredients">Składniki</Link>
-                            </li>
-                            <li className="nav-item">
-                                <Link className="nav-link" to="/reservations">Rezerwacje</Link>
-                            </li>
-                            <li className="nav-item">
-                                <Link className="nav-link" to="/reservations/history">Historia Rezerwacji</Link>
                             </li>
                         </ul>
                     </div>

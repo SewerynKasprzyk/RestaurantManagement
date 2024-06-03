@@ -7,7 +7,7 @@ export default function AdminNav() {
         <div>
             <nav className="navbar navbar-expand-lg bg-body-tertiary">
                 <div className="container-fluid">
-                    <Link className="navbar-brand" to="/">Navbar</Link>
+                    <Link className="navbar-brand" to="/">Home</Link>
                     <button className="navbar-toggler" type="button" data-bs-toggle="collapse"
                             data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                             aria-expanded="false" aria-label="Toggle navigation">
@@ -15,6 +15,7 @@ export default function AdminNav() {
                     </button>
                     <div className="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+
                             <li className="nav-item">
                                 <Dropdown>
                                     <Dropdown.Toggle variant="success" id="dropdown-basic">
@@ -23,30 +24,44 @@ export default function AdminNav() {
 
                                     <Dropdown.Menu>
                                         <Dropdown.Item as={Link} to="/menu">Menu</Dropdown.Item>
-                                        <Dropdown.Item as={Link} to="/menuitem">Edycja Menu</Dropdown.Item>
+                                        <Dropdown.Item as={Link} to="/menuitem">Edit Menu</Dropdown.Item>
                                     </Dropdown.Menu>
                                 </Dropdown>
                             </li>
+
                             <li className="nav-item">
-                                <Link className="nav-link" to="/loginTest">LoginTest2</Link>
+                                <Link className="nav-link" to="/loginTest">Login</Link>
                             </li>
-                            <li className="nav-item">
-                                <Link className="nav-link" to="/ingredients">Składniki</Link>
-                            </li>
-                            <li className="nav-item">
-                                <Link className="nav-link" to="/reservations">Rezerwacje</Link>
-                            </li>
+
                             <li className="nav-item">
                                 <Dropdown>
                                     <Dropdown.Toggle variant="success" id="dropdown-basic">
-                                        Reports
+                                        Reservation Management
                                     </Dropdown.Toggle>
 
                                     <Dropdown.Menu>
-                                        <Dropdown.Item as={Link} to="/reports/reservations">Raport
-                                            rezerwacji</Dropdown.Item>
-                                        <Dropdown.Item as={Link} to="/reports/sales-by-category">Raport
-                                            sprzedaży</Dropdown.Item>
+                                        <Dropdown.Item as={Link} to="/reservations">Add reservation</Dropdown.Item>
+                                        <Dropdown.Item as={Link} to="/reservations/history">Reservations
+                                            History</Dropdown.Item>
+                                    </Dropdown.Menu>
+                                </Dropdown>
+                            </li>
+
+                            <li className="nav-item">
+                                <Link className="nav-link" to="/ingredients">Storeroom</Link>
+                            </li>
+
+                            <li className="nav-item">
+                                <Dropdown>
+                                    <Dropdown.Toggle variant="success" id="dropdown-basic">
+                                        Report
+                                    </Dropdown.Toggle>
+
+                                    <Dropdown.Menu>
+                                        <Dropdown.Item as={Link} to="/reports/reservations">Reservation
+                                            Report</Dropdown.Item>
+                                        <Dropdown.Item as={Link} to="/reports/sales-by-category">Sales
+                                            report</Dropdown.Item>
                                     </Dropdown.Menu>
                                 </Dropdown>
                             </li>
@@ -62,9 +77,6 @@ export default function AdminNav() {
                                         <Dropdown.Item as={Link} to="/employeeList">Delete Employee</Dropdown.Item>
                                     </Dropdown.Menu>
                                 </Dropdown>
-                            </li>
-                            <li className="nav-item">
-                                <Link className="nav-link" to="/reservations/history">Historia Rezerwacji</Link>
                             </li>
                         </ul>
                     </div>
