@@ -6,9 +6,11 @@ import org.springframework.stereotype.Service;
 import pl.polsl.project.restaurantmanagement.model.AmountType;
 import pl.polsl.project.restaurantmanagement.model.Ingredient;
 import pl.polsl.project.restaurantmanagement.model.MenuItem;
+import pl.polsl.project.restaurantmanagement.model.MenuItemType;
 import pl.polsl.project.restaurantmanagement.repositories.MenuItemRepository;
 
 import java.math.BigDecimal;
+import java.util.Arrays;
 import java.util.List;
 
 import static pl.polsl.project.restaurantmanagement.model.MenuItemType.*;
@@ -23,8 +25,21 @@ public class MenuItemService {
         this.menuItemRepository = menuItemRepository;
     }
 
+//    public MenuItem saveOrUpdateMenuItem(MenuItem menuItem) {
+//        return menuItemRepository.save(menuItem);
+//    }
+
     public MenuItem saveOrUpdateMenuItem(MenuItem menuItem) {
-        return menuItemRepository.save(menuItem);
+        menuItemRepository.updateOrSave(menuItem.getId(), menuItem.getName(), menuItem.getType(), menuItem.getPrice().doubleValue(), menuItem.getDescription());
+        return menuItem;
+    }
+
+    public List<MenuItemType> getAllMenuItemTypes() {
+        return Arrays.asList(MenuItemType.values());
+    }
+
+    public void addMenuItem(MenuItem menuItem) {
+        menuItemRepository.insertMenuItem(menuItem.getName(), menuItem.getType().toString(), menuItem.getPrice().doubleValue(), menuItem.getDescription());
     }
 
     public List<MenuItem> getAllMenuItems() {
