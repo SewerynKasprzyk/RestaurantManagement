@@ -42,6 +42,12 @@ public class UserController {
         return userService.getAllUsers();
     }
 
+    @GetMapping("/all")
+    public ResponseEntity<List<User>> getAllUsersWithQuery() {
+        List<User> users = userService.findAllUsersWithQuery();
+        return ResponseEntity.ok(users);
+    }
+
     @GetMapping("/{userId}")
     public ResponseEntity<UserDto> getUserById(@PathVariable Integer userId) {
         User user = userService.getUserById(userId);

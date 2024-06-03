@@ -63,6 +63,9 @@ export default function AdminNav() {
                                     </Dropdown.Menu>
                                 </Dropdown>
                             </li>
+                            <li className="nav-item">
+                                <Link className="nav-link" to="/reservations/history">Historia Rezerwacji</Link>
+                            </li>
                         </ul>
                     </div>
                 </div>
