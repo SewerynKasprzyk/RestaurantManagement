@@ -1,5 +1,6 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
+import {Dropdown} from "react-bootstrap";
 
 export default function Navbar() {
     return (
@@ -16,17 +17,22 @@ export default function Navbar() {
                     <div className="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul className="navbar-nav me-auto mb-2 mb-lg-0">
                             <li className="nav-item">
-                                <Link className="nav-link" to="/menu">Menu</Link>
-                            </li>
+                                <Dropdown>
+                                    <Dropdown.Toggle variant="success" id="dropdown-basic">
+                                        Menu
+                                    </Dropdown.Toggle>
 
+                                    <Dropdown.Menu>
+                                        <Dropdown.Item href="/menu">Menu</Dropdown.Item>
+                                        <Dropdown.Item href="/menuitem">Edycja Menu</Dropdown.Item>
+                                    </Dropdown.Menu>
+                                </Dropdown>
+                            </li>
                             <li className="nav-item">
                                 <Link className="nav-link" to="/loginTest">LoginTest2</Link>
                             </li>
                             <li className="nav-item">
                                 <Link className="nav-link" to="/ingredients">Składniki</Link>
-                            </li>
-                            <li className="nav-item">
-                                <Link className="nav-link" to="/menuitem">Edycja Menu</Link>
                             </li>
                             <li className="nav-item">
                                 <Link className="nav-link" to="/reservations">Rezerwacje</Link>
