@@ -184,4 +184,9 @@ public class ReservationService {
         }
     }
 
+   public List<TableEntity> getReservedTables() {
+        LocalTime now = LocalTime.now();
+        LocalTime future = now.plusHours(6);
+        return reservationRepository.findReservedTablesBetween(now, future);
+    }
 }

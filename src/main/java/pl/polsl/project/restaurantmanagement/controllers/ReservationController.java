@@ -74,4 +74,11 @@ public class ReservationController {
         List<ReservationReport> reports = reservationService.findReservationsReport(start, end);
         return new ResponseEntity<>(reports, HttpStatus.OK);
     }
+
+    //obłożenie stolików
+    @GetMapping("/reservedTables")
+    public ResponseEntity<List<TableEntity>> getReservedTables() {
+        List<TableEntity> reservedTables = reservationService.getReservedTables();
+        return new ResponseEntity<>(reservedTables, HttpStatus.OK);
+    }
 }

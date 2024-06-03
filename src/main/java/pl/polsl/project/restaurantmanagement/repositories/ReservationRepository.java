@@ -19,6 +19,9 @@ public interface ReservationRepository extends JpaRepository<Reservation, Intege
     // Define custom queries here if needed
     @Query("SELECT r.tables FROM Reservation r WHERE r.startHour < :endTime AND r.endHour > :startTime")
     List<TableEntity> findReservedTables(@Param("startTime") LocalTime startTime, @Param("endTime") LocalTime endTime);
+    //TODO nie wiem czy dziala wyświetla 1 stolik
+    @Query("SELECT r.tables FROM Reservation r WHERE r.startHour >= :startTime AND r.endHour <= :endTime")
+    List<TableEntity> findReservedTablesBetween(@Param("startTime") LocalTime startTime, @Param("endTime") LocalTime endTime);
 
     @Query(value = "SELECT * FROM Reservations WHERE user_id = :userId", nativeQuery = true)
     ArrayList<Reservation> findByUserId(@Param("userId") Integer userId);
@@ -36,5 +39,7 @@ public interface ReservationRepository extends JpaRepository<Reservation, Intege
 
     @Query("SELECT r FROM Reservation r WHERE r.reservationDate BETWEEN :start AND :end")
     List<Reservation> findReservations(@Param("start") LocalDate start, @Param("end") LocalDate end);
+
+
 
 }
