@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { request } from '../api/axiosConfig';
+import {getAuthToken, request} from '../api/axiosConfig';
 import './AddOrder.css'; // Importujemy plik CSS
 
 export default function AddOrder() {
-    const [totalAmount, setTotalAmount] = useState(0);
+    const [totalPrice, setTotalPrice] = useState(0);
     const [user, setUser] = useState(null);
+    const [userId, setUserId] = useState(null);
+    const [notes, setNotes] = useState('');
     const [menuItems, setMenuItems] = useState([]);
     const [selectedItems, setSelectedItems] = useState({});
     const [error, setError] = useState('');
@@ -18,6 +20,7 @@ export default function AddOrder() {
                 if (response.status === 200) {
                     const userData = response.data;
                     setUser(userData);
+                    setUserId(userData.id);
                 } else {
                     console.error('Failed to fetch user data');
                 }
@@ -44,6 +47,35 @@ export default function AddOrder() {
         fetchMenuItems();
     }, []);
 
+    const handleAddOrder = async () => {
+        if (!user) {
+            setError('Nie można dodać zamówienia bez zalogowanego użytkownika.');
+            return;
+        }
+
+        const order = {
+            totalPrice,
+            notes,
+            userId,
+            orderItems: Object.values(selectedItems).map(item => ({
+                menuItemId: item.id,
+                quantity: item.quantity
+            }))
+        };
+
+        try {
+            console.log(order);
+            const response = await request('post', '/api/orders/add', order, getAuthToken());
+            if (response.status === 200) {
+                navigate('/');
+            } else {
+                throw new Error('Błąd dodawania zamówienia');
+            }
+        } catch (error) {
+            setError('Błąd dodawania zamówienia. Spróbuj ponownie.');
+        }
+    };
+
     const handleAddItem = (item) => {
         const updatedItems = { ...selectedItems };
         if (updatedItems[item.id]) {
@@ -52,7 +84,7 @@ export default function AddOrder() {
             updatedItems[item.id] = { ...item, quantity: 1 };
         }
         setSelectedItems(updatedItems);
-        updateTotalAmount(updatedItems);
+        updateTotalPrice(updatedItems);
     };
 
     const handleRemoveItem = (itemId) => {
@@ -63,40 +95,14 @@ export default function AddOrder() {
             delete updatedItems[itemId];
         }
         setSelectedItems(updatedItems);
-        updateTotalAmount(updatedItems);
+        updateTotalPrice(updatedItems);
     };
 
-    const updateTotalAmount = (items) => {
+    const updateTotalPrice = (items) => {
         const total = Object.values(items).reduce((sum, item) => {
             return sum + item.price * item.quantity;
         }, 0);
-        setTotalAmount(total.toFixed(2));
-    };
-
-    const handleSubmit = async (event) => {
-        event.preventDefault();
-
-        if (!user) {
-            setError('Nie można dodać zamówienia bez zalogowanego użytkownika.');
-            return;
-        }
-
-        const order = {
-            totalAmount,
-            user,
-            items: Object.values(selectedItems)
-        };
-
-        try {
-            const response = await request('POST', '/api/orders/add', order);
-            if (response.status === 200) {
-                navigate('/');
-            } else {
-                throw new Error('Błąd dodawania zamówienia');
-            }
-        } catch (error) {
-            setError('Błąd dodawania zamówienia. Spróbuj ponownie.');
-        }
+        setTotalPrice(total.toFixed(2));
     };
 
     const getCategoryName = (category) => {
@@ -136,24 +142,28 @@ export default function AddOrder() {
     return (
         <div className='add-order-container'>
             <h2>Dodaj zamówienie</h2>
-            <form onSubmit={handleSubmit}>
-                {renderMenuItemsByCategory()}
-                <div>
-                    <h3>Wybrane dania:</h3>
-                    {Object.values(selectedItems).map((item) => (
-                        <div key={item.id} className="selected-item">
-                            <p>{`${item.name} - ${item.price} PLN`}</p>
-                            <p>Ilość: {item.quantity}</p>
-                            <button type="button" onClick={() => handleAddItem(item)}>+</button>
-                            <button type="button" onClick={() => handleRemoveItem(item.id)}>-</button>
-                        </div>
-                    ))}
-                </div>
-                <div>
-                    <h3>Łączna kwota: {totalAmount} PLN</h3>
-                </div>
-                <button type='submit'>Dodaj zamówienie</button>
-            </form>
+            {renderMenuItemsByCategory()}
+            <div>
+                <h3>Wybrane dania:</h3>
+                {Object.values(selectedItems).map((item) => (
+                    <div key={item.id} className="selected-item">
+                        <p>{`${item.name} - ${item.price} PLN`}</p>
+                        <p>Ilość: {item.quantity}</p>
+                        <button type="button" onClick={() => handleAddItem(item)}>+</button>
+                        <button type="button" onClick={() => handleRemoveItem(item.id)}>-</button>
+                    </div>
+                ))}
+            </div>
+            <div>
+                <h3>Łączna kwota: {totalPrice} PLN</h3>
+                <textarea
+                    placeholder="Dodaj notatki do zamówienia"
+                    value={notes}
+                    onChange={(e) => setNotes(e.target.value)}
+                />
+
+            </div>
+            <button type='button' onClick={handleAddOrder}>Dodaj zamówienie</button>
             {error && <div className="error">{error}</div>}
         </div>
     );

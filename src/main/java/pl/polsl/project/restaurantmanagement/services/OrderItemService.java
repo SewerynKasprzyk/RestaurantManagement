@@ -40,6 +40,7 @@ public class OrderItemService {
         return orderItemRepository.findSalesByCategoryReport(start, end);
     }
 
+
     public List<OrderItem> getOrderItemsByOrderId(Integer orderId) {
         return orderItemRepository.findByOrderId(orderId);
     }
