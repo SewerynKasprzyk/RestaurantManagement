@@ -31,6 +31,9 @@ export default function Navbar() {
                             <li className="nav-item">
                                 <Link className="nav-link" to="/reservations">Rezerwacje</Link>
                             </li>
+                            <li className="nav-item">
+                                <Link className="nav-link" to="/reservations/history">Historia Rezerwacji</Link>
+                            </li>
                         </ul>
                     </div>
 

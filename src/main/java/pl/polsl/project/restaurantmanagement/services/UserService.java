@@ -44,6 +44,10 @@ public class UserService {
         userRepository.deleteById(id);
     }
 
+    public List<User> findAllUsersWithQuery() {
+        return userRepository.findAllUsersWithQuery();
+    }
+
     @Transactional
     public void initializeExampleUsers() {
         if (userRepository.count() == 0) { // Check if there are no users in the database

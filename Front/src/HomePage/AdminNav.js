@@ -37,6 +37,9 @@ export default function AdminNav() {
                             <li className="nav-item">
                                 <Link className="nav-link" to="/reports/sales-by-category">Raport sprzedaży</Link>
                             </li>
+                            <li className="nav-item">
+                                <Link className="nav-link" to="/reservations/history">Historia Rezerwacji</Link>
+                            </li>
                         </ul>
                     </div>
 
