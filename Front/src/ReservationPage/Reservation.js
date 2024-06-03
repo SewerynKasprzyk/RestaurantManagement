@@ -48,26 +48,32 @@ export default function Reservation() {
     }, [user]);
 
     return (
-        <div className='reservation-container'>
-            <h2>Twoje rezerwacje</h2>
-            <button onClick={() => window.location.href = '/reservations/add'}>Dodaj rezerwację</button>
+       <div>
+           <h2 className="mb-3">Twoje rezerwacje</h2>
+           <button className="btn btn-primary mb-3" onClick={() => window.location.href = '/reservations/add'}>Dodaj rezerwację</button>
 
-            {error && <div className="error">{error}</div>}
+           {error && <div className="alert alert-danger">{error}</div>}
 
-            {reservations.length > 0 ? (
-                <ul>
-                    {reservations.map((reservation) => (
-                        <li key={reservation.id}>
-                            <p>Data: {reservation.reservationDate}</p>
-                            <p>Godzina rozpoczęcia: {reservation.startHour}</p>
-                            <p>Godzina zakończenia: {reservation.endHour}</p>
-                            <p>Uwagi: {reservation.notes}</p>
-                        </li>
-                    ))}
-                </ul>
-            ) : (
-                <p>Brak rezerwacji</p>
-            )}
-        </div>
+           <div className="row">
+               {reservations.length > 0 ? (
+                   reservations.map((reservation) => (
+                       <div key={reservation.id} className="col-md-4 mb-4">
+                           <div className="card">
+                               <div className="card-body">
+                                   <p className="card-text">Data: {reservation.reservationDate}</p>
+                                   <p className="card-text">Godzina rozpoczęcia: {reservation.startHour}</p>
+                                   <p className="card-text">Godzina zakończenia: {reservation.endHour}</p>
+                                   <p className="card-text">Uwagi: {reservation.notes}</p>
+                               </div>
+                           </div>
+                       </div>
+                   ))
+               ) : (
+                   <p>Brak rezerwacji</p>
+               )}
+           </div>
+       </div>
+
+
     );
 }

@@ -35,24 +35,33 @@ const EmployeeList = () => {
     };
 
     return (
-        <div>
-            <h2>Active Employees</h2>
-            <ul>
-                {employees.map((employee) => (
-                    <li key={employee.id}>
-                        <input
-                            type="radio"
-                            name="employee"
-                            value={employee.id}
-                            checked={selectedEmployee === employee.id}
-                            onChange={() => handleSelectEmployee(employee.id)}
-                        />
-                        {employee.name}
-                    </li>
-                ))}
-            </ul>
-            <button onClick={handleDeactivateEmployee}>Delete Employee</button>
-        </div>
+       <div className="container" style={{marginTop:"1rem"}}>
+           <div className="row justify-content-center">
+               <div className="col-md-8">
+                   <div className="card">
+                       <div className="card-body">
+                           <h2 className="card-title mb-3">Active Employees</h2>
+                           <ul className="list-group">
+                               {employees.map((employee) => (
+                                   <li key={employee.id} className="list-group-item d-flex justify-content-between align-items-center">
+                                       <input
+                                           type="radio"
+                                           name="employee"
+                                           value={employee.id}
+                                           checked={selectedEmployee === employee.id}
+                                           onChange={() => handleSelectEmployee(employee.id)}
+                                       />
+                                       {employee.name}
+                                   </li>
+                               ))}
+                           </ul>
+                           <button className="btn btn-danger mt-3" onClick={handleDeactivateEmployee}>Delete Employee</button>
+                       </div>
+                   </div>
+               </div>
+           </div>
+       </div>
+
     );
 };
 

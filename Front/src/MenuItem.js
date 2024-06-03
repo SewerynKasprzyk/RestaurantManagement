@@ -5,7 +5,7 @@ export function EditMenuItems() {
     const [selectedItem, setSelectedItem] = useState(null);
     const [menuItemData, setMenuItemData] = useState({name: '', type: '', price: '', description: ''});
     const [isNewItem, setIsNewItem] = useState(false);
-
+    const [showForm, setShowForm] = useState(false);
     const [menuItemTypes, setMenuItemTypes] = useState([]);
 
     useEffect(() => {
@@ -41,6 +41,7 @@ export function EditMenuItems() {
         setMenuItemData({...menuItemData, [event.target.name]: event.target.value});
         console.log(menuItemData.type);
     };
+
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -100,45 +101,47 @@ export function EditMenuItems() {
     };
 
     return (
-        <div>
-            <h2>Menu Items</h2>
-            <button onClick={handleAdd}>Add New Item</button>
-            <ul>
-                {Array.isArray(menuItems) && menuItems.map((item, index) => (
-                    <li key={index}>
-                        {item.name} - {item.price}
-                        <button onClick={() => handleEdit(item)}>Edit</button>
-                        <button onClick={() => handleDelete(item)}>Delete</button>
-                    </li>
-                ))}
-            </ul>
+        <div className="container mt-4">
+                <h2 className="mb-3">Menu Items</h2>
+                <button className="btn btn-primary mb-3" onClick={handleAdd}>Add New Item</button>
+                <ul className="list-group">
+                    {Array.isArray(menuItems) && menuItems.map((item, index) => (
+                        <li key={index} className="list-group-item d-flex justify-content-between align-items-center">
+                            {item.name} - {item.price}
+                            <div className="d-grid gap-2 d-md-flex justify-content-md-end">
+                                <button className="btn gap-2 btn-secondary  mr-2" onClick={() => handleEdit(item)}>Edit</button>
+                                <button className="btn btn-danger gap-2" onClick={() => handleDelete(item)}>Delete</button>
+                            </div>
+                        </li>
+                    ))}
+                </ul>
 
-            {(selectedItem || isNewItem) && (
-                <form onSubmit={handleSubmit}>
-                    <label>
-                        Name:
-                        <input type="text" name="name" value={menuItemData.name} onChange={handleInputChange} />
-                    </label>
-                    <label>
-                        Type:
-                        <select name="type" value={menuItemData.type} onChange={handleInputChange}>
-                            {menuItemTypes.map((type, index) => (
-                                <option key={index} value={type}>{type}</option>
-                            ))}
-                        </select>
-                    </label>
-                    <label>
-                        Price:
-                        <input type="text" name="price" value={menuItemData.price} onChange={handleInputChange} />
-                    </label>
-                    <label>
-                        Description:
-                        <input type="text" name="description" value={menuItemData.description} onChange={handleInputChange} />
-                    </label>
-                    <input type="submit" value="Submit" />
-                </form>
-            )}
-        </div>
+                {(selectedItem || isNewItem) && (
+                    <form onSubmit={handleSubmit} className="mt-4">
+                        <div className="form-group">
+                            <label>Name:</label>
+                            <input type="text" className="form-control" name="name" value={menuItemData.name} onChange={handleInputChange} />
+                        </div>
+                        <div className="form-group">
+                            <label>Type:</label>
+                            <select className="form-control" name="type" value={menuItemData.type} onChange={handleInputChange}>
+                                {menuItemTypes.map((type, index) => (
+                                    <option key={index} value={type}>{type}</option>
+                                ))}
+                            </select>
+                        </div>
+                        <div className="form-group">
+                            <label>Price:</label>
+                            <input type="text" className="form-control" name="price" value={menuItemData.price} onChange={handleInputChange} />
+                        </div>
+                        <div className="form-group">
+                            <label>Description:</label>
+                            <input type="text" className="form-control" name="description" value={menuItemData.description} onChange={handleInputChange} />
+                        </div>
+                        <input type="submit" value="Submit" className="btn btn-success" />
+                    </form>
+                )}
+            </div>
     );
 }
 

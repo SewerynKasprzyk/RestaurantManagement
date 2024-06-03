@@ -29,7 +29,7 @@ const UserComponent = () => {
 
     return (
         <div>
-            <h1>User Name: {userName}</h1>
+            <h1>Witaj, {userName}</h1>
         </div>
     );
 };

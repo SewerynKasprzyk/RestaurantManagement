@@ -22,38 +22,47 @@ const ReservationsReport = () => {
     };
 
     return (
-        <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
-            <h1>Raport okresowy rezerwacji</h1>
-            <div>
-                <label>Data początkowa:</label>
-                <DatePicker selected={startDate} onChange={date => setStartDate(date)} />
+        <div className="container" style={{marginTop:"1rem"}}>
+            <div className="row justify-content-center">
+                <div className="col-md-8">
+                    <div className="card">
+                        <div className="card-body">
+                            <h1 className="card-title mb-4">Raport okresowy rezerwacji</h1>
+                            <div className="mb-3">
+                                <label className="form-label">Data początkowa:</label>
+                                <DatePicker className="form-control" selected={startDate} onChange={date => setStartDate(date)} />
+                            </div>
+                            <div className="mb-3">
+                                <label className="form-label">Data końcowa:</label>
+                                <DatePicker className="form-control" selected={endDate} onChange={date => setEndDate(date)} />
+                            </div>
+                            <button className="btn btn-primary mb-3" onClick={fetchReservations} disabled={loading}>
+                                {loading ? 'Ładowanie...' : 'Generuj raport'}
+                            </button>
+                            <table className="table" style={{ textAlign: "center" }}>
+                                <thead>
+                                    <tr>
+                                        <th>Data</th>
+                                        <th>Ilość rezerwacji</th>
+                                        <th>Średnia ilość godzin rezerwacji</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {reservations.map(report => (
+                                        <tr key={report.date}>
+                                            <td>{report.date}</td>
+                                            <td>{report.count}</td>
+                                            <td>{report.averageHours}</td>
+                                        </tr>
+                                    ))}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div>
-                <label>Data końcowa:</label>
-                <DatePicker selected={endDate} onChange={date => setEndDate(date)} />
-            </div>
-            <button onClick={fetchReservations} disabled={loading}>
-                {loading ? 'Ładowanie...' : 'Generuj raport'}
-            </button>
-            <table style={{ margin: "auto", textAlign: "center", borderCollapse: "collapse" }}>
-                <thead>
-                <tr>
-                    <th style={{ marginRight: "20px", border: "1px solid black", padding: "10px" }}>Data</th>
-                    <th style={{ marginRight: "20px", border: "1px solid black", padding: "10px" }}>Ilość rezerwacji</th>
-                    <th style={{ marginRight: "20px", border: "1px solid black", padding: "10px" }}>Średnia ilość godzin rezerwacji</th>
-                </tr>
-                </thead>
-                <tbody>
-                {reservations.map(report => (
-                    <tr key={report.date}>
-                        <td style={{ border: "1px solid black", padding: "10px" }}>{report.date}</td>
-                        <td style={{ border: "1px solid black", padding: "10px" }}>{report.count}</td>
-                        <td style={{ border: "1px solid black", padding: "10px" }}>{report.averageHours}</td>
-                    </tr>
-                ))}
-                </tbody>
-            </table>
         </div>
+
     );
 };
 

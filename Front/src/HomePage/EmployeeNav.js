@@ -15,7 +15,7 @@ export default function Navbar() {
                     </button>
                     <div className="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-                            <li className="nav-item">
+                            <li className="nav-item" style={{marginRight:"0.5rem"}}>
                                 <Dropdown>
                                     <Dropdown.Toggle variant="success" id="dropdown-basic">
                                         Menu
@@ -26,9 +26,6 @@ export default function Navbar() {
                                         <Dropdown.Item as={Link} to="/menuitem">Edit Menu</Dropdown.Item>
                                     </Dropdown.Menu>
                                 </Dropdown>
-                            </li>
-                            <li className="nav-item">
-                                <Link className="nav-link" to="/loginTest">Login</Link>
                             </li>
 
                             <li className="nav-item">
@@ -47,6 +44,9 @@ export default function Navbar() {
 
                             <li className="nav-item">
                                 <Link className="nav-link" to="/ingredients">Storeroom</Link>
+                            </li>
+                            <li className="nav-item">
+                                <Link className="nav-link" to="/loginTest">Login</Link>
                             </li>
                         </ul>
                     </div>

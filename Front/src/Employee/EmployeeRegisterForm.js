@@ -34,7 +34,7 @@ export default class EmployeeRegisterForm extends React.Component {
 
     render() {
         return (
-            <div className="row justify-content-center">
+            <div className="row justify-content-center" style={{marginTop:"1rem"}}>
                 <div className="col-4">
                     <form onSubmit={this.onSubmitRegister}>
                         <div className="form-outline mb-4">
