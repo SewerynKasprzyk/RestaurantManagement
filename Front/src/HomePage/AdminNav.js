@@ -1,11 +1,10 @@
-import React from 'react'
-import {Link} from 'react-router-dom'
-import {Dropdown} from "react-bootstrap";
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { Dropdown } from "react-bootstrap";
 
 export default function AdminNav() {
     return (
         <div>
-
             <nav className="navbar navbar-expand-lg bg-body-tertiary">
                 <div className="container-fluid">
                     <Link className="navbar-brand" to="/">Navbar</Link>
@@ -23,8 +22,8 @@ export default function AdminNav() {
                                     </Dropdown.Toggle>
 
                                     <Dropdown.Menu>
-                                        <Dropdown.Item href="/menu">Menu</Dropdown.Item>
-                                        <Dropdown.Item href="/menuitem">Edycja Menu</Dropdown.Item>
+                                        <Dropdown.Item as={Link} to="/menu">Menu</Dropdown.Item>
+                                        <Dropdown.Item as={Link} to="/menuitem">Edycja Menu</Dropdown.Item>
                                     </Dropdown.Menu>
                                 </Dropdown>
                             </li>
@@ -44,8 +43,8 @@ export default function AdminNav() {
                                     </Dropdown.Toggle>
 
                                     <Dropdown.Menu>
-                                        <Dropdown.Item href="/reports/reservations">Raport rezerwacji</Dropdown.Item>
-                                        <Dropdown.Item href="/reports/sales-by-category">Raport sprzedaży</Dropdown.Item>
+                                        <Dropdown.Item as={Link} to="/reports/reservations">Raport rezerwacji</Dropdown.Item>
+                                        <Dropdown.Item as={Link} to="/reports/sales-by-category">Raport sprzedaży</Dropdown.Item>
                                     </Dropdown.Menu>
                                 </Dropdown>
                             </li>
@@ -54,5 +53,5 @@ export default function AdminNav() {
                 </div>
             </nav>
         </div>
-    )
+    );
 }
