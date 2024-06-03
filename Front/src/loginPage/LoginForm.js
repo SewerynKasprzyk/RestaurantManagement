@@ -108,7 +108,7 @@ export default class LoginForm extends React.Component {
                                 </div>
 
                                 <div className="form-outline mb-4">
-                                    <input type="text" id="password" name="password" className="form-control"
+                                    <input type="password" id="password" name="password" className="form-control"
                                            onChange={this.onChangeHandler}/>
                                     <label className="form-label" htmlFor="password">Password</label>
                                 </div>

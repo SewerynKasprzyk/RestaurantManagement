@@ -79,7 +79,7 @@ export default function AdminNav() {
                                 <Link className="nav-link" to="/ingredients">Storeroom</Link>
                             </li>
 
-                            <li className="nav-item">
+                            <li className="nav-item ms-auto">
                                 <Link className="nav-link" to="/loginTest">Login</Link>
                             </li>
                         </ul>
