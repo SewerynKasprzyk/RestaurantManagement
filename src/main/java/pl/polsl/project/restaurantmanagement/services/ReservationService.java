@@ -24,6 +24,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
+import java.util.stream.Collectors;
 
 @Service
 public class ReservationService {
@@ -78,12 +79,41 @@ public class ReservationService {
         return reports;
     }
 
+    // Nowa metoda
+    public List<ReservationReport> findReservationsReport(LocalDate start, LocalDate end) {
+        List<Reservation> reservations = reservationRepository.findReservations(start, end);
+
+        Map<LocalDate, List<Reservation>> groupedReservations = reservations.stream()
+                .collect(Collectors.groupingBy(Reservation::getReservationDate));
+
+        List<ReservationReport> reports = new ArrayList<>();
+
+        for (Map.Entry<LocalDate, List<Reservation>> entry : groupedReservations.entrySet()) {
+            LocalDate date = entry.getKey();
+            List<Reservation> dailyReservations = entry.getValue();
+
+            double totalHours = 0;
+            for (Reservation reservation : dailyReservations) {
+                Duration duration = Duration.between(reservation.getStartHour(), reservation.getEndHour());
+                totalHours += duration.toHours();
+            }
+
+            double averageHours = totalHours / dailyReservations.size();
+            reports.add(new ReservationReport(date, dailyReservations.size(), String.format("%.2f", averageHours)));
+        }
+
+        return reports;
+    }
+
     public List<Reservation> getAllReservations() {
         return reservationRepository.findAll();
     }
 
-    public Reservation getReservationById(Integer id) {
-        return reservationRepository.findById(id).orElse(null);
+    public List<ReservationDto> getReservationsByUserId(Integer userId) {
+        List<Reservation> reservations = reservationRepository.findByUserId(userId);
+        return reservations.stream()
+                .map(reservationMapper::toReservationDto)
+                .collect(Collectors.toList());
     }
 
     public void deleteReservation(Integer id) {
@@ -93,6 +123,29 @@ public class ReservationService {
     public List<TableEntity> getFreeTables() {
         return tableRepository.findAvailableTables();
     }
+
+    public List<TableEntity> getFreeTables(LocalTime startTime, LocalTime endTime) {
+        List<TableEntity> allTables = tableRepository.findAll();
+        List<TableEntity> reservedTables = reservationRepository.findReservedTables(startTime, endTime);
+        return allTables.stream()
+                .filter(table -> !reservedTables.contains(table))
+                .collect(Collectors.toList());
+    }
+
+    public List<TableEntity> getFreeTables(LocalDate reservationDate, LocalTime startHour, LocalTime endHour) {
+        List<TableEntity> allTables = tableRepository.findAll();
+        List<Reservation> conflictingReservations = reservationRepository.findConflictingReservations(reservationDate, startHour, endHour);
+
+        List<TableEntity> occupiedTables = new ArrayList<>();
+        for (Reservation reservation : conflictingReservations) {
+            occupiedTables.addAll(reservation.getTables());
+        }
+
+        return allTables.stream()
+                .filter(table -> !occupiedTables.contains(table))
+                .collect(Collectors.toList());
+    }
+
 
     public Reservation addReservation(ReservationDto reservationDto, String token){
         UserDto userDto = userAuthProvider.getUserFromToken(token);
@@ -104,6 +157,13 @@ public class ReservationService {
 
     public ReservationDto toReservationDto(Reservation reservation){
         return reservationMapper.toReservationDto(reservation);
+    }
+
+    public List<ReservationDto> getReservationsByTableId(Integer id) {
+        List<Reservation> reservations = reservationRepository.findByTablesId(id);
+        return reservations.stream()
+                .map(reservationMapper::toReservationDto)
+                .collect(Collectors.toList());
     }
 
     @Transactional

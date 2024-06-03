@@ -35,21 +35,7 @@ public class OrderController {
     public ResponseEntity<List<SalesByCategoryReport>> getSalesByCategoryReport(
             @RequestParam("start") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate start,
             @RequestParam("end") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate end) {
-        List<Order> orders = orderService.getOrdersByDateRange(start, end);
-        Map<String, SalesByCategoryReport> reportMap = new HashMap<>();
-
-        for (Order order : orders) {
-            List<OrderItem> orderItems = orderItemService.getOrderItemsByOrderId(order.getId());
-
-            for (OrderItem orderItem : orderItems) {
-                String category = orderItem.getMenuItem().getCategory().name();
-                SalesByCategoryReport report = reportMap.getOrDefault(category, new SalesByCategoryReport(category));
-                report.addSale(orderItem.getPrice().doubleValue());
-                reportMap.put(category, report);
-            }
-        }
-
-        List<SalesByCategoryReport> reports = new ArrayList<>(reportMap.values());
+        List<SalesByCategoryReport> reports = orderItemService.findSalesByCategoryReport(start, end);
         return new ResponseEntity<>(reports, HttpStatus.OK);
     }
 
