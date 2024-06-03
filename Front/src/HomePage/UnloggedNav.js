@@ -7,7 +7,7 @@ export default function Navbar() {
 
             <nav className="navbar navbar-expand-lg bg-body-tertiary">
                 <div className="container-fluid">
-                    <Link className="navbar-brand" to="/">Navbar</Link>
+                    <Link className="navbar-brand" to="/">Home</Link>
                     <button className="navbar-toggler" type="button" data-bs-toggle="collapse"
                             data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                             aria-expanded="false" aria-label="Toggle navigation">
@@ -20,7 +20,7 @@ export default function Navbar() {
                             </li>
 
                             <li className="nav-item">
-                                <Link className="nav-link" to="/loginTest">LoginTest2</Link>
+                                <Link className="nav-link" to="/loginTest">Login</Link>
                             </li>
                         </ul>
                     </div>
