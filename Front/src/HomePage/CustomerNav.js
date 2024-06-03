@@ -1,10 +1,9 @@
-import React from 'react'
-import {Link} from 'react-router-dom'
+import React from 'react';
+import { Link } from 'react-router-dom';
 
 export default function Navbar() {
     return (
         <div>
-
             <nav className="navbar navbar-expand-lg bg-body-tertiary">
                 <div className="container-fluid">
                     <Link className="navbar-brand" to="/">Navbar</Link>
@@ -26,11 +25,8 @@ export default function Navbar() {
                             </li>
                         </ul>
                     </div>
-
-
                 </div>
             </nav>
-
         </div>
-    )
+    );
 }
