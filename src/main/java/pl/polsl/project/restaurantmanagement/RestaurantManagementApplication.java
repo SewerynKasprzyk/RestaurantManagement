@@ -1,5 +1,6 @@
 package pl.polsl.project.restaurantmanagement;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
@@ -15,27 +16,15 @@ import java.util.Collections;
 
 @SpringBootApplication
 @EnableAutoConfiguration(exclude = {SecurityAutoConfiguration.class})
+@RequiredArgsConstructor
 public class RestaurantManagementApplication {
 
     private final UserService userService;
-
     private final IngredientService ingredientService;
-
     private final MenuItemService menuItemService;
-
     private final TableService tableService;
     private final ReservationService reservationService;
 
-    @Autowired
-    public RestaurantManagementApplication(UserService userService, IngredientService ingredientService,
-                                           MenuItemService menuItemService, TableService tableService,
-                                           ReservationService reservationService) {
-        this.userService = userService;
-        this.ingredientService = ingredientService;
-        this.menuItemService = menuItemService;
-        this.tableService = tableService;
-        this.reservationService = reservationService;
-    }
 
     public static void main(String[] args) {
         ConfigurableApplicationContext context = SpringApplication.run(RestaurantManagementApplication.class, args);
