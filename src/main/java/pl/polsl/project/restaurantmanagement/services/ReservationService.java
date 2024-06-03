@@ -184,9 +184,16 @@ public class ReservationService {
         }
     }
 
-   public List<TableEntity> getReservedTables() {
-        LocalTime now = LocalTime.now();
-        LocalTime future = now.plusHours(6);
-        return reservationRepository.findReservedTablesBetween(now, future);
+    // nie dziala poprawnie 1 stolik sie wyswielta
+    public List<TableEntity> getReservedTables(LocalDate reservationDate, LocalTime startHour, LocalTime endHour) {
+        List<TableEntity> allTables = tableRepository.findAll();
+        List<Reservation> conflictingReservations = reservationRepository.findConflictingReservations(reservationDate, startHour, endHour);
+
+        List<TableEntity> occupiedTables = new ArrayList<>();
+        for (Reservation reservation : conflictingReservations) {
+            occupiedTables.addAll(reservation.getTables());
+        }
+
+        return occupiedTables;
     }
 }

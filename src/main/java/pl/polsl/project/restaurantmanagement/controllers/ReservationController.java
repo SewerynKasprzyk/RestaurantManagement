@@ -78,7 +78,11 @@ public class ReservationController {
     //obłożenie stolików
     @GetMapping("/reservedTables")
     public ResponseEntity<List<TableEntity>> getReservedTables() {
-        List<TableEntity> reservedTables = reservationService.getReservedTables();
-        return new ResponseEntity<>(reservedTables, HttpStatus.OK);
+        LocalDate date = LocalDate.now();
+        LocalTime start = LocalTime.now();
+        LocalTime end = LocalTime.now().plusMinutes(20);
+
+        List<TableEntity> freeTables = reservationService.getReservedTables(date, start, end);
+        return new ResponseEntity<>(freeTables, HttpStatus.OK);
     }
 }
