@@ -85,6 +85,20 @@ export function EditMenuItems() {
             });
     };
 
+    const handleDelete = (item) => {
+        fetch(`http://localhost:8080/api/menu/${item.id}`, {
+            method: 'DELETE',
+        })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                // Usuń element z lokalnej listy menu po pomyślnym usunięciu na serwerze
+                setMenuItems(menuItems.filter(menuItem => menuItem.id !== item.id));
+            })
+            .catch(error => console.error('Error:', error));
+    };
+
     return (
         <div>
             <h2>Menu Items</h2>
@@ -94,9 +108,11 @@ export function EditMenuItems() {
                     <li key={index}>
                         {item.name} - {item.price}
                         <button onClick={() => handleEdit(item)}>Edit</button>
+                        <button onClick={() => handleDelete(item)}>Delete</button>
                     </li>
                 ))}
             </ul>
+
             {(selectedItem || isNewItem) && (
                 <form onSubmit={handleSubmit}>
                     <label>

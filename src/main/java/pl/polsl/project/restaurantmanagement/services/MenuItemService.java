@@ -53,7 +53,7 @@ public class MenuItemService {
     public MenuItem getMenuItemByName(String name) { return menuItemRepository.findByName(name); }
 
     public void deleteMenuItem(Integer id) {
-        menuItemRepository.deleteById(id);
+        menuItemRepository.deleteByQuery(id);
     }
 
     //Tworzenie przykladowych pozycji menu

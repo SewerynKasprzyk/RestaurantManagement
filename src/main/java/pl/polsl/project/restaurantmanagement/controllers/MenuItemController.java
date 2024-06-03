@@ -40,6 +40,12 @@ public class MenuItemController {
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteMenuItem(@PathVariable Integer id) {
+        menuItemService.deleteMenuItem(id);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
     @GetMapping("/{name}")
     public ResponseEntity<MenuItem> getSingleMenuItemByName(@PathVariable String name) {
         MenuItem menuItem = menuItemService.getMenuItemByName(name);

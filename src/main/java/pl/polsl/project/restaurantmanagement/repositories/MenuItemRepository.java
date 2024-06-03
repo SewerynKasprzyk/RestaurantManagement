@@ -27,4 +27,9 @@ public interface MenuItemRepository extends JpaRepository<MenuItem, Integer> {
     @Query(value = "INSERT INTO menu_items (name, type, price, description) VALUES (:name, :type, :price, :description)", nativeQuery = true)
     void insertMenuItem(@Param("name") String name, @Param("type") String type, @Param("price") Double price, @Param("description") String description);
 
+    @Modifying
+    @Transactional
+    @Query(value = "DELETE FROM menu_items WHERE menu_item_id = :id", nativeQuery = true)
+    void deleteByQuery(@Param("id") Integer id);
+
 }
