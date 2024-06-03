@@ -19,7 +19,7 @@ public interface MenuItemRepository extends JpaRepository<MenuItem, Integer> {
     @Query("UPDATE MenuItem m SET m.name = :name, m.type = :type, m.price = :price, m.description = :description WHERE m.id = :id")
     void updateOrSave(@Param("id") Integer id, @Param("name") String name, @Param("type") MenuItemType type, @Param("price") Double price, @Param("description") String description);
 
-    @Query("SELECT DISTINCT m.type FROM MenuItem m")
+    @Query("SELECT m.type FROM MenuItem m")
     List<MenuItemType> findAllMenuItemTypes();
 
     @Modifying

@@ -13,9 +13,11 @@ import ReservationsReport from "./ReportPage/ReservationsReport";
 import SalesByCategoryReport from "./ReportPage/SalesByCategoryReport";
 import NavBarControl from "./NavBarControl";
 import PrivateRoute from './PrivateRoute';
+import LiveReservation from "./LiveReservation/LiveReservation";
 import EmployeeRegisterPage from './Employee/EmployeeRegisterPage';
 import EmployeeList from "./Employee/EmployeeList";
 import UserReservations from './ReservationPage/UserReservations';
+import EditReservation from "./ReservationPage/EditReservation";
 
 // Main application component
 function App() {
@@ -33,10 +35,12 @@ function App() {
                         <Route path="/reports/reservations" element={<PrivateRoute element={<ReservationsReport />} roles={['ADMIN']} />} />
                         <Route path="/reports/sales-by-category" element={<PrivateRoute element={<SalesByCategoryReport />} roles={['ADMIN']} />} />
                         <Route path="/raport" element={<PrivateRoute element={<GenerateReport />} roles={['ADMIN', 'EMPLOYEE']} />} />
+                        <Route path="/livereservation" element={<PrivateRoute element={<LiveReservation />} roles={['ADMIN']} />} />
                         <Route path="/employee" element={<PrivateRoute element={<EmployeeRegisterPage/>} roles={['ADMIN', 'EMPLOYEE']} />} />
                         <Route path="/employeeList" element={<PrivateRoute element={<EmployeeList/>} roles={['ADMIN', 'EMPLOYEE']} />} />
                         <Route path="/unauthorized" element={<div>Unauthorized Access</div>} />
                         <Route path="/reservations/history" element={<PrivateRoute element={<UserReservations />} roles={['ADMIN', 'EMPLOYEE']} />} />
+                        <Route path="/reservations/edit/:id" element={<PrivateRoute element={<EditReservation />} roles={['ADMIN', 'EMPLOYEE']} />} />
                     </Routes>
                 </div>
             </BrowserRouter>
