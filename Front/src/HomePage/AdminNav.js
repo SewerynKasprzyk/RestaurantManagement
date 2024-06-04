@@ -61,6 +61,7 @@ export default function AdminNav() {
                                 <Link className="nav-link" to="/orders">Zamówienia</Link>
                             </li>
                             <li className="nav-item">
+                            </li>
 
                             <li className="nav-item" style={{marginRight:"0.5rem"}}>
                                 <Dropdown>
