@@ -29,8 +29,6 @@ export default function AdminNav() {
                                 </Dropdown>
                             </li>
 
-
-
                             <li className="nav-item" style={{marginRight:"0.5rem"}}>
                                 <Dropdown>
                                     <Dropdown.Toggle variant="success" id="dropdown-basic">
@@ -44,8 +42,6 @@ export default function AdminNav() {
                                     </Dropdown.Menu>
                                 </Dropdown>
                             </li>
-
-
 
                             <li className="nav-item" style={{marginRight:"0.5rem"}}>
                                 <Dropdown>
@@ -78,8 +74,9 @@ export default function AdminNav() {
                             <li className="nav-item">
                                 <Link className="nav-link" to="/ingredients">Storeroom</Link>
                             </li>
-
-                            <li className="nav-item ms-auto">
+                        </ul>
+                        <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
+                            <li className="nav-item">
                                 <Link className="nav-link" to="/loginTest">Login</Link>
                             </li>
                         </ul>
@@ -87,5 +84,6 @@ export default function AdminNav() {
                 </div>
             </nav>
         </div>
+
     );
 }

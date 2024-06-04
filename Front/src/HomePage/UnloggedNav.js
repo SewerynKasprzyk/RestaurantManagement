@@ -18,7 +18,8 @@ export default function Navbar() {
                             <li className="nav-item">
                                 <Link className="nav-link" to="/menu">Menu</Link>
                             </li>
-
+                        </ul>
+                        <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
                             <li className="nav-item">
                                 <Link className="nav-link" to="/loginTest">Login</Link>
                             </li>

@@ -72,6 +72,7 @@ export default function Reservation() {
                                    <p className="card-text">Data: {reservation.reservationDate}</p>
                                    <p className="card-text">Godzina rozpoczęcia: {reservation.startHour}</p>
                                    <p className="card-text">Godzina zakończenia: {reservation.endHour}</p>
+                                   <p className="card-text">Zarezerwowane stoliki: {reservation.tables.map(table => `Stolik ${table.id}`).join(', ')}</p>
                                    <p className="card-text">Uwagi: {reservation.notes}</p>
                                </div>
                            </div>
@@ -84,22 +85,7 @@ export default function Reservation() {
        </div>
 
 
-            {reservations.length > 0 ? (
-                <ul>
-                    {reservations.map((reservation) => (
-                        <li key={reservation.id}>
-                            <p>Data: {reservation.reservationDate}</p>
-                            <p>Godzina rozpoczęcia: {reservation.startHour}</p>
-                            <p>Godzina zakończenia: {reservation.endHour}</p>
-                            <p>Zarezerwowane stoliki: {reservation.tables.map(table => `Stolik ${table.id}`).join(', ')}</p>
-                            <p>Uwagi: {reservation.notes}</p>
-                            <button onClick={() => handleEdit(reservation.id)}>Edytuj</button>
-                        </li>
-                    ))}
-                </ul>
-            ) : (
-                <p>Nie masz jeszcze żadnych rezerwacji.</p>
-            )}
-        </div>
+
+
     );
 }
