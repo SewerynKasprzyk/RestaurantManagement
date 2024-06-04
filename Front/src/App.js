@@ -18,6 +18,7 @@ import EmployeeRegisterPage from './Employee/EmployeeRegisterPage';
 import EmployeeList from "./Employee/EmployeeList";
 import UserReservations from './ReservationPage/UserReservations';
 import EditReservation from "./ReservationPage/EditReservation";
+import Home from "./HomePage/Home";
 
 // Main application component
 function App() {
@@ -39,6 +40,7 @@ function App() {
                         <Route path="/employee" element={<PrivateRoute element={<EmployeeRegisterPage/>} roles={['ADMIN', 'EMPLOYEE']} />} />
                         <Route path="/employeeList" element={<PrivateRoute element={<EmployeeList/>} roles={['ADMIN', 'EMPLOYEE']} />} />
                         <Route path="/unauthorized" element={<div>Unauthorized Access</div>} />
+                        <Route path="/home" element={<PrivateRoute element = {<Home />} roles={['ADMIN', 'EMPLOYEE', 'CUSTOMER']} />} />
                         <Route path="/reservations/history" element={<PrivateRoute element={<UserReservations />} roles={['ADMIN', 'EMPLOYEE']} />} />
                         <Route path="/reservations/edit/:id" element={<PrivateRoute element={<EditReservation />} roles={['ADMIN', 'EMPLOYEE']} />} />
                     </Routes>
