@@ -5,6 +5,22 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+}
+
+body::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('./assets/background_restaurnat_image.jpg');
+  background-size: cover; /* Możesz zmienić na inne opcje, np. contain, 100% 100%, etc. */
+  background-repeat: no-repeat;
+  background-position: center;
+  filter: blur(5px); /* Dodanie efektu blur */
+  z-index: -1; /* Umieszczenie pseudo-elementu za zawartością body */
 }
 
 code {

@@ -22,40 +22,49 @@ const SalesByCategoryReport = () => {
     };
 
     return (
-        <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
-            <h1>Raport sprzedaży według kategorii</h1>
-            <div>
-                <label>Data początkowa:</label>
-                <DatePicker selected={startDate} onChange={date => setStartDate(date)} />
-            </div>
-            <div>
-                <label>Data końcowa:</label>
-                <DatePicker selected={endDate} onChange={date => setEndDate(date)} />
-            </div>
-            <button onClick={fetchSales} disabled={loading}>
-                {loading ? 'Ładowanie...' : 'Generuj raport'}
-            </button>
-            <table style={{ margin: "auto", textAlign: "center", borderCollapse: "collapse" }}>
-                <thead>
-                <tr>
-                    <th style={{ marginRight: "20px", border: "1px solid black", padding: "10px" }}>Kategoria</th>
-                    <th style={{ marginRight: "20px", border: "1px solid black", padding: "10px" }}>Całkowita sprzedaż</th>
-                    <th style={{ marginRight: "20px", border: "1px solid black", padding: "10px" }}>Ilość zamówień</th>
-                    <th style={{ marginRight: "20px", border: "1px solid black", padding: "10px" }}>Średnia sprzedaż</th>
-                </tr>
-                </thead>
-                <tbody>
-                {sales.map(report => (
-                    <tr key={report.category}>
-                        <td style={{ border: "1px solid black", padding: "10px" }}>{report.category}</td>
-                        <td style={{ border: "1px solid black", padding: "10px" }}>{report.totalSales}</td>
-                        <td style={{ border: "1px solid black", padding: "10px" }}>{report.orderCount}</td>
-                        <td style={{ border: "1px solid black", padding: "10px" }}>{report.averageSale}</td>
-                    </tr>
-                ))}
-                </tbody>
-            </table>
-        </div>
+       <div className="container" style={{marginTop:"1rem"}}>
+           <div className="row justify-content-center">
+               <div className="col-md-8">
+                   <div className="card">
+                       <div className="card-body">
+                           <h1 className="card-title mb-4">Raport sprzedaży według kategorii</h1>
+                           <div className="mb-3">
+                               <label className="form-label">Data początkowa:</label>
+                               <DatePicker className="form-control" selected={startDate} onChange={date => setStartDate(date)} />
+                           </div>
+                           <div className="mb-3">
+                               <label className="form-label">Data końcowa:</label>
+                               <DatePicker className="form-control" selected={endDate} onChange={date => setEndDate(date)} />
+                           </div>
+                           <button className="btn btn-primary mb-3" onClick={fetchSales} disabled={loading}>
+                               {loading ? 'Ładowanie...' : 'Generuj raport'}
+                           </button>
+                           <table className="table" style={{ textAlign: "center" }}>
+                               <thead>
+                                   <tr>
+                                       <th>Kategoria</th>
+                                       <th>Całkowita sprzedaż</th>
+                                       <th>Ilość zamówień</th>
+                                       <th>Średnia sprzedaż</th>
+                                   </tr>
+                               </thead>
+                               <tbody>
+                                   {sales.map(report => (
+                                       <tr key={report.category}>
+                                           <td>{report.category}</td>
+                                           <td>{report.totalSales}</td>
+                                           <td>{report.orderCount}</td>
+                                           <td>{report.averageSale}</td>
+                                       </tr>
+                                   ))}
+                               </tbody>
+                           </table>
+                       </div>
+                   </div>
+               </div>
+           </div>
+       </div>
+
     );
 };
 

@@ -35,4 +35,12 @@ public class AuthController {
 
         return ResponseEntity.created(URI.create("/api/users/" + user.getId())).body(user);
     }
+
+    @PostMapping("/registerEmployee")
+    public ResponseEntity<UserDto> registerEmployee(@RequestBody SignUpDto signUpDto) {
+        UserDto user = userService.registerEmployee(signUpDto);
+        user.setToken(userAuthProvider.createToken(user.getLogin()));
+
+        return ResponseEntity.created(URI.create("/api/users/" + user.getId())).body(user);
+    }
 }

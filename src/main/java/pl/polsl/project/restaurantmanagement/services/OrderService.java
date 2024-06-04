@@ -74,7 +74,7 @@ public class OrderService {
         if (orderRepository.count() == 0) {
             List<MenuItem> menuItems = menuItemRepository.findAll();
 
-            for (int i = 0; i < 3; i++) {
+            for (int i = 0; i < 6; i++) {
                 Order order = new Order();
                 order.setOrderDate(LocalDate.now().minusDays(i));
                 orderRepository.save(order);

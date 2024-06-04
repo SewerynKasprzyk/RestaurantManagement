@@ -3,6 +3,9 @@ import React, { useState, useEffect } from 'react';
 // Komponent wyświetlający menu
 export default function MenuItems() {
     const [menuItems, setMenuItems] = useState([]);
+    const [currentPage, setCurrentPage] = useState(1);
+    const [currentCategory, setCurrentCategory] = useState('');
+    const itemsPerPage = 6; // Liczba elementów na stronę
 
     useEffect(() => {
 
@@ -25,16 +28,64 @@ export default function MenuItems() {
         fetchMenu();
     },[]);
 
+    const handleCategoryChange = (event) => {
+        setCurrentCategory(event.target.value);
+        setCurrentPage(1);
+    };
+
+    const filteredItems = currentCategory
+        ? menuItems.filter(item => item.category === currentCategory)
+        : menuItems;
+
+     const indexOfLastItem = currentPage * itemsPerPage;
+     const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+     const currentItems = filteredItems.slice(indexOfFirstItem, indexOfLastItem);
+
+    const nextPage = () => {
+        if (indexOfLastItem < menuItems.length) {
+            setCurrentPage(currentPage + 1);
+        }
+    };
+
+    const prevPage = () => {
+        if (indexOfFirstItem > 0) {
+            setCurrentPage(currentPage - 1);
+        }
+    };
 
     return (
-        <div>
-            <h2>Menu</h2>
-            <ul>
-                {menuItems.map((item, index) => (
-                    <li key={index}>{item.name} - {item.price} PLN - {item.description}</li>
-                ))}
-            </ul>
-        </div>
+                <div className="container my-4">
+                    <h2 className="text-white text-center mb-4">Menu</h2>
+                    <div className="mb-4">
+                        <h6 htmlFor="categoryFilter" className="form-label">Filter by type:</h6>
+                        <select
+                            id="categoryFilter"
+                            className="form-select"
+                            value={currentCategory}
+                            onChange={handleCategoryChange}
+                        >
+                            <option value="">All</option>
+                            <option value="MAIN_COURSE">MAIN_COURSE</option>
+                            <option value="APPETIZER">APPETIZER</option>
+                            <option value="BEVERAGE">BEVERAGE</option>
+                        </select>
+                    </div>
+                    <ul className="list-group">
+                        {currentItems.map((item, index) => (
+                            <li key={index} className="list-group-item d-flex justify-content-between align-items-center">
+                                <div>
+                                    <h5 className="mb-1">{item.name}</h5>
+                                    <small>{item.description}</small>
+                                </div>
+                                <span className="badge bg-primary rounded-pill">{item.price} PLN</span>
+                            </li>
+                        ))}
+                    </ul>
+                    <div className="d-flex justify-content-between mt-4">
+                        <button className="btn btn-primary" onClick={prevPage} disabled={indexOfFirstItem === 0}>Poprzedni</button>
+                        <button className="btn btn-primary" onClick={nextPage} disabled={indexOfLastItem >= filteredItems.length}>Następny</button>
+                    </div>
+                </div>
     );
 
 }

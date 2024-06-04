@@ -51,6 +51,15 @@ public class ReservationService {
         return reservationRepository.save(reservation);
     }
 
+    public Reservation getReservationById(Integer id) {
+        return reservationRepository.findReservationById(id);
+    }
+
+    public List<ReservationDto> getReservationsByDate(LocalDate date) {
+        List<Reservation> reservations = reservationRepository.findByReservationDate(date);
+        return reservations.stream().map(this::toReservationDto).collect(Collectors.toList());
+    }
+
     public List<ReservationReport> getReservationsByDateRange(LocalDateTime start, LocalDateTime end) {
         List<Reservation> reservations = reservationRepository.findByReservationDateBetween(start.toLocalDate(), end.toLocalDate());
 
@@ -184,4 +193,16 @@ public class ReservationService {
         }
     }
 
+    // nie dziala poprawnie 1 stolik sie wyswielta
+    public List<TableEntity> getReservedTables(LocalDate reservationDate, LocalTime startHour, LocalTime endHour) {
+        List<TableEntity> allTables = tableRepository.findAll();
+        List<Reservation> conflictingReservations = reservationRepository.findConflictingReservations(reservationDate, startHour, endHour);
+
+        List<TableEntity> occupiedTables = new ArrayList<>();
+        for (Reservation reservation : conflictingReservations) {
+            occupiedTables.addAll(reservation.getTables());
+        }
+
+        return occupiedTables;
+    }
 }

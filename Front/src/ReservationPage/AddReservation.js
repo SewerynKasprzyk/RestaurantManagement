@@ -76,6 +76,12 @@ export default function AddReservation() {
             return;
         }
 
+        // Dodajemy sprawdzenie, czy wybrano jakikolwiek stolik
+        if (selectedTables.length === 0) {
+            setError('Nie można dodać rezerwacji bez wybranego stolika.');
+            return;
+        }
+
         const reservation = {
             reservationDate,
             startHour,
@@ -115,68 +121,83 @@ export default function AddReservation() {
     };
 
     return (
-        <div className='add-reservation-container'>
-            <h2>Dodaj rezerwację</h2>
-            <form onSubmit={handleSubmit}>
-                <div>
-                    <label>Data rezerwacji:</label>
-                    <input
-                        type='date'
-                        value={reservationDate}
-                        onChange={(event) => setReservationDate(event.target.value)}
-                        required
-                    />
-                </div>
-                <div>
-                    <label>Godzina rozpoczęcia:</label>
-                    <input
-                        type='time'
-                        value={startHour}
-                        onChange={handleStartHourChange}
-                        required
-                    />
-                </div>
-                <div>
-                    <label>Godzina zakończenia:</label>
-                    <input
-                        type='time'
-                        value={endHour}
-                        onChange={handleEndHourChange}
-                        required
-                    />
-                </div>
-                <div>
-                    <label>Uwagi:</label>
-                    <input
-                        type='text'
-                        value={notes}
-                        onChange={(event) => setNotes(event.target.value)}
-                    />
-                </div>
-                <div>
-                    <label>Wybierz stolik:</label>
-                    <select onChange={handleTableSelect} value={selectedTableId}>
-                        <option value="" disabled>Wybierz stolik</option>
-                        {availableTables.map((table) => (
-                            <option key={table.id} value={table.id}>
-                                {`Stolik ${table.id} : ${table.seatsAmount}`}
-                            </option>
-                        ))}
-                    </select>
-                    <button type="button" onClick={handleAddTable} disabled={!selectedTableId}>Dodaj stolik</button>
-                </div>
-                <div>
-                    <h3>Wybrane stoliki:</h3>
-                    {selectedTables.map((table) => (
-                        <div key={table.id}>
-                            <p>{`Stolik ${table.id}: Liczba miejsc przy stoliku: ${table.seatsAmount || 'Brak opisu'}`}</p>
-                            <button type="button" onClick={() => handleRemoveTable(table.id)}>Usuń</button>
+<div className="container" style={{marginTop:"1rem"}}>
+    <div className="row justify-content-center">
+        <div className="col-md-8">
+            <div className="card">
+                <div className="card-body">
+                    <h2 className="card-title mb-3">Dodaj rezerwację</h2>
+                    <form onSubmit={handleSubmit}>
+                        <div className="mb-3">
+                            <label className="form-label">Data rezerwacji:</label>
+                            <input
+                                type='date'
+                                className="form-control"
+                                value={reservationDate}
+                                onChange={(event) => setReservationDate(event.target.value)}
+                                required
+                            />
                         </div>
-                    ))}
+                        <div className="mb-3">
+                            <label className="form-label">Godzina rozpoczęcia:</label>
+                            <input
+                                type='time'
+                                className="form-control"
+                                value={startHour}
+                                onChange={handleStartHourChange}
+                                required
+                            />
+                        </div>
+                        <div className="mb-3">
+                            <label className="form-label">Godzina zakończenia:</label>
+                            <input
+                                type='time'
+                                className="form-control"
+                                value={endHour}
+                                onChange={handleEndHourChange}
+                                required
+                            />
+                        </div>
+                        <div className="mb-3">
+                            <label className="form-label">Uwagi:</label>
+                            <input
+                                type='text'
+                                className="form-control"
+                                value={notes}
+                                onChange={(event) => setNotes(event.target.value)}
+                            />
+                        </div>
+                        <div className="mb-3">
+                            <label className="form-label">Wybierz stolik:</label>
+                            <select className="form-select" onChange={handleTableSelect} value={selectedTableId}>
+                                <option value="" disabled>Wybierz stolik</option>
+                                {availableTables.map((table) => (
+                                    <option key={table.id} value={table.id}>
+                                        {`Stolik ${table.id} : ${table.seatsAmount}`}
+                                    </option>
+                                ))}
+                            </select>
+                            <button type="button" className="btn btn-primary mt-2" onClick={handleAddTable} disabled={!selectedTableId}>Dodaj stolik</button>
+                        </div>
+                        <div>
+                            <h3>Wybrane stoliki:</h3>
+                            {selectedTables.map((table) => (
+                                <div key={table.id} className="mb-2">
+                                    <p>{`Stolik ${table.id}: Liczba miejsc przy stoliku: ${table.seatsAmount || 'Brak opisu'}`}</p>
+                                    <button type="button" className="btn btn-danger" onClick={() => handleRemoveTable(table.id)}>Usuń</button>
+                                </div>
+                            ))}
+                        </div>
+                        <button type='submit' className="btn btn-success mt-3">Dodaj rezerwację</button>
+                    </form>
+                    {error && <div className="error mt-3">{error}</div>}
                 </div>
-                <button type='submit'>Dodaj rezerwację</button>
-            </form>
-            {error && <div className="error">{error}</div>}
+            </div>
         </div>
+    </div>
+</div>
+
+
+
     );
 }
