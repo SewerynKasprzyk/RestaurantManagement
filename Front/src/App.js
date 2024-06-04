@@ -18,6 +18,9 @@ import EmployeeRegisterPage from './Employee/EmployeeRegisterPage';
 import EmployeeList from "./Employee/EmployeeList";
 import UserReservations from './ReservationPage/UserReservations';
 import EditReservation from "./ReservationPage/EditReservation";
+import Occupancy from './ReservationPage/Occupancy';
+import './globalStyles.css';
+
 
 // Main application component
 function App() {
@@ -41,6 +44,7 @@ function App() {
                         <Route path="/unauthorized" element={<div>Unauthorized Access</div>} />
                         <Route path="/reservations/history" element={<PrivateRoute element={<UserReservations />} roles={['ADMIN', 'EMPLOYEE']} />} />
                         <Route path="/reservations/edit/:id" element={<PrivateRoute element={<EditReservation />} roles={['ADMIN', 'EMPLOYEE']} />} />
+                        <Route path="/occupancy" element={<PrivateRoute element={<Occupancy />} roles={['ADMIN', 'EMPLOYEE']} />} />
                     </Routes>
                 </div>
             </BrowserRouter>

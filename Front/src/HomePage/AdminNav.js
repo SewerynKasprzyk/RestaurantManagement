@@ -37,8 +37,8 @@ export default function AdminNav() {
 
                                     <Dropdown.Menu>
                                         <Dropdown.Item as={Link} to="/reservations">Add reservation</Dropdown.Item>
-                                        <Dropdown.Item as={Link} to="/reservations/history">Reservations
-                                            History</Dropdown.Item>
+                                        <Dropdown.Item as={Link} to="/reservations/history">Reservations History</Dropdown.Item>
+                                        <Dropdown.Item as={Link} to="/occupancy">Occupancy</Dropdown.Item>
                                     </Dropdown.Menu>
                                 </Dropdown>
                             </li>

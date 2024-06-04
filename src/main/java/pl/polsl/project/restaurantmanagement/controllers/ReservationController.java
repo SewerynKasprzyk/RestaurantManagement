@@ -118,4 +118,11 @@ public class ReservationController {
         List<TableEntity> freeTables = reservationService.getReservedTables(date, start, end);
         return new ResponseEntity<>(freeTables, HttpStatus.OK);
     }
+
+    @GetMapping("/reservations/{date}")
+    public ResponseEntity<List<ReservationDto>> getReservationsForDate(@PathVariable String date) {
+        LocalDate selectedDate = LocalDate.parse(date);
+        List<ReservationDto> reservations = reservationService.getReservationsByDate(selectedDate);
+        return ResponseEntity.ok(reservations);
+    }
 }

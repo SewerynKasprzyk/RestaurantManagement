@@ -9,7 +9,7 @@ export default function LiveReservation() {
             .then(response => {
                 setTables(response.data);
                 console.log(response.data);
-                console.log(tables);
+                console.log(tables + 'asdasda');
             })
             .catch(error => {
                 console.error('There was an error!', error);

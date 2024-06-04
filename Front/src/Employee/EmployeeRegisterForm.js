@@ -39,27 +39,27 @@ export default class EmployeeRegisterForm extends React.Component {
                     <form onSubmit={this.onSubmitRegister}>
                         <div className="form-outline mb-4">
                             <input type="text" id="name" name="name" className="form-control" onChange={this.onChangeHandler} />
-                            <label className="form-label" htmlFor="name">Name</label>
+                            <h6 className="form-label" htmlFor="name">Name</h6>
                         </div>
 
                         <div className="form-outline mb-4">
                             <input type="text" id="surname" name="surname" className="form-control" onChange={this.onChangeHandler} />
-                            <label className="form-label" htmlFor="surname">Last name</label>
+                            <h6 className="form-label" htmlFor="surname">Last name</h6>
                         </div>
 
                         <div className="form-outline mb-4">
                             <input type="text" id="phoneNumber" name="phoneNumber" className="form-control" onChange={this.onChangeHandler} />
-                            <label className="form-label" htmlFor="phoneNumber">Phone number</label>
+                            <h6 className="form-label" htmlFor="phoneNumber">Phone number</h6>
                         </div>
 
                         <div className="form-outline mb-4">
                             <input type="text" id="login" name="login" className="form-control" onChange={this.onChangeHandler} />
-                            <label className="form-label" htmlFor="login">Username</label>
+                            <h6 className="form-label" htmlFor="login">Username</h6>
                         </div>
 
                         <div className="form-outline mb-4">
                             <input type="password" id="password" name="password" className="form-control" onChange={this.onChangeHandler} />
-                            <label className="form-label" htmlFor="password">Password</label>
+                            <h6 className="form-label" htmlFor="password">Password</h6>
                         </div>
 
                         <button type="submit" className="btn btn-primary btn-block mb-4">Register Employee</button>

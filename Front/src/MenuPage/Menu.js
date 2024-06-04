@@ -57,17 +57,17 @@ export default function MenuItems() {
                 <div className="container my-4">
                     <h2 className="text-white text-center mb-4">Menu</h2>
                     <div className="mb-4">
-                        <label htmlFor="categoryFilter" className="form-label">Filtruj po typie:</label>
+                        <h6 htmlFor="categoryFilter" className="form-label">Filter by type:</h6>
                         <select
                             id="categoryFilter"
                             className="form-select"
                             value={currentCategory}
                             onChange={handleCategoryChange}
                         >
-                            <option value="">Wszystkie</option>
-                            <option value="MAIN_COURSE">Dania główne</option>
-                            <option value="APPETIZER">Przystawki</option>
-                            <option value="BEVERAGE">Napoje</option>
+                            <option value="">All</option>
+                            <option value="MAIN_COURSE">MAIN_COURSE</option>
+                            <option value="APPETIZER">APPETIZER</option>
+                            <option value="BEVERAGE">BEVERAGE</option>
                         </select>
                     </div>
                     <ul className="list-group">
