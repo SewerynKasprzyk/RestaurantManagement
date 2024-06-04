@@ -55,7 +55,7 @@ export default function AddOrder() {
 
         const order = {
             totalPrice,
-            notes,
+            notes : notes || 'Brak',
             userId,
             orderItems: Object.values(selectedItems).map(item => ({
                 menuItemId: item.id,
@@ -161,7 +161,6 @@ export default function AddOrder() {
                     value={notes}
                     onChange={(e) => setNotes(e.target.value)}
                 />
-
             </div>
             <button type='button' onClick={handleAddOrder}>Dodaj zamówienie</button>
             {error && <div className="error">{error}</div>}

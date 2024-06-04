@@ -44,4 +44,8 @@ public class OrderItemService {
     public List<OrderItem> getOrderItemsByOrderId(Integer orderId) {
         return orderItemRepository.findByOrderId(orderId);
     }
+
+    public List<OrderItem> findOrderItemsByOrderId(Integer orderId) {
+        return orderItemRepository.findOrderItemsByOrderId(orderId);
+    }
 }

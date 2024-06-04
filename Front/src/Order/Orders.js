@@ -2,8 +2,10 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { request } from "../api/axiosConfig";
 
+
 export default function Orders() {
     const [orders, setOrders] = useState([]);
+    const [orderItems, setOrderItems] = useState([]); // Dodajemy nowy stan orderItems
     const [error, setError] = useState('');
     const [user, setUser] = useState(null);
     const navigate = useNavigate();
@@ -16,6 +18,7 @@ export default function Orders() {
                 if (response.status === 200) {
                     const userData = response.data;
                     setUser(userData);
+
                 } else {
                     console.error('Failed to fetch user data');
                 }
@@ -27,6 +30,8 @@ export default function Orders() {
         fetchUser();
     }, []);
 
+
+
     useEffect(() => {
         const fetchOrders = async () => {
             if (user) {
@@ -34,7 +39,20 @@ export default function Orders() {
                     const response = await request('GET', `/api/orders/user/${user.id}`);
 
                     if (response.status === 200) {
-                        setOrders(response.data);
+
+                        const fetchedOrders = response.data;
+                        const ordersWithItems = await Promise.all(
+                            fetchedOrders.map(async (order) => {
+                                    const itemsResponse = await request('GET', `/api/orderitems/order/${order.id}`);
+                                    if (itemsResponse.status === 200) {
+                                        return {...order, orderItems: itemsResponse.data};
+                                    } else {
+                                        console.error('Failed to fetch order items');
+                                        return order;
+                                    }
+                                })
+                            );
+                        setOrders(ordersWithItems);
                     } else {
                         console.error('Failed to fetch orders');
                     }
@@ -43,6 +61,7 @@ export default function Orders() {
                     setError('Błąd pobierania zamówień.');
                 }
             }
+            console.log(orders);
         };
 
         fetchOrders();
@@ -60,9 +79,18 @@ export default function Orders() {
                     {orders.map((order) => (
                         <li key={order.id}>
                             <p>Data: {order.orderDate}</p>
-                            <p>Godzina zamówienia: {order.orderTime}</p>
                             <p>Uwagi: {order.notes}</p>
-                            <p>Kwota: {order.totalAmount}</p>
+                            <p>Kwota: {order.totalPrice}</p>
+                            <p>Zamówione pozycje:</p>
+                            <ul>
+                                {order.orderItems.map((item, index) => (
+                                    <li key={index}>
+                                        <p>Nazwa: {item.menuItem.name}</p>
+                                        <p>Cena: {item.menuItem.price}</p>
+                                        <p>Ilość: {item.quantity}</p>
+                                    </li>
+                                ))}
+                            </ul>
                         </li>
                     ))}
                 </ul>

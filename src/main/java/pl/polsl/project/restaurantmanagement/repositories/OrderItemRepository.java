@@ -21,5 +21,10 @@ public interface OrderItemRepository extends JpaRepository<OrderItem, Integer> {
             "WHERE r.orderDate BETWEEN :start AND :end " +
             "GROUP BY m.type")
     List<SalesByCategoryReport> findSalesByCategoryReport(@Param("start") LocalDate start, @Param("end") LocalDate end);
+
+
+    @Query("SELECT oi FROM OrderItem oi WHERE oi.order.id = :orderId")
+    List<OrderItem> findOrderItemsByOrderId(@Param("orderId") Integer orderId);
+
     List<OrderItem> findByOrderId(Integer orderId);
 }
