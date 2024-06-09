@@ -7,10 +7,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pl.polsl.project.restaurantmanagement.configuration.OrderMapper;
 import pl.polsl.project.restaurantmanagement.model.DTO.OrderDto;
+import pl.polsl.project.restaurantmanagement.model.DTO.OrderItemDto;
 import pl.polsl.project.restaurantmanagement.model.Order;
 import pl.polsl.project.restaurantmanagement.model.OrderItem;
 import pl.polsl.project.restaurantmanagement.model.User;
 import pl.polsl.project.restaurantmanagement.model.report.SalesByCategoryReport;
+import pl.polsl.project.restaurantmanagement.repositories.MenuItemRepository;
 import pl.polsl.project.restaurantmanagement.services.OrderService;
 import pl.polsl.project.restaurantmanagement.services.OrderItemService;
 import pl.polsl.project.restaurantmanagement.services.UserService;
@@ -30,6 +32,7 @@ public class OrderController {
     private final UserService userService;
     private final OrderItemService orderItemService;
     private final OrderMapper orderMapper;
+    private final MenuItemRepository menuItemRepository;
 
     @GetMapping
     public ResponseEntity<List<Order>> getAllOrders() { return new ResponseEntity<List<Order>>(orderService.getAllOrders(), HttpStatus.OK); }
@@ -51,11 +54,36 @@ public class OrderController {
     @PostMapping("/add")
     public ResponseEntity<OrderDto> addOrder(@RequestBody OrderDto orderDTO, @RequestHeader("Authorization") String token) {
         System.out.println("Received OrderDTO: " + orderDTO);
+
+        // Mapowanie OrderDto na Order
         Order order = orderMapper.toOrder(orderDTO);
+
+        // Ustawienie daty zamówienia
         order.setOrderDate(LocalDate.now());
-        order.setUser(userService.getUserById(orderDTO.getUserId()));
+
+        // Ustawienie użytkownika
+        User user = userService.getUserById(orderDTO.getUserId());
+        order.setUser(user);
+
+        // Tworzenie listy OrderItem
+        List<OrderItem> orderItems = new ArrayList<>();
+        for (OrderItemDto orderItemDto : orderDTO.getOrderItems()) {
+            OrderItem orderItem = new OrderItem();
+            orderItem.setMenuItem(menuItemRepository.findById(orderItemDto.getMenuItemId()).orElse(null)); // Ustawienie MenuItem
+            orderItem.setQuantity(orderItemDto.getQuantity());
+            orderItem.setOrder(order);
+            orderItems.add(orderItem);
+        }
+
+        // Ustawienie listy OrderItem w zamówieniu
+        order.setOrderItems(orderItems);
+
+        // Zapis zamówienia
         Order savedOrder = orderService.addOrder(order);
+
+        // Mapowanie Order na OrderDto
         OrderDto savedOrderDto = orderMapper.toOrderDto(savedOrder);
+
         return ResponseEntity.ok(savedOrderDto);
     }
 
