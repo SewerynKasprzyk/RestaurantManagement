@@ -50,5 +50,5 @@ public class User {
     @JsonManagedReference
     private List<Reservation> reservations;
 
-    // Constructors, getters, and setters
+    //Constructors, getters, and setters
 }

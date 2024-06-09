@@ -46,11 +46,18 @@ public class OrderItemService {
                 .collect(Collectors.toList());
     }
 
+
+    public List<OrderItem> getOrderItemsByOrderId(Integer orderId) {
+        return orderItemRepository.findByOrderId(orderId);
     public List<OrderItem> getOrderItemsByOrderIdAndCategory(Integer orderId, String category) {
         // Zwróć pozycje zamówienia, które pasują do podanego id zamówienia i kategorii
         return orderItemRepository.findAll().stream()
                 .filter(orderItem -> orderItem.getOrder() != null && orderItem.getOrder().getId().equals(orderId))
                 .filter(orderItem -> orderItem.getMenuItem().getCategory().name().equals(category))
                 .collect(Collectors.toList());
+    }
+
+    public List<OrderItem> findOrderItemsByOrderId(Integer orderId) {
+        return orderItemRepository.findOrderItemsByOrderId(orderId);
     }
 }

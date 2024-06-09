@@ -5,6 +5,7 @@ import lombok.NoArgsConstructor;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.time.LocalTime;
 import java.util.List;
 

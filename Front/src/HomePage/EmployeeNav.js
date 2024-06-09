@@ -45,6 +45,9 @@ export default function Navbar() {
                             <li className="nav-item">
                                 <Link className="nav-link" to="/ingredients">Storeroom</Link>
                             </li>
+                            <li className="nav-item">
+                                <Link className="nav-link" to="/orders">Zamówienia</Link>
+                            </li>
                         </ul>
 
                     </div>

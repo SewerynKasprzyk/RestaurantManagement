@@ -57,6 +57,11 @@ export default function AdminNav() {
                                     </Dropdown.Menu>
                                 </Dropdown>
                             </li>
+                            <li className="nav-item">
+                                <Link className="nav-link" to="/orders">Zamówienia</Link>
+                            </li>
+                            <li className="nav-item">
+                            </li>
 
                             <li className="nav-item" style={{marginRight:"0.5rem"}}>
                                 <Dropdown>
@@ -65,6 +70,10 @@ export default function AdminNav() {
                                     </Dropdown.Toggle>
 
                                     <Dropdown.Menu>
+                                        <Dropdown.Item as={Link} to="/reports/reservations">Raport
+                                            rezerwacji</Dropdown.Item>
+                                        <Dropdown.Item as={Link} to="/reports/sales-by-category">Raport
+                                            sprzedaży</Dropdown.Item>
                                         <Dropdown.Item as={Link} to="/employee">Add Employee</Dropdown.Item>
                                         <Dropdown.Item as={Link} to="/employeeList">Delete Employee</Dropdown.Item>
                                     </Dropdown.Menu>
