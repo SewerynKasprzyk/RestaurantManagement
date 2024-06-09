@@ -1,5 +1,6 @@
 package pl.polsl.project.restaurantmanagement.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import jakarta.persistence.*;
@@ -19,6 +20,7 @@ public class OrderItem {
 
     @ManyToOne
     @JoinColumn(name = "order_id")
+    @JsonIgnore
     private Order order;
 
     @ManyToOne
