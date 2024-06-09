@@ -7,6 +7,7 @@ import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
 import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.context.annotation.ComponentScan;
 import pl.polsl.project.restaurantmanagement.model.Reservation;
 import pl.polsl.project.restaurantmanagement.services.*;
 
@@ -15,6 +16,7 @@ import java.time.LocalTime;
 import java.util.Collections;
 
 @SpringBootApplication
+@ComponentScan(basePackages = {"pl.polsl.project.restaurantmanagement", "pl.polsl.project.restaurantmanagement.configuration"})
 @EnableAutoConfiguration(exclude = {SecurityAutoConfiguration.class})
 @RequiredArgsConstructor
 public class RestaurantManagementApplication {
