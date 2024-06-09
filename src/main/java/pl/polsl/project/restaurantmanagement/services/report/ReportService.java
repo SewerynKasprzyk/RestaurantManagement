@@ -13,6 +13,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.time.temporal.ChronoUnit;
+
 
 @Service
 public class ReportService {
@@ -26,21 +28,34 @@ public class ReportService {
         this.orderItemService = orderItemService;
     }
 
-    public List<SalesByCategoryReport> getSalesByCategoryReport(LocalDate start, LocalDate end) {
-        List<Order> orders = orderService.getOrdersByDateRange(start, end);
-        Map<String, SalesByCategoryReport> reportMap = new HashMap<>();
+    public List<SalesByCategoryReport> getSalesByCategoryReport(LocalDate start, LocalDate end, String category, String startHour, String endHour) {
+        List<SalesByCategoryReport> reports = new ArrayList<>();
 
-        for (Order order : orders) {
-            List<OrderItem> orderItems = orderItemService.getOrderItemsByOrderId(order.getId());
+        // Generate all dates between start and end
+        long numOfDaysBetween = ChronoUnit.DAYS.between(start, end);
+        for (int i = 0; i <= numOfDaysBetween; i++) {
+            LocalDate currentDate = start.plusDays(i);
 
-            for (OrderItem orderItem : orderItems) {
-                String category = orderItem.getMenuItem().getCategory().name();
-                SalesByCategoryReport report = reportMap.getOrDefault(category, new SalesByCategoryReport(category));
-                report.addSale(orderItem.getPrice().doubleValue());
-                reportMap.put(category, report);
+            // Get orders for the current date
+            List<Order> orders = orderService.getOrdersByDateRangeAndTimeRange(currentDate, currentDate, startHour, endHour);
+            Map<String, SalesByCategoryReport> reportMap = new HashMap<>();
+
+            for (Order order : orders) {
+                List<OrderItem> orderItems = orderItemService.getOrderItemsByOrderIdAndCategory(order.getId(), category);
+
+                for (OrderItem orderItem : orderItems) {
+                    String itemCategory = orderItem.getMenuItem().getCategory().name();
+                    SalesByCategoryReport report = reportMap.getOrDefault(itemCategory, new SalesByCategoryReport(itemCategory));
+                    report.addSale(orderItem.getPrice().doubleValue());
+                    report.setDay(currentDate.toString());
+                    reportMap.put(itemCategory, report);
+                }
             }
+
+            // Add the reports for the current date to the final list
+            reports.addAll(reportMap.values());
         }
 
-        return new ArrayList<>(reportMap.values());
+        return reports;
     }
 }

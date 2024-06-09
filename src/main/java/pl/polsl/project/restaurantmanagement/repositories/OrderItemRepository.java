@@ -17,8 +17,10 @@ public interface OrderItemRepository extends JpaRepository<OrderItem, Integer> {
             "m.type, SUM(o.quantity * m.price), COUNT(o), AVG(o.quantity * m.price)) " +
             "FROM OrderItem o " +
             "JOIN o.order r " +
+            "JOIN r.user u " +
+            "JOIN u.reservations res " +
             "JOIN o.menuItem m " +
-            "WHERE r.orderDate BETWEEN :start AND :end " +
+            "WHERE res.reservationDate BETWEEN :start AND :end " +
             "GROUP BY m.type")
     List<SalesByCategoryReport> findSalesByCategoryReport(@Param("start") LocalDate start, @Param("end") LocalDate end);
     List<OrderItem> findByOrderId(Integer orderId);

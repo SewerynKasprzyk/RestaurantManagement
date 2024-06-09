@@ -9,6 +9,7 @@ import pl.polsl.project.restaurantmanagement.repositories.OrderItemRepository;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class OrderItemService {
@@ -37,10 +38,19 @@ public class OrderItemService {
     }
 
     public List<SalesByCategoryReport> findSalesByCategoryReport(LocalDate start, LocalDate end) {
-        return orderItemRepository.findSalesByCategoryReport(start, end);
+        return orderItemRepository.findSalesByCategoryReport(start, end).stream()
+                .map(report -> {
+                    report.setAverageOrderValue(report.getTotalSales() / report.getOrderCount());
+                    return report;
+                })
+                .collect(Collectors.toList());
     }
 
-    public List<OrderItem> getOrderItemsByOrderId(Integer orderId) {
-        return orderItemRepository.findByOrderId(orderId);
+    public List<OrderItem> getOrderItemsByOrderIdAndCategory(Integer orderId, String category) {
+        // Zwróć pozycje zamówienia, które pasują do podanego id zamówienia i kategorii
+        return orderItemRepository.findAll().stream()
+                .filter(orderItem -> orderItem.getOrder() != null && orderItem.getOrder().getId().equals(orderId))
+                .filter(orderItem -> orderItem.getMenuItem().getCategory().name().equals(category))
+                .collect(Collectors.toList());
     }
 }
