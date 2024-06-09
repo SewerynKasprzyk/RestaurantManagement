@@ -46,6 +46,8 @@ public class OrderItemService {
     }
 
     public List<OrderItem> findOrderItemsByOrderId(Integer orderId) {
-        return orderItemRepository.findOrderItemsByOrderId(orderId);
+        List<OrderItem> orderItems = orderItemRepository.findByOrderId(orderId);
+        System.out.println("Found order items: " + orderItems);
+        return orderItems;
     }
 }

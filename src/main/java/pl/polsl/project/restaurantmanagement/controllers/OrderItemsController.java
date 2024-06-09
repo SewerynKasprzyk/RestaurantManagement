@@ -22,6 +22,7 @@ public class OrderItemsController {
     @GetMapping("/order/{orderId}")
     public ResponseEntity<List<OrderItem>> getOrderById(@PathVariable Integer orderId) {
         List<OrderItem> orderItems = orderItemService.findOrderItemsByOrderId(orderId);
+        System.out.println("Order Items: " + orderItems);
         return new ResponseEntity<>(orderItems, HttpStatus.OK);
     }
 }
