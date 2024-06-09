@@ -5,6 +5,7 @@ import lombok.NoArgsConstructor;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.time.LocalTime;
 import java.util.List;
@@ -36,6 +37,9 @@ public class Order {
     // Add this field
     @Column(name = "order_date")
     private LocalDate orderDate;
+
+    @Column(name = "order_time")
+    private LocalTime orderTime;
 
 
 //    @Column(name = "order_time")
