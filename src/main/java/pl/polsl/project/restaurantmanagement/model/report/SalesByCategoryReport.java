@@ -16,13 +16,6 @@ public class SalesByCategoryReport {
         this.orderCount = 0;
     }
 
-    // Nowy konstruktor
-    public SalesByCategoryReport(MenuItemType category, Long totalSales, Long orderCount, Double averageSale) {
-        this.category = category.name();
-        this.totalSales = totalSales != null ? totalSales : 0;
-        this.orderCount = orderCount != null ? orderCount.intValue() : 0;
-    }
-
     public void addSale(double sale) {
         totalSales += sale;
         orderCount++;

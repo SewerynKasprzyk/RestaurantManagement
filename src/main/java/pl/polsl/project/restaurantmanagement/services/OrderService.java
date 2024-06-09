@@ -80,6 +80,10 @@ public class OrderService {
                 .collect(Collectors.toList());
     }
 
+    public List<Order> getOrdersByDateRange(LocalDate start, LocalDate end) {
+        return orderRepository.findByOrderDateBetween(start, end);
+    }
+
     public Order addOrder(Order order) {
 
         return orderRepository.save(order);

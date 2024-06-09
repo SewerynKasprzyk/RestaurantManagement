@@ -37,6 +37,7 @@ public class Order {
     @Column(name = "order_date")
     private LocalDate orderDate;
 
+
 //    @Column(name = "order_time")
 //    private LocalTime orderTime;
 

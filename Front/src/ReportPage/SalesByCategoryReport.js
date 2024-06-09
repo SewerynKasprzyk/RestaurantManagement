@@ -24,8 +24,10 @@ const SalesByCategoryReport = () => {
 
     const fetchSales = async () => {
         setLoading(true);
+        console.log(`Fetching sales data from ${startDate.toISOString().split('T')[0]} to ${endDate.toISOString().split('T')[0]}`);
         const response = await axios.get(`http://localhost:8080/api/reports/sales-by-category?start=${startDate.toISOString().split('T')[0]}&end=${endDate.toISOString().split('T')[0]}&category=${category}&startHour=${startHour}&endHour=${endHour}`);
         if (Array.isArray(response.data)) {
+            console.log(`Received ${response.data.length} sales records`);
             setSales(response.data);
         } else {
             console.error('Unexpected server response:', response.data);
@@ -77,13 +79,16 @@ const SalesByCategoryReport = () => {
                                 </tr>
                                 </thead>
                                 <tbody>
-                                {sales.map(report => (
-                                    <tr key={report.day}>
-                                        <td>{report.day}</td>
-                                        <td>{report.totalSales}</td>
-                                        <td>{report.averageOrderValue}</td>
-                                    </tr>
-                                ))}
+                                {sales.map(report => {
+                                    console.log(`Rendering sales data for ${report.day}: total sales = ${report.totalSales}, average order value = ${report.averageOrderValue}`);
+                                    return (
+                                        <tr key={report.day}>
+                                            <td>{report.day}</td>
+                                            <td>{report.totalSales}</td>
+                                            <td>{report.averageOrderValue}</td>
+                                        </tr>
+                                    );
+                                })}
                                 </tbody>
                             </table>
                         </div>
