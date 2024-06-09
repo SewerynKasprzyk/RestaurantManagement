@@ -18,6 +18,7 @@ import pl.polsl.project.restaurantmanagement.services.OrderItemService;
 import pl.polsl.project.restaurantmanagement.services.UserService;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -64,6 +65,8 @@ public class OrderController {
         // Ustawienie użytkownika
         User user = userService.getUserById(orderDTO.getUserId());
         order.setUser(user);
+
+        order.setOrderTime(LocalTime.now());
 
         // Tworzenie listy OrderItem
         List<OrderItem> orderItems = new ArrayList<>();
