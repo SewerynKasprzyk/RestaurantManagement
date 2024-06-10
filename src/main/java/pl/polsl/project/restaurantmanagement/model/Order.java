@@ -42,9 +42,5 @@ public class Order {
     private LocalTime orderTime;
 
 
-//    @Column(name = "order_time")
-//    private LocalTime orderTime;
-
-
     // Constructors, getters, and setters
 }

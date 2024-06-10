@@ -43,13 +43,15 @@ public class OrderController {
     @GetMapping
     public ResponseEntity<List<Order>> getAllOrders() { return new ResponseEntity<List<Order>>(orderService.getAllOrders(), HttpStatus.OK); }
 
-    @GetMapping("/reports/sales-by-category")
-    public ResponseEntity<List<SalesByCategoryReport>> getSalesByCategoryReport(
-            @RequestParam("start") LocalDate start,
-            @RequestParam("end") LocalDate end) {
-        List<SalesByCategoryReport> reports = orderItemService.findSalesByCategoryReport(start, end);
-        return new ResponseEntity<>(reports, HttpStatus.OK);
-    }
+//    @GetMapping("/reports/sales-by-category")
+//    public ResponseEntity<List<SalesByCategoryReport>> getSalesByCategoryReport(
+//            @RequestParam("start") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate start,
+//            @RequestParam("end") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate end,
+//            @RequestParam("startHour") String startHour,
+//            @RequestParam("endHour") String endHour) {
+//        List<SalesByCategoryReport> reports = orderItemService.findSalesByCategoryReport(start, end, startHour, endHour);
+//        return new ResponseEntity<>(reports, HttpStatus.OK);
+//    }
 
     @GetMapping("user/{userId}")
     public ResponseEntity<List<Order>> getOrdersByUserId(@PathVariable Integer userId) {

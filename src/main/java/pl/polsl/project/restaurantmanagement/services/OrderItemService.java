@@ -8,6 +8,7 @@ import pl.polsl.project.restaurantmanagement.model.report.SalesByCategoryReport;
 import pl.polsl.project.restaurantmanagement.repositories.OrderItemRepository;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -45,26 +46,38 @@ public class OrderItemService {
         orderItemRepository.deleteById(id);
     }
 
-    public List<SalesByCategoryReport> findSalesByCategoryReport(LocalDate start, LocalDate end) {
+    public List<SalesByCategoryReport> findSalesByCategoryReport(LocalDate start, LocalDate end, String startHour, String endHour) {
+        // Konwersja godzin na typ LocalTime
+        LocalTime startTime = LocalTime.parse(startHour);
+        LocalTime endTime = LocalTime.parse(endHour);
+
         List<OrderItem> orderItems = StreamSupport
                 .stream(orderItemRepository.findAll().spliterator(), false)
                 .filter(orderItem ->
                         orderItem.getOrder().getOrderDate().compareTo(start) >= 0 &&
-                                orderItem.getOrder().getOrderDate().compareTo(end) <= 0)
+                                orderItem.getOrder().getOrderDate().compareTo(end) <= 0 &&
+                                orderItem.getOrder().getOrderTime().compareTo(startTime) >= 0 &&
+                                orderItem.getOrder().getOrderTime().compareTo(endTime) <= 0)
                 .collect(Collectors.toList());
 
-        Map<String, SalesByCategoryReport> reportMap = new HashMap<>();
+        Map<String, Map<String, SalesByCategoryReport>> reportMap = new HashMap<>();
 
         for (OrderItem orderItem : orderItems) {
             String category = orderItem.getMenuItem().getCategory().name();
             double sales = orderItem.getQuantity() * orderItem.getPrice().doubleValue();
+            String orderDate = orderItem.getOrder().getOrderDate().toString();
 
-            SalesByCategoryReport report = reportMap.getOrDefault(category, new SalesByCategoryReport(category));
+            Map<String, SalesByCategoryReport> dateMap = reportMap.getOrDefault(category, new HashMap<>());
+            SalesByCategoryReport report = dateMap.getOrDefault(orderDate, new SalesByCategoryReport(category));
             report.addSale(sales);
-            reportMap.put(category, report);
+            report.setDay(orderDate);
+            dateMap.put(orderDate, report);
+            reportMap.put(category, dateMap);
         }
 
-        return new ArrayList<>(reportMap.values());
+        return reportMap.values().stream()
+                .flatMap(dateMap -> dateMap.values().stream())
+                .collect(Collectors.toList());
     }
 
 

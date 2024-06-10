@@ -9,6 +9,7 @@ import pl.polsl.project.restaurantmanagement.services.OrderItemService;
 import pl.polsl.project.restaurantmanagement.services.OrderService;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -30,12 +31,24 @@ public class ReportService {
     }
 
     public List<SalesByCategoryReport> getSalesByCategoryReport(LocalDate start, LocalDate end, String category, String startHour, String endHour) {
-        List<Order> orders = orderService.getOrdersByDateRange(start, end);
+        // Konwersja godzin na typ LocalTime
+        LocalTime startTime = LocalTime.parse(startHour);
+        LocalTime endTime = LocalTime.parse(endHour);
+
+        // Pobranie wszystkich zamówień
+        List<Order> orders = orderService.getAllOrders();
+
+        // Filtracja zamówień, które pasują do podanego zakresu dat i godzin
+        List<Order> filteredOrders = orders.stream()
+                .filter(order -> !order.getOrderDate().isBefore(start) && !order.getOrderDate().isAfter(end) &&
+                        !order.getOrderTime().isBefore(startTime) && !order.getOrderTime().isAfter(endTime))
+                .collect(Collectors.toList());
+
         Map<String, Map<String, SalesByCategoryReport>> reportMap = new HashMap<>();
 
-        for (Order order : orders) {
+        for (Order order : filteredOrders) {
             for (OrderItem orderItem : order.getOrderItems()) {
-                String itemCategory = orderItem.getMenuItem().getCategory().name(); // Renamed variable
+                String itemCategory = orderItem.getMenuItem().getCategory().name();
                 if (!itemCategory.equals(category)) {
                     continue;
                 }
