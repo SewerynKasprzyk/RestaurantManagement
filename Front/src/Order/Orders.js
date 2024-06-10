@@ -30,6 +30,11 @@ export default function Orders() {
         fetchUser();
     }, []);
 
+    const formatTime = (time) => {
+        // Zakładamy, że czas jest w formacie HH:mm:ss
+        const [hours, minutes] = time.split(':');
+        return `${hours}:${minutes}`;
+    };
 
 
     useEffect(() => {
@@ -79,6 +84,7 @@ export default function Orders() {
                     {orders.map((order) => (
                         <li key={order.id}>
                             <p>Data: {order.orderDate}</p>
+                            <p>Godzina: {formatTime(order.orderTime)}</p>
                             <p>Uwagi: {order.notes}</p>
                             <p>Kwota: {order.totalPrice}</p>
                             <p>Zamówione pozycje:</p>
