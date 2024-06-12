@@ -34,7 +34,7 @@ function App() {
                         <Route path="/menu" element = {<MenuItems/>} />
                         <Route path="/loginTest" element={<AppContent />} />
                         <Route path="/reservations" element={<PrivateRoute element={<Reservation />} roles={['ADMIN', 'EMPLOYEE', 'CUSTOMER']} />} />
-                        <Route path="/reservations/add" element={<PrivateRoute element={<AddReservation />} roles={['ADMIN', 'EMPLOYEE']} />} />
+                        <Route path="/reservations/add" element={<PrivateRoute element={<AddReservation />} roles={['ADMIN', 'EMPLOYEE', 'CUSTOMER']} />} />
                         <Route path="/orders" element={<PrivateRoute element={<Orders />} roles={['ADMIN', 'EMPLOYEE', 'CUSTOMER']} />} />
                         <Route path="/orders/add" element={<PrivateRoute element={<AddOrder />} roles={['ADMIN', 'EMPLOYEE', 'CUSTOMER']} />} />
                         <Route path="/reservations/add" element={<PrivateRoute element={<AddReservation />} roles={['ADMIN', 'EMPLOYEE', 'CUSTOMER']} />} />
