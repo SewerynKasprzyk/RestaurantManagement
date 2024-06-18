@@ -8,6 +8,7 @@ import pl.polsl.project.restaurantmanagement.model.Ingredient;
 import pl.polsl.project.restaurantmanagement.repositories.IngredientRepository;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 
 @Service
 public class IngredientService {
@@ -31,12 +32,31 @@ public class IngredientService {
 
     //public Optional<Ingredient> getIngredientById(Integer id) { return ingredientRepository.findById(id); }
 
+    public Ingredient addIngredient(Ingredient newIngredient) {
+        return ingredientRepository.save(newIngredient);
+    }
+
     public void deleteIngredient(Integer id) {
         ingredientRepository.deleteById(id);
     }
 
-    public void addIngredient(Ingredient ingredient) {
-        ingredientRepository.save(ingredient);
+//    public void deleteIngredient(Integer id) {
+//        ingredientRepository.deleteById(id);
+//    }
+//
+//    public void addIngredient(Ingredient ingredient) {
+//        ingredientRepository.save(ingredient);
+//    }
+
+    public Ingredient updateIngredient(Integer id, Ingredient updatedIngredient) {
+        return ingredientRepository.findById(id)
+                .map(ingredient -> {
+                    ingredient.setName(updatedIngredient.getName());
+                    ingredient.setAmount(updatedIngredient.getAmount());
+                    ingredient.setAmountType(updatedIngredient.getAmountType());
+                    return ingredientRepository.save(ingredient);
+                })
+                .orElseThrow(() -> new NoSuchElementException("Ingredient not found with id " + id));
     }
 
     //Przykladowe skladniki

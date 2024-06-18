@@ -4,10 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import pl.polsl.project.restaurantmanagement.model.Ingredient;
 import pl.polsl.project.restaurantmanagement.services.IngredientService;
 
@@ -24,6 +21,24 @@ public class IngredientController {
     @GetMapping
     public ResponseEntity<List<Ingredient>> getAllIngredients() {
         return new ResponseEntity<List<Ingredient>>(ingredientService.getAllIngredients(), HttpStatus.OK);
+    }
+
+    @PostMapping("/add")
+    public ResponseEntity<Ingredient> addIngredient(@RequestBody Ingredient newIngredient) {
+        Ingredient ingredient = ingredientService.addIngredient(newIngredient);
+        return new ResponseEntity<>(ingredient, HttpStatus.CREATED);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteIngredient(@PathVariable Integer id) {
+        ingredientService.deleteIngredient(id);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Ingredient> updateIngredient(@PathVariable Integer id, @RequestBody Ingredient updatedIngredient) {
+        Ingredient ingredient = ingredientService.updateIngredient(id, updatedIngredient);
+        return new ResponseEntity<>(ingredient, HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
