@@ -1,0 +1,118 @@
+.home {
+    font-family: Arial, sans-serif;
+}
+
+.section {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.banner {
+    height: 66.67vh; /* 2/3 of the viewport height */
+    background: url('../assets/pexels-pixabay-260922.jpg') no-repeat center center;
+    background-size: cover;
+    color: white;
+    text-align: center;
+}
+
+.banner-title {
+    font-size: 3rem;
+}
+
+.restaurant-name {
+    font-weight: bold;
+}
+
+.speciality {
+    height: 33.33vh; /* 1/3 of the viewport height */
+    background-color: white;
+    color: black;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 50px;
+}
+
+.speciality-title {
+    font-size: 2rem;
+}
+
+.speciality-images {
+    display: flex;
+    gap: 10px;
+}
+
+.speciality-image {
+    width: 250px;
+    height: 200px;
+    border-radius: 10%;
+    object-fit: cover;
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.about-us {
+    height: 33.33vh; /* 1/3 of the viewport height */
+    background-color: #292989;
+    color: white;
+    padding: 0 50px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.about-us-image {
+    width: 250px;
+    height: 200px;
+    border-radius: 10%;
+    object-fit: cover;
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.about-us-title {
+    font-size: 2rem;
+}
+
+.trusted {
+    height: 33.33vh; /* 1/3 of the viewport height */
+    background: url('../assets/logo_banner.png') no-repeat center center;
+    background-size: cover;
+    color: white;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.trusted-title {
+    font-size: 2rem;
+}
+
+.credentials {
+    height: 1vh; /* 1/10 of the viewport height */
+    background-color: grey;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.credentials-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    gap: 20px; /* odstęp między elementami */
+}
+
+.credentials-list li {
+    font-size: 1.5rem;
+}
+
+.credentials-text {
+    font-size: 1.5rem;
+}
