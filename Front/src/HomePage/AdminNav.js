@@ -16,7 +16,7 @@ export default function AdminNav() {
                     <div className="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul className="navbar-nav me-auto mb-2 mb-lg-0">
 
-                            <li className="nav-item" style={{marginRight:"0.5rem"}}>
+                            <li className="nav-item" style={{marginRight: "0.5rem"}}>
                                 <Dropdown>
                                     <Dropdown.Toggle variant="success" id="dropdown-basic">
                                         Menu
@@ -29,7 +29,7 @@ export default function AdminNav() {
                                 </Dropdown>
                             </li>
 
-                            <li className="nav-item" style={{marginRight:"0.5rem"}}>
+                            <li className="nav-item" style={{marginRight: "0.5rem"}}>
                                 <Dropdown>
                                     <Dropdown.Toggle variant="success" id="dropdown-basic">
                                         Reservation Management
@@ -37,13 +37,14 @@ export default function AdminNav() {
 
                                     <Dropdown.Menu>
                                         <Dropdown.Item as={Link} to="/reservations">Add reservation</Dropdown.Item>
-                                        <Dropdown.Item as={Link} to="/reservations/history">Reservations History</Dropdown.Item>
+                                        <Dropdown.Item as={Link} to="/reservations/history">Reservations
+                                            History</Dropdown.Item>
                                         <Dropdown.Item as={Link} to="/occupancy">Occupancy</Dropdown.Item>
                                     </Dropdown.Menu>
                                 </Dropdown>
                             </li>
 
-                            <li className="nav-item" style={{marginRight:"0.5rem"}}>
+                            <li className="nav-item" style={{marginRight: "0.5rem"}}>
                                 <Dropdown>
                                     <Dropdown.Toggle variant="success" id="dropdown-basic">
                                         Report
@@ -63,7 +64,7 @@ export default function AdminNav() {
                             <li className="nav-item">
                             </li>
 
-                            <li className="nav-item" style={{marginRight:"0.5rem"}}>
+                            <li className="nav-item" style={{marginRight: "0.5rem"}}>
                                 <Dropdown>
                                     <Dropdown.Toggle variant="success" id="dropdown-basic">
                                         Employee Management
@@ -77,12 +78,16 @@ export default function AdminNav() {
                             </li>
 
                             <li className="nav-item">
+                                <Link className="nav-link" to="/orders/kitchen">Kitchen</Link>
+                            </li>
+
+                            <li className="nav-item">
                                 <Link className="nav-link" to="/ingredients">Storeroom</Link>
                             </li>
                         </ul>
                         <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
                             <li className="nav-item">
-                                <Link className="nav-link" to="/loginTest">Login</Link>
+                            <Link className="nav-link" to="/loginTest">Login</Link>
                             </li>
                         </ul>
                     </div>

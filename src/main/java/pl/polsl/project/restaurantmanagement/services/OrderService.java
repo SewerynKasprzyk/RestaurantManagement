@@ -112,5 +112,9 @@ public class OrderService {
     public ArrayList<Order> getOrdersByUserId(Integer userId) {
         return orderRepository.findByUserId(userId);
     }
+
+    public ArrayList<Order> getUnservedOrders() {
+        return orderRepository.findByIsServedFalse();
+    }
 }
 

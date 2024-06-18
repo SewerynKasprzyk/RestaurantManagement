@@ -41,6 +41,9 @@ public class Order {
     @Column(name = "order_time")
     private LocalTime orderTime;
 
+    @Column(name = "isServed")
+    private Boolean isServed;
+
 
     // Constructors, getters, and setters
 }

@@ -15,7 +15,7 @@ export default function Navbar() {
                     </button>
                     <div className="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-                            <li className="nav-item" style={{marginRight:"0.5rem"}}>
+                            <li className="nav-item" style={{marginRight: "0.5rem"}}>
                                 <Dropdown>
                                     <Dropdown.Toggle variant="success" id="dropdown-basic">
                                         Menu
@@ -36,7 +36,8 @@ export default function Navbar() {
 
                                     <Dropdown.Menu>
                                         <Dropdown.Item as={Link} to="/reservations">Add reservation</Dropdown.Item>
-                                        <Dropdown.Item as={Link} to="/reservations/history">Reservations History</Dropdown.Item>
+                                        <Dropdown.Item as={Link} to="/reservations/history">Reservations
+                                            History</Dropdown.Item>
                                         <Dropdown.Item as={Link} to="/occupancy">Occupancy</Dropdown.Item>
                                     </Dropdown.Menu>
                                 </Dropdown>
@@ -48,10 +49,14 @@ export default function Navbar() {
                             <li className="nav-item">
                                 <Link className="nav-link" to="/orders">Orders</Link>
                             </li>
+
+                            <li className="nav-item">
+                                <Link className="nav-link" to="/orders/kitchen">Kitchen</Link>
+                            </li>
                         </ul>
                         <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
                             <li className="nav-item">
-                                <Link className="nav-link" to="/loginTest">Login</Link>
+                            <Link className="nav-link" to="/loginTest">Login</Link>
                             </li>
                         </ul>
 

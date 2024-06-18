@@ -43,6 +43,11 @@ public class OrderController {
     @GetMapping
     public ResponseEntity<List<Order>> getAllOrders() { return new ResponseEntity<List<Order>>(orderService.getAllOrders(), HttpStatus.OK); }
 
+    @GetMapping("/kitchen")
+    public ResponseEntity<List<Order>> getUnservedOrders() {
+        return new ResponseEntity<List<Order>>(orderService.getUnservedOrders(), HttpStatus.OK);
+    }
+
 //    @GetMapping("/reports/sales-by-category")
 //    public ResponseEntity<List<SalesByCategoryReport>> getSalesByCategoryReport(
 //            @RequestParam("start") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate start,
@@ -87,6 +92,9 @@ public class OrderController {
 
         // Ustawienie listy OrderItem w zamówieniu
         order.setOrderItems(orderItems);
+
+        // Ustawienie statusu zamowienia
+        order.setIsServed(false);
 
         // Zapis zamówienia
         Order savedOrder = orderService.addOrder(order);
