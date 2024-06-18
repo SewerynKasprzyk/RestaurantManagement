@@ -67,7 +67,7 @@ export default function AddOrder() {
             console.log(order);
             const response = await request('post', '/api/orders/add', order, getAuthToken());
             if (response.status === 200) {
-                navigate('/');
+                navigate('/orders');
             } else {
                 throw new Error('Błąd dodawania zamówienia');
             }

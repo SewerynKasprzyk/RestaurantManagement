@@ -90,7 +90,7 @@ export default function AddReservation() {
         try {
             const response = await request('post', '/api/reservations/add', reservation);
             if (response.status === 200) {
-                navigate('/');
+                navigate('/reservations');
             } else {
                 throw new Error('Błąd dodawania rezerwacji');
             }
