@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from "axios";
-import { request } from '../api/axiosConfig';
+import { request } from '../api/axiosConfig'; // Usunięto nieużywaną funkcję getAuthToken
 
 export default function AddReservation() {
     const [reservationDate, setReservationDate] = useState('');
@@ -162,16 +162,18 @@ export default function AddReservation() {
                                         onChange={(event) => setNotes(event.target.value)}
                                     />
                                 </div>
-                                <div className="mb-3">
-                                    <label className="form-label">Wybierz stolik:</label>
+                                <div>
+                                    <h3>Wybierz stolik:</h3>
                                     <div className="table-selection">
                                         {availableTables.map((table) => (
                                             <div
                                                 key={table.id}
                                                 className={`table-item ${selectedTables.some(selectedTable => selectedTable.id === table.id) ? 'selected' : ''}`}
                                                 onClick={() => handleAddTable(table.id)}
+                                                style={{ cursor: 'pointer', border: '1px solid #ccc', borderRadius: '5px', padding: '10px', marginRight: '10px', marginBottom: '10px' }}
                                             >
-                                                {`Stolik ${table.id} : ${table.seatsAmount}`}
+                                                <p>{`Stolik ${table.id}`}</p>
+                                                <p>Liczba miejsc: {table.seatsAmount}</p>
                                             </div>
                                         ))}
                                     </div>
