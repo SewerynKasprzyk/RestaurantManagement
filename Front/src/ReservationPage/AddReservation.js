@@ -76,6 +76,12 @@ export default function AddReservation() {
             return;
         }
 
+        // Dodajemy sprawdzenie, czy wybrano jakikolwiek stolik
+        if (selectedTables.length === 0) {
+            setError('Nie można dodać rezerwacji bez wybranego stolika.');
+            return;
+        }
+
         const reservation = {
             reservationDate,
             startHour,

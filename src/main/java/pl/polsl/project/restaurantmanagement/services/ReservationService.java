@@ -55,6 +55,11 @@ public class ReservationService {
         return reservationRepository.findReservationById(id);
     }
 
+    public List<ReservationDto> getReservationsByDate(LocalDate date) {
+        List<Reservation> reservations = reservationRepository.findByReservationDate(date);
+        return reservations.stream().map(this::toReservationDto).collect(Collectors.toList());
+    }
+
     public List<ReservationReport> getReservationsByDateRange(LocalDateTime start, LocalDateTime end) {
         List<Reservation> reservations = reservationRepository.findByReservationDateBetween(start.toLocalDate(), end.toLocalDate());
 

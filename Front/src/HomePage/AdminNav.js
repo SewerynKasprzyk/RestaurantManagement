@@ -37,8 +37,8 @@ export default function AdminNav() {
 
                                     <Dropdown.Menu>
                                         <Dropdown.Item as={Link} to="/reservations">Add reservation</Dropdown.Item>
-                                        <Dropdown.Item as={Link} to="/reservations/history">Reservations
-                                            History</Dropdown.Item>
+                                        <Dropdown.Item as={Link} to="/reservations/history">Reservations History</Dropdown.Item>
+                                        <Dropdown.Item as={Link} to="/occupancy">Occupancy</Dropdown.Item>
                                     </Dropdown.Menu>
                                 </Dropdown>
                             </li>
@@ -56,6 +56,11 @@ export default function AdminNav() {
                                             report</Dropdown.Item>
                                     </Dropdown.Menu>
                                 </Dropdown>
+                            </li>
+                            <li className="nav-item">
+                                <Link className="nav-link" to="/orders">Orders</Link>
+                            </li>
+                            <li className="nav-item">
                             </li>
 
                             <li className="nav-item" style={{marginRight:"0.5rem"}}>

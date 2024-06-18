@@ -119,11 +119,11 @@ export function EditMenuItems() {
                 {(selectedItem || isNewItem) && (
                     <form onSubmit={handleSubmit} className="mt-4">
                         <div className="form-group">
-                            <label>Name:</label>
+                            <h6>Name:</h6>
                             <input type="text" className="form-control" name="name" value={menuItemData.name} onChange={handleInputChange} />
                         </div>
                         <div className="form-group">
-                            <label>Type:</label>
+                            <h6>Type:</h6>
                             <select className="form-control" name="type" value={menuItemData.type} onChange={handleInputChange}>
                                 {menuItemTypes.map((type, index) => (
                                     <option key={index} value={type}>{type}</option>
@@ -131,11 +131,11 @@ export function EditMenuItems() {
                             </select>
                         </div>
                         <div className="form-group">
-                            <label>Price:</label>
+                            <h6>Price:</h6>
                             <input type="text" className="form-control" name="price" value={menuItemData.price} onChange={handleInputChange} />
                         </div>
                         <div className="form-group">
-                            <label>Description:</label>
+                            <h6>Description:</h6>
                             <input type="text" className="form-control" name="description" value={menuItemData.description} onChange={handleInputChange} />
                         </div>
                         <input type="submit" value="Submit" className="btn btn-success" />

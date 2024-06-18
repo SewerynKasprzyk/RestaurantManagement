@@ -55,7 +55,7 @@ export default function UserReservations() {
 
                <select className="form-select mb-3 " onChange={handleUserSelect} value={selectedUserId}  style={{ maxWidth: "300px", marginTop:"1rem", marginLeft: "1rem" }}>
                    <option value="" disabled>Select a user</option>
-                   {users.map((user) => (
+                   {Array.isArray(users) && users.map((user) => (
                        <option key={user.id} value={user.id}>
                            {user.name}
                        </option>

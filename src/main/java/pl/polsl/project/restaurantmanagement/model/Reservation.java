@@ -35,6 +35,7 @@ public class Reservation {
     @Column(name = "notes")
     private String notes;
 
+    //
     //dodany @JsonIgnore w celu uniknięcia rekurencyjnego wywoływania (w konsoli wyrzucało błąd)
     @ManyToOne(fetch = FetchType.LAZY)
     @JsonManagedReference

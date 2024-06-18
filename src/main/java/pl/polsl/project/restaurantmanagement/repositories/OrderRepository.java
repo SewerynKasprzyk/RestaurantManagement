@@ -5,9 +5,12 @@ import org.springframework.stereotype.Repository;
 import pl.polsl.project.restaurantmanagement.model.Order;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @Repository
 public interface OrderRepository extends JpaRepository<Order, Integer> {
     List<Order> findByOrderDateBetween(LocalDate start, LocalDate end);
+
+    ArrayList<Order> findByUserId(Integer userId);
 }
