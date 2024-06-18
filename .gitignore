@@ -55,3 +55,4 @@ yarn-debug.log*
 yarn-error.log*
 /Front/node_modules/
 /logs/**/myapp.log
+/logs/
