@@ -12,7 +12,8 @@ const Occupancy = () => {
     const fetchReservations = async () => {
         try {
             const authToken = getAuthToken();
-            const response = await request('GET', `/api/reservations/reservations/${selectedDate.toISOString().split('T')[0]}`);
+            const adjustedDate = new Date(selectedDate.getTime() - selectedDate.getTimezoneOffset() * 60000);
+            const response = await request('GET', `/api/reservations/reservations/${adjustedDate.toISOString().split('T')[0]}`);
             if (response.status === 200) {
                 setReservations(response.data);
             } else {
