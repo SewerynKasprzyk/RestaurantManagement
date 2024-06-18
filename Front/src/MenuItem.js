@@ -120,7 +120,7 @@ export function EditMenuItems() {
                     <form onSubmit={handleSubmit} className="mt-4">
                         <div className="form-group">
                             <h6>Name:</h6>
-                            <input type="text" className="form-control" name="name" value={menuItemData.name} onChange={handleInputChange} />
+                            <input type="text" className="form-control" name="name" value={menuItemData.name} onChange={handleInputChange} maxLength="20" />
                         </div>
                         <div className="form-group">
                             <h6>Type:</h6>
@@ -132,11 +132,11 @@ export function EditMenuItems() {
                         </div>
                         <div className="form-group">
                             <h6>Price:</h6>
-                            <input type="text" className="form-control" name="price" value={menuItemData.price} onChange={handleInputChange} />
+                            <input type="text" className="form-control" name="price" value={menuItemData.price} onChange={handleInputChange} maxLength="10" />
                         </div>
                         <div className="form-group">
                             <h6>Description:</h6>
-                            <input type="text" className="form-control" name="description" value={menuItemData.description} onChange={handleInputChange} />
+                            <input type="text" className="form-control" name="description" value={menuItemData.description} onChange={handleInputChange} maxLength="50" />
                         </div>
                         <input type="submit" value="Submit" className="btn btn-success" />
                     </form>

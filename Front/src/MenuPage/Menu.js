@@ -68,6 +68,7 @@ export default function MenuItems() {
                             <option value="MAIN_COURSE">MAIN_COURSE</option>
                             <option value="APPETIZER">APPETIZER</option>
                             <option value="BEVERAGE">BEVERAGE</option>
+                            <option value="DESSERT">DESSERT</option>
                         </select>
                     </div>
                     <ul className="list-group">

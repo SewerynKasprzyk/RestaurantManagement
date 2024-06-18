@@ -7,7 +7,7 @@ export default function Home() {
         <div className="home">
             <div className={classNames('section', 'banner')}>
                 <h1 className="banner-title">Welcome to our restaurant <span
-                    className="restaurant-name">[Name here]</span></h1>
+                    className="restaurant-name"><br />Ratatouille Bistro</span></h1>
             </div>
             <div className={classNames('section', 'speciality')}>
                 <h2 className="speciality-title">Our Speciality</h2>

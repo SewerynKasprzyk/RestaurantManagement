@@ -159,6 +159,7 @@ export default function AddOrder() {
                 <textarea
                     placeholder="Dodaj notatki do zamówienia"
                     value={notes}
+                    maxLength={50}
                     onChange={(e) => setNotes(e.target.value)}
                 />
             </div>

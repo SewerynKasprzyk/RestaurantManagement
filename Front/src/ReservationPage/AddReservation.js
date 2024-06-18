@@ -159,6 +159,7 @@ export default function AddReservation() {
                                         type='text'
                                         className="form-control"
                                         value={notes}
+                                        maxLength={50}
                                         onChange={(event) => setNotes(event.target.value)}
                                     />
                                 </div>

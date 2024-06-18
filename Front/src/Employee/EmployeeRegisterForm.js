@@ -38,27 +38,27 @@ export default class EmployeeRegisterForm extends React.Component {
                 <div className="col-4">
                     <form onSubmit={this.onSubmitRegister}>
                         <div className="form-outline mb-4">
-                            <input type="text" id="name" name="name" className="form-control" onChange={this.onChangeHandler} />
+                            <input type="text" id="name" maxLength={50} name="name" className="form-control" onChange={this.onChangeHandler} />
                             <h6 className="form-label" htmlFor="name">Name</h6>
                         </div>
 
                         <div className="form-outline mb-4">
-                            <input type="text" id="surname" name="surname" className="form-control" onChange={this.onChangeHandler} />
+                            <input type="text" id="surname" maxLength={50} name="surname" className="form-control" onChange={this.onChangeHandler} />
                             <h6 className="form-label" htmlFor="surname">Last name</h6>
                         </div>
 
                         <div className="form-outline mb-4">
-                            <input type="text" id="phoneNumber" name="phoneNumber" className="form-control" onChange={this.onChangeHandler} />
+                            <input type="text" id="phoneNumber" maxLength={9} name="phoneNumber" className="form-control" onChange={this.onChangeHandler} />
                             <h6 className="form-label" htmlFor="phoneNumber">Phone number</h6>
                         </div>
 
                         <div className="form-outline mb-4">
-                            <input type="text" id="login" name="login" className="form-control" onChange={this.onChangeHandler} />
+                            <input type="text" id="login" maxLength={50} name="login" className="form-control" onChange={this.onChangeHandler} />
                             <h6 className="form-label" htmlFor="login">Username</h6>
                         </div>
 
                         <div className="form-outline mb-4">
-                            <input type="password" id="password" name="password" className="form-control" onChange={this.onChangeHandler} />
+                            <input type="password" maxLength={50} id="password" name="password" className="form-control" onChange={this.onChangeHandler} />
                             <h6 className="form-label" htmlFor="password">Password</h6>
                         </div>
 

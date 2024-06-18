@@ -102,11 +102,11 @@ export function Ingredients() {
                 <form onSubmit={handleSubmit} className="mt-4">
                     <div className="form-group">
                         <h6>Name:</h6>
-                        <input type="text" className="form-control" name="name" value={ingredientData.name} onChange={handleInputChange} />
+                        <input type="text" maxLength={50} className="form-control" name="name" value={ingredientData.name} onChange={handleInputChange} />
                     </div>
                     <div className="form-group">
                         <h6>Amount:</h6>
-                        <input type="text" className="form-control" name="amount" value={ingredientData.amount} onChange={handleInputChange} />
+                        <input type="text" maxLength={10} className="form-control" name="amount" value={ingredientData.amount} onChange={handleInputChange} />
                     </div>
                     <div className="form-group">
                         <h6>Amount Type:</h6>
