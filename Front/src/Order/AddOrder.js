@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {getAuthToken, request} from '../api/axiosConfig';
-import './AddOrder.css'; // Importujemy plik CSS
+
 
 export default function AddOrder() {
     const [totalPrice, setTotalPrice] = useState(0);
@@ -120,17 +120,21 @@ export default function AddOrder() {
     const renderMenuItemsByCategory = () => {
         const categories = Array.from(new Set(menuItems.map(item => item.category)));
         return categories.map(category => (
-            <div key={category} className="category">
+            <div key={category} className="category mb-4">
                 <h3>{getCategoryName(category)}</h3>
-                <div className="menu-items-grid">
+                <div className="row">
                     {menuItems
                         .filter(item => item.category === category)
                         .map(item => (
-                            <div key={item.id} className="card">
-                                <h4>{item.name}</h4>
-                                <p>{item.description}</p>
-                                <p>Cena: {item.price} PLN</p>
-                                <button onClick={() => handleAddItem(item)}>Dodaj</button>
+                            <div key={item.id} className="col-md-4 mb-3">
+                                <div className="card h-100">
+                                    <div className="card-body">
+                                        <h4 className="card-title">{item.name}</h4>
+                                        <p className="card-text">{item.description}</p>
+                                        <p className="card-text">Cena: {item.price} PLN</p>
+                                        <button className="btn btn-primary" onClick={() => handleAddItem(item)}>Dodaj</button>
+                                    </div>
+                                </div>
                             </div>
                         ))
                     }
@@ -140,31 +144,34 @@ export default function AddOrder() {
     };
 
     return (
-        <div className='add-order-container'>
+<div className="container mt-4">
             <h2>Dodaj zamówienie</h2>
             {renderMenuItemsByCategory()}
             <div>
                 <h3>Wybrane dania:</h3>
                 {Object.values(selectedItems).map((item) => (
-                    <div key={item.id} className="selected-item">
-                        <p>{`${item.name} - ${item.price} PLN`}</p>
-                        <p>Ilość: {item.quantity}</p>
-                        <button type="button" onClick={() => handleAddItem(item)}>+</button>
-                        <button type="button" onClick={() => handleRemoveItem(item.id)}>-</button>
+                    <div key={item.id} className="card mb-3">
+                        <div className="card-body">
+                            <p className="card-text">{`${item.name} - ${item.price} PLN`}</p>
+                            <p className="card-text">Ilość: {item.quantity}</p>
+                            <button className="btn btn-success me-2" type="button" onClick={() => handleAddItem(item)}>+</button>
+                            <button className="btn btn-danger" type="button" onClick={() => handleRemoveItem(item.id)}>-</button>
+                        </div>
                     </div>
                 ))}
             </div>
             <div>
                 <h3>Łączna kwota: {totalPrice} PLN</h3>
                 <textarea
+                    className="form-control mb-3"
                     placeholder="Dodaj notatki do zamówienia"
                     value={notes}
                     maxLength={50}
                     onChange={(e) => setNotes(e.target.value)}
                 />
             </div>
-            <button type='button' onClick={handleAddOrder}>Dodaj zamówienie</button>
-            {error && <div className="error">{error}</div>}
+            <button className="btn btn-primary mb-3" type='button' onClick={handleAddOrder}>Dodaj zamówienie</button>
+            {error && <div className="alert alert-danger">{error}</div>}
         </div>
     );
 }

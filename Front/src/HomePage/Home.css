@@ -78,7 +78,7 @@
 
 .trusted {
     height: 33.33vh; /* 1/3 of the viewport height */
-    background: url('../assets/logo_banner2.png') no-repeat center center;
+    background: url('../assets/logo_banner.png') no-repeat center center;
     background-size: cover;
     color: white;
     text-align: center;

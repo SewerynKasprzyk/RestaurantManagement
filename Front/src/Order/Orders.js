@@ -73,36 +73,40 @@ export default function Orders() {
     }, [user]);
 
     return (
-        <div className='orders-container'>
-            <h2>Twoje zamówienia</h2>
-            <button onClick={() => navigate('/orders/add')}>Dodaj zamówienie</button>
+       <div className='container mt-4'>
+                   <h2>Twoje zamówienia</h2>
+                   <button className='btn btn-primary mb-3' onClick={() => navigate('/orders/add')}>Dodaj zamówienie</button>
 
-            {error && <div className="error">{error}</div>}
+                   {error && <div className="alert alert-danger">{error}</div>}
 
-            {orders.length > 0 ? (
-                <ul>
-                    {orders.map((order) => (
-                        <li key={order.id}>
-                            <p>Data: {order.orderDate}</p>
-                            <p>Godzina: {formatTime(order.orderTime)}</p>
-                            <p>Uwagi: {order.notes}</p>
-                            <p>Kwota: {order.totalPrice}</p>
-                            <p>Zamówione pozycje:</p>
-                            <ul>
-                                {order.orderItems.map((item, index) => (
-                                    <li key={index}>
-                                        <p>Nazwa: {item.menuItem.name}</p>
-                                        <p>Cena: {item.menuItem.price}</p>
-                                        <p>Ilość: {item.quantity}</p>
-                                    </li>
-                                ))}
-                            </ul>
-                        </li>
-                    ))}
-                </ul>
-            ) : (
-                <p>Brak zamówień</p>
-            )}
-        </div>
+                   {orders.length > 0 ? (
+                       <div className='row'>
+                           {orders.map((order) => (
+                               <div className='col-md-4 mb-4' key={order.id}>
+                                   <div className='card'>
+                                       <div className='card-body'>
+                                           <h5 className='card-title'>Data: {order.orderDate}</h5>
+                                           <h6 className='card-subtitle mb-2 text-muted'>Godzina: {formatTime(order.orderTime)}</h6>
+                                           <p className='card-text'>Uwagi: {order.notes}</p>
+                                           <p className='card-text'>Kwota: {order.totalPrice} zł</p>
+                                           <p className='card-text'>Zamówione pozycje:</p>
+                                           <ul className='list-group list-group-flush'>
+                                               {order.orderItems.map((item, index) => (
+                                                   <li key={index} className='list-group-item'>
+                                                       <p>Nazwa: {item.menuItem.name}</p>
+                                                       <p>Cena: {item.menuItem.price} zł</p>
+                                                       <p>Ilość: {item.quantity}</p>
+                                                   </li>
+                                               ))}
+                                           </ul>
+                                       </div>
+                                   </div>
+                               </div>
+                           ))}
+                       </div>
+                   ) : (
+                       <p>Brak zamówień</p>
+                   )}
+               </div>
     );
 }
