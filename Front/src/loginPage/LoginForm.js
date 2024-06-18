@@ -11,6 +11,7 @@ export default class LoginForm extends React.Component {
             phoneNumber: "",
             login: "",
             password: "",
+            resetEmail: "",
             errors: {},
             onLogin: props.onLogin,
             onRegister: props.onRegister
@@ -26,18 +27,20 @@ export default class LoginForm extends React.Component {
     validateForm = () => {
         const errors = {};
 
-        if (!this.state.name) {
-            errors.name = 'Name is required';
-        }
+        if (this.state.active === "register") {
+            if (!this.state.name) {
+                errors.name = 'Name is required';
+            }
 
-        if (!this.state.surname) {
-            errors.surname = 'Last name is required';
-        }
+            if (!this.state.surname) {
+                errors.surname = 'Last name is required';
+            }
 
-        if (!this.state.phoneNumber) {
-            errors.phoneNumber = 'Phone number is required';
-        } else if (!/^\d{9}$/.test(this.state.phoneNumber)) {
-            errors.phoneNumber = 'Phone number must be 9 digits long';
+            if (!this.state.phoneNumber) {
+                errors.phoneNumber = 'Phone number is required';
+            } else if (!/^\d{9}$/.test(this.state.phoneNumber)) {
+                errors.phoneNumber = 'Phone number must be 9 digits long';
+            }
         }
 
         if (!this.state.login) {
@@ -46,6 +49,10 @@ export default class LoginForm extends React.Component {
 
         if (!this.state.password) {
             errors.password = 'Password is required';
+        }
+
+        if (this.state.active === "reset" && !this.state.resetEmail) {
+            errors.resetEmail = 'Email is required';
         }
 
         this.setState({ errors });
@@ -71,8 +78,14 @@ export default class LoginForm extends React.Component {
         }
     };
 
+    onSubmitReset = (event) => {
+        event.preventDefault();
+        // Simulate password reset logic here
+        alert(`Password reset link sent to ${this.state.resetEmail}`);
+    };
+
     render() {
-        const allFieldsFilled = Object.values(this.state).slice(0, 5).every(value => value);
+        const allFieldsFilled = this.state.active !== "reset" && Object.values(this.state).slice(0, 5).every(value => value);
 
         return (
             <div className="row justify-content-center">
@@ -93,6 +106,15 @@ export default class LoginForm extends React.Component {
                                 Register
                             </button>
                         </li>
+                        <li className="nav-item" role="presentation">
+                            <button
+                                className={classNames("nav-link", this.state.active === "reset" ? "active" : "")}
+                                id="tab-reset"
+                                onClick={() => this.setState({ active: "reset" })}
+                            >
+                                Reset Password
+                            </button>
+                        </li>
                     </ul>
 
                     <div className="tab-content" id="ex1-content">
@@ -103,7 +125,7 @@ export default class LoginForm extends React.Component {
                             <form onSubmit={this.onSubmitLogin}>
                                 <div className="form-outline mb-4">
                                     <input
-                                        type="login"
+                                        type="text"
                                         id="loginName"
                                         name="login"
                                         className="form-control"
@@ -121,6 +143,12 @@ export default class LoginForm extends React.Component {
                                         onChange={this.onChangeHandler}
                                     />
                                     <label className="form-label" htmlFor="loginPassword">Password</label>
+                                </div>
+
+                                <div className="mb-4">
+                                    <button type="button" className="btn btn-link" onClick={() => this.setState({ active: "reset" })}>
+                                        Forgot Password?
+                                    </button>
                                 </div>
 
                                 <button type="submit" className="btn btn-primary btn-block mb-4">Sign in</button>
@@ -197,8 +225,29 @@ export default class LoginForm extends React.Component {
                                     className="btn btn-primary btn-block mb-4"
                                     disabled={!allFieldsFilled || Object.keys(this.state.errors).length > 0}
                                 >
-                                    Sign in
+                                    Register
                                 </button>
+                            </form>
+                        </div>
+
+                        <div
+                            className={classNames("tab-pane", "fade", this.state.active === "reset" ? "show active" : "")}
+                            id="pills-reset"
+                        >
+                            <form onSubmit={this.onSubmitReset}>
+                                <div className="form-outline mb-4">
+                                    <input
+                                        type="email"
+                                        id="resetEmail"
+                                        name="resetEmail"
+                                        className={`form-control ${this.state.errors.resetEmail ? 'is-invalid' : ''}`}
+                                        onChange={this.onChangeHandler}
+                                    />
+                                    <label className="form-label" htmlFor="resetEmail">Email</label>
+                                    {this.state.errors.resetEmail && <div className="invalid-feedback">{this.state.errors.resetEmail}</div>}
+                                </div>
+
+                                <button type="submit" className="btn btn-primary btn-block mb-4">Send Reset Link</button>
                             </form>
                         </div>
                     </div>

@@ -35,7 +35,7 @@ function App() {
                         <Route path="/loginTest" element={<AppContent />} />
                         <Route path="/reservations" element={<PrivateRoute element={<Reservation />} roles={['ADMIN', 'EMPLOYEE', 'CUSTOMER']} />} />
                         <Route path="/reservations/add" element={<PrivateRoute element={<AddReservation />} roles={['ADMIN', 'EMPLOYEE', 'CUSTOMER']} />} />
-                        <Route path="/orders" element={<PrivateRoute element={<Orders />} roles={['ADMIN', 'EMPLOYEE', 'CUSTOMER']} />} />
+                        <Route path="/orders" element={<PrivateRoute element={<Orders />} roles={['ADMIN', 'EMPLOYEE']} />} />
                         <Route path="/orders/add" element={<PrivateRoute element={<AddOrder />} roles={['ADMIN', 'EMPLOYEE', 'CUSTOMER']} />} />
                         <Route path="/reservations/add" element={<PrivateRoute element={<AddReservation />} roles={['ADMIN', 'EMPLOYEE', 'CUSTOMER']} />} />
                         <Route path="/ingredients" element={<PrivateRoute element={<Ingredients />} roles={['ADMIN', 'EMPLOYEE']} />} />
