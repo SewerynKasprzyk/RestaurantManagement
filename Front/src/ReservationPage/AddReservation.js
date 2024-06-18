@@ -66,8 +66,14 @@ export default function AddReservation() {
     const handleSubmit = async (event) => {
         event.preventDefault();
 
+
         if (!user) {
             setError('Nie można dodać rezerwacji bez zalogowanego użytkownika.');
+            return;
+        }
+
+        if(endHour < startHour) {
+            setError('The end time of the reservation cannot be earlier than the start time.');
             return;
         }
 

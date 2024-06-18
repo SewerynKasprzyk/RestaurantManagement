@@ -8,9 +8,10 @@ export default function Reservation() {
     const [reservations, setReservations] = useState([]);
     const [error, setError] = useState('');
     const [user, setUser] = useState(null);
+    const [startHour, setStartHour] = useState('');
+    const [endHour, setEndHour] = useState('');
     const navigate = useNavigate();
     const [availableTables, setAvailableTables] = useState([]);
-
 
     useEffect(() => {
         const fetchUser = async () => {
@@ -56,36 +57,43 @@ export default function Reservation() {
         navigate(`/reservations/edit/${id}`);
     }
 
+    const handleSubmit = (event) => {
+        event.preventDefault();
+
+        if (endHour < startHour) {
+            setError('End time cannot be earlier than start time');
+            return;
+        }
+
+        // Continue with form submission
+    }
+
     return (
-       <div>
-           <h2 className="mb-3">Twoje rezerwacje</h2>
-           <button className="btn btn-primary mb-3" onClick={() => window.location.href = '/reservations/add'}>Dodaj rezerwację</button>
+        <div>
+            <h2 className="mb-3">Twoje rezerwacje</h2>
+            <button className="btn btn-primary mb-3" onClick={() => window.location.href = '/reservations/add'}>Dodaj rezerwację</button>
 
-           {error && <div className="alert alert-danger">{error}</div>}
+            {error && <div className="alert alert-danger">{error}</div>}
 
-           <div className="row">
-               {reservations.length > 0 ? (
-                   reservations.map((reservation) => (
-                       <div key={reservation.id} className="col-md-4 mb-4">
-                           <div className="card">
-                               <div className="card-body">
-                                   <p className="card-text">Data: {reservation.reservationDate}</p>
-                                   <p className="card-text">Godzina rozpoczęcia: {reservation.startHour}</p>
-                                   <p className="card-text">Godzina zakończenia: {reservation.endHour}</p>
-                                   <p className="card-text">Zarezerwowane stoliki: {reservation.tables.map(table => `Stolik ${table.id}`).join(', ')}</p>
-                                   <p className="card-text">Uwagi: {reservation.notes}</p>
-                               </div>
-                           </div>
-                       </div>
-                   ))
-               ) : (
-                   <p>Brak rezerwacji</p>
-               )}
-           </div>
-       </div>
-
-
-
-
+            <div className="row">
+                {reservations.length > 0 ? (
+                    reservations.map((reservation) => (
+                        <div key={reservation.id} className="col-md-4 mb-4">
+                            <div className="card">
+                                <div className="card-body">
+                                    <p className="card-text">Data: {reservation.reservationDate}</p>
+                                    <p className="card-text">Godzina rozpoczęcia: {reservation.startHour}</p>
+                                    <p className="card-text">Godzina zakończenia: {reservation.endHour}</p>
+                                    <p className="card-text">Zarezerwowane stoliki: {reservation.tables.map(table => `Stolik ${table.id}`).join(', ')}</p>
+                                    <p className="card-text">Uwagi: {reservation.notes}</p>
+                                </div>
+                            </div>
+                        </div>
+                    ))
+                ) : (
+                    <p>Brak rezerwacji</p>
+                )}
+            </div>
+        </div>
     );
 }
