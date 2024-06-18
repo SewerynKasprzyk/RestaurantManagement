@@ -8,8 +8,14 @@ const ReservationsReport = () => {
     const [startDate, setStartDate] = useState(new Date());
     const [endDate, setEndDate] = useState(new Date());
     const [loading, setLoading] = useState(false);
+    const [errorMessage, setErrorMessage] = useState('');
 
     const fetchReservations = async () => {
+        if (endDate < startDate) {
+            setErrorMessage('Data końcowa nie może być wcześniejsza niż data początkowa.');
+            return;
+        }
+        setErrorMessage('');
         setLoading(true);
         const response = await axios.get(`http://localhost:8080/api/reports/reservations?start=${startDate.toISOString()}&end=${endDate.toISOString()}`);
         if (Array.isArray(response.data)) {
@@ -36,25 +42,26 @@ const ReservationsReport = () => {
                                 <label className="form-label">Data końcowa:</label>
                                 <DatePicker className="form-control" selected={endDate} onChange={date => setEndDate(date)} />
                             </div>
+                            {errorMessage && <p style={{color: 'red'}}>{errorMessage}</p>}
                             <button className="btn btn-primary mb-3" onClick={fetchReservations} disabled={loading}>
                                 {loading ? 'Ładowanie...' : 'Generuj raport'}
                             </button>
                             <table className="table" style={{ textAlign: "center" }}>
                                 <thead>
-                                    <tr>
-                                        <th>Data</th>
-                                        <th>Ilość rezerwacji</th>
-                                        <th>Średnia ilość godzin rezerwacji</th>
-                                    </tr>
+                                <tr>
+                                    <th>Data</th>
+                                    <th>Ilość rezerwacji</th>
+                                    <th>Średnia ilość godzin rezerwacji</th>
+                                </tr>
                                 </thead>
                                 <tbody>
-                                    {reservations.map(report => (
-                                        <tr key={report.date}>
-                                            <td>{report.date}</td>
-                                            <td>{report.count}</td>
-                                            <td>{report.averageHours}</td>
-                                        </tr>
-                                    ))}
+                                {reservations.map(report => (
+                                    <tr key={report.date}>
+                                        <td>{report.date}</td>
+                                        <td>{report.count}</td>
+                                        <td>{report.averageHours}</td>
+                                    </tr>
+                                ))}
                                 </tbody>
                             </table>
                         </div>
@@ -62,7 +69,6 @@ const ReservationsReport = () => {
                 </div>
             </div>
         </div>
-
     );
 };
 
