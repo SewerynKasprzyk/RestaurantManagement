@@ -43,6 +43,11 @@ public class OrderController {
     @GetMapping
     public ResponseEntity<List<Order>> getAllOrders() { return new ResponseEntity<List<Order>>(orderService.getAllOrders(), HttpStatus.OK); }
 
+    @GetMapping("/kitchen")
+    public ResponseEntity<List<Order>> getUnservedOrders() {
+        return new ResponseEntity<List<Order>>(orderService.getUnservedOrders(), HttpStatus.OK);
+    }
+
 //    @GetMapping("/reports/sales-by-category")
 //    public ResponseEntity<List<SalesByCategoryReport>> getSalesByCategoryReport(
 //            @RequestParam("start") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate start,
@@ -58,6 +63,15 @@ public class OrderController {
         return new ResponseEntity<List<Order>>(orderService.getOrdersByUserId(userId), HttpStatus.OK);
     }
 
+    @PostMapping("/{orderId}")
+    public ResponseEntity<Order> markOrderAsServed(@PathVariable Integer orderId) {
+        Order updatedOrder = orderService.markAsServed(orderId);
+        if (updatedOrder != null) {
+            return ResponseEntity.ok(updatedOrder);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
 
     @PostMapping("/add")
     public ResponseEntity<OrderDto> addOrder(@RequestBody OrderDto orderDTO, @RequestHeader("Authorization") String token) {
@@ -73,7 +87,7 @@ public class OrderController {
         User user = userService.getUserById(orderDTO.getUserId());
         order.setUser(user);
 
-        order.setOrderTime(LocalTime.now());
+        order.setOrderTime(LocalTime.now().withNano(0));
 
         // Tworzenie listy OrderItem
         List<OrderItem> orderItems = new ArrayList<>();
@@ -87,6 +101,9 @@ public class OrderController {
 
         // Ustawienie listy OrderItem w zamówieniu
         order.setOrderItems(orderItems);
+
+        // Ustawienie statusu zamowienia
+        order.setIsServed(false);
 
         // Zapis zamówienia
         Order savedOrder = orderService.addOrder(order);

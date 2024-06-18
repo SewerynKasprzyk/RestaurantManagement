@@ -13,4 +13,6 @@ public interface OrderRepository extends JpaRepository<Order, Integer> {
     List<Order> findByOrderDateBetween(LocalDate start, LocalDate end);
 
     ArrayList<Order> findByUserId(Integer userId);
+
+    ArrayList<Order> findByIsServedFalse();
 }

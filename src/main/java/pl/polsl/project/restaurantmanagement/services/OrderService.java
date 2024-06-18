@@ -18,6 +18,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -111,6 +112,20 @@ public class OrderService {
 
     public ArrayList<Order> getOrdersByUserId(Integer userId) {
         return orderRepository.findByUserId(userId);
+    }
+
+    public ArrayList<Order> getUnservedOrders() {
+        return orderRepository.findByIsServedFalse();
+    }
+
+    public Order markAsServed(Integer orderId) {
+        Optional<Order> optionalOrder = orderRepository.findById(orderId);
+        if (optionalOrder.isPresent()) {
+            Order order = optionalOrder.get();
+            order.setIsServed(true);
+            return orderRepository.save(order);
+        }
+        return null;
     }
 }
 
