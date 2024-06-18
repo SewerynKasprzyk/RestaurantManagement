@@ -27,7 +27,9 @@ export default class AppContent extends Component {
 
     logout = () => {
         removeAuthToken();
-        this.setState({ componentToShow: "welcome", isLoggedIn: false });
+        this.setState({ componentToShow: "welcome", isLoggedIn: false }, () => {
+            setTimeout(() => window.location.reload(), 100); // Delay to ensure state updates before reload
+        });
     };
 
     onLogin = (event, login, password) => {
@@ -35,7 +37,9 @@ export default class AppContent extends Component {
         request("POST", "/login", { login, password })
             .then((response) => {
                 setAuthToken(response.data.token);
-                this.setState({ componentToShow: "messages", isLoggedIn: true });
+                this.setState({ componentToShow: "messages", isLoggedIn: true }, () => {
+                    setTimeout(() => window.location.reload(), 100); // Delay to ensure state updates before reload
+                });
             })
             .catch(() => {
                 this.setState({ componentToShow: "welcome", isLoggedIn: false });
@@ -47,7 +51,9 @@ export default class AppContent extends Component {
         request("POST", "/register", { name, surname, phoneNumber, login, password })
             .then((response) => {
                 setAuthToken(response.data.token);
-                this.setState({ componentToShow: "messages", isLoggedIn: true });
+                this.setState({ componentToShow: "messages", isLoggedIn: true }, () => {
+                    setTimeout(() => window.location.reload(), 100); // Delay to ensure state updates before reload
+                });
             })
             .catch(() => {
                 this.setState({ componentToShow: "welcome", isLoggedIn: false });

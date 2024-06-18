@@ -48,7 +48,7 @@ function App() {
                         <Route path="/employee" element={<PrivateRoute element={<EmployeeRegisterPage/>} roles={['ADMIN', 'EMPLOYEE']} />} />
                         <Route path="/employeeList" element={<PrivateRoute element={<EmployeeList/>} roles={['ADMIN', 'EMPLOYEE']} />} />
                         <Route path="/unauthorized" element={<div>Unauthorized Access</div>} />
-                        <Route path="" element={<PrivateRoute element = {<Home />} roles={['ADMIN', 'EMPLOYEE', 'CUSTOMER']} />} />
+                        <Route path="" element = {<Home />} />
                         <Route path="/reservations/history" element={<PrivateRoute element={<UserReservations />} roles={['ADMIN', 'EMPLOYEE']} />} />
                         <Route path="/reservations/edit/:id" element={<PrivateRoute element={<EditReservation />} roles={['ADMIN', 'EMPLOYEE']} />} />
                         <Route path="/occupancy" element={<PrivateRoute element={<Occupancy />} roles={['ADMIN', 'EMPLOYEE']} />} />
