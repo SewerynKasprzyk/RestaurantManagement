@@ -72,6 +72,7 @@ export default function AdminNav() {
                                     <Dropdown.Menu>
                                         <Dropdown.Item as={Link} to="/employee">Add Employee</Dropdown.Item>
                                         <Dropdown.Item as={Link} to="/employeeList">Delete Employee</Dropdown.Item>
+                                        <Dropdown.Item as={Link} to="/time-schedule">Time Schedule Management</Dropdown.Item>
                                     </Dropdown.Menu>
                                 </Dropdown>
                             </li>
