@@ -116,3 +116,161 @@ This generated password is for development use only. Your security configuration
 2024-06-18T14:15:57.133+02:00  INFO 18076 --- [RestaurantManagement] [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
 2024-06-18T14:15:57.134+02:00  INFO 18076 --- [RestaurantManagement] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
 2024-06-18T14:15:57.135+02:00  INFO 18076 --- [RestaurantManagement] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2024-06-18T14:54:56.413+02:00  INFO 11636 --- [RestaurantManagement] [restartedMain] p.p.p.r.RestaurantManagementApplication  : Starting RestaurantManagementApplication using Java 21.0.2 with PID 11636 (C:\Users\Buzka\IdeaProjects\RestaurantManagement\target\classes started by Buzka in C:\Users\Buzka\IdeaProjects\RestaurantManagement)
+2024-06-18T14:54:56.415+02:00  INFO 11636 --- [RestaurantManagement] [restartedMain] p.p.p.r.RestaurantManagementApplication  : No active profile set, falling back to 1 default profile: "default"
+2024-06-18T14:54:56.467+02:00  INFO 11636 --- [RestaurantManagement] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2024-06-18T14:54:56.467+02:00  INFO 11636 --- [RestaurantManagement] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2024-06-18T14:54:57.104+02:00  INFO 11636 --- [RestaurantManagement] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-06-18T14:54:57.168+02:00  INFO 11636 --- [RestaurantManagement] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 58 ms. Found 8 JPA repository interfaces.
+2024-06-18T14:54:57.646+02:00  INFO 11636 --- [RestaurantManagement] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2024-06-18T14:54:57.657+02:00  INFO 11636 --- [RestaurantManagement] [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2024-06-18T14:54:57.657+02:00  INFO 11636 --- [RestaurantManagement] [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.19]
+2024-06-18T14:54:57.705+02:00  INFO 11636 --- [RestaurantManagement] [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2024-06-18T14:54:57.705+02:00  INFO 11636 --- [RestaurantManagement] [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1237 ms
+2024-06-18T14:54:57.830+02:00  INFO 11636 --- [RestaurantManagement] [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-06-18T14:54:57.888+02:00  INFO 11636 --- [RestaurantManagement] [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.4.4.Final
+2024-06-18T14:54:57.922+02:00  INFO 11636 --- [RestaurantManagement] [restartedMain] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2024-06-18T14:54:58.131+02:00  INFO 11636 --- [RestaurantManagement] [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-06-18T14:54:58.155+02:00  INFO 11636 --- [RestaurantManagement] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2024-06-18T14:54:58.286+02:00  INFO 11636 --- [RestaurantManagement] [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@1f1b7bbf
+2024-06-18T14:54:58.287+02:00  INFO 11636 --- [RestaurantManagement] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2024-06-18T14:54:59.195+02:00  INFO 11636 --- [RestaurantManagement] [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-06-18T14:54:59.321+02:00  INFO 11636 --- [RestaurantManagement] [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-06-18T14:54:59.547+02:00  INFO 11636 --- [RestaurantManagement] [restartedMain] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
+2024-06-18T14:55:00.170+02:00  WARN 11636 --- [RestaurantManagement] [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-06-18T14:55:00.182+02:00  WARN 11636 --- [RestaurantManagement] [restartedMain] .s.s.UserDetailsServiceAutoConfiguration : 
+
+Using generated security password: 44b80deb-8dd1-4925-97bf-c6c17448036a
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2024-06-18T14:55:00.370+02:00  INFO 11636 --- [RestaurantManagement] [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@50a1ce95, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@367c3c3b, org.springframework.security.web.context.SecurityContextHolderFilter@73b8a938, org.springframework.security.web.header.HeaderWriterFilter@24e645cd, org.springframework.security.web.authentication.logout.LogoutFilter@4884915e, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@1dd0de0d, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@71215420, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@5037c27b, org.springframework.security.web.session.SessionManagementFilter@3ab852a9, org.springframework.security.web.access.ExceptionTranslationFilter@1c0838a4, org.springframework.security.web.access.intercept.AuthorizationFilter@46641be9]
+2024-06-18T14:55:00.376+02:00  WARN 11636 --- [RestaurantManagement] [restartedMain] o.s.s.c.a.web.builders.WebSecurity       : You are asking Spring Security to ignore Mvc [pattern='/resources/**']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2024-06-18T14:55:00.376+02:00  INFO 11636 --- [RestaurantManagement] [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will not secure Mvc [pattern='/resources/**']
+2024-06-18T14:55:00.547+02:00  INFO 11636 --- [RestaurantManagement] [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2024-06-18T14:55:00.577+02:00  INFO 11636 --- [RestaurantManagement] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path ''
+2024-06-18T14:55:00.583+02:00  INFO 11636 --- [RestaurantManagement] [restartedMain] p.p.p.r.RestaurantManagementApplication  : Started RestaurantManagementApplication in 4.538 seconds (process running for 5.097)
+2024-06-18T14:55:08.201+02:00  INFO 11636 --- [RestaurantManagement] [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-06-18T14:55:08.201+02:00  INFO 11636 --- [RestaurantManagement] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2024-06-18T14:55:08.202+02:00  INFO 11636 --- [RestaurantManagement] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2024-06-18T14:55:20.067+02:00  WARN 11636 --- [RestaurantManagement] [http-nio-8080-exec-7] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [pl.polsl.project.restaurantmanagement.configuration.AppException: Unknown user]
+2024-06-18T14:55:49.098+02:00  INFO 11636 --- [RestaurantManagement] [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2024-06-18T14:55:49.100+02:00  INFO 11636 --- [RestaurantManagement] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2024-06-18T14:55:49.109+02:00  INFO 11636 --- [RestaurantManagement] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2024-06-18T19:12:40.905+02:00  INFO 20644 --- [RestaurantManagement] [restartedMain] p.p.p.r.RestaurantManagementApplication  : Starting RestaurantManagementApplication using Java 21.0.2 with PID 20644 (C:\Users\Buzka\IdeaProjects\RestaurantManagement\target\classes started by Buzka in C:\Users\Buzka\IdeaProjects\RestaurantManagement)
+2024-06-18T19:12:40.907+02:00  INFO 20644 --- [RestaurantManagement] [restartedMain] p.p.p.r.RestaurantManagementApplication  : No active profile set, falling back to 1 default profile: "default"
+2024-06-18T19:12:40.985+02:00  INFO 20644 --- [RestaurantManagement] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2024-06-18T19:12:40.985+02:00  INFO 20644 --- [RestaurantManagement] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2024-06-18T19:12:42.039+02:00  INFO 20644 --- [RestaurantManagement] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-06-18T19:12:42.113+02:00  INFO 20644 --- [RestaurantManagement] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 67 ms. Found 8 JPA repository interfaces.
+2024-06-18T19:12:42.593+02:00  INFO 20644 --- [RestaurantManagement] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2024-06-18T19:12:42.602+02:00  INFO 20644 --- [RestaurantManagement] [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2024-06-18T19:12:42.602+02:00  INFO 20644 --- [RestaurantManagement] [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.19]
+2024-06-18T19:12:42.648+02:00  INFO 20644 --- [RestaurantManagement] [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2024-06-18T19:12:42.648+02:00  INFO 20644 --- [RestaurantManagement] [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1663 ms
+2024-06-18T19:12:42.772+02:00  INFO 20644 --- [RestaurantManagement] [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-06-18T19:12:42.832+02:00  INFO 20644 --- [RestaurantManagement] [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.4.4.Final
+2024-06-18T19:12:42.865+02:00  INFO 20644 --- [RestaurantManagement] [restartedMain] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2024-06-18T19:12:43.087+02:00  INFO 20644 --- [RestaurantManagement] [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-06-18T19:12:43.111+02:00  INFO 20644 --- [RestaurantManagement] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2024-06-18T19:12:43.378+02:00  INFO 20644 --- [RestaurantManagement] [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@158a8f75
+2024-06-18T19:12:43.380+02:00  INFO 20644 --- [RestaurantManagement] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2024-06-18T19:12:44.506+02:00  INFO 20644 --- [RestaurantManagement] [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-06-18T19:12:44.648+02:00  INFO 20644 --- [RestaurantManagement] [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-06-18T19:12:44.918+02:00  INFO 20644 --- [RestaurantManagement] [restartedMain] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
+2024-06-18T19:12:45.584+02:00  WARN 20644 --- [RestaurantManagement] [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-06-18T19:12:45.597+02:00  WARN 20644 --- [RestaurantManagement] [restartedMain] .s.s.UserDetailsServiceAutoConfiguration : 
+
+Using generated security password: 7d7249a2-b878-4223-bf05-92ef2a3d0816
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2024-06-18T19:12:45.808+02:00  INFO 20644 --- [RestaurantManagement] [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@2b720800, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@3249b885, org.springframework.security.web.context.SecurityContextHolderFilter@37606edc, org.springframework.security.web.header.HeaderWriterFilter@c636876, org.springframework.security.web.authentication.logout.LogoutFilter@34297474, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@41a65d92, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@77179edc, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@4f0dc443, org.springframework.security.web.session.SessionManagementFilter@6d484df2, org.springframework.security.web.access.ExceptionTranslationFilter@6a442e4f, org.springframework.security.web.access.intercept.AuthorizationFilter@5299777c]
+2024-06-18T19:12:45.815+02:00  WARN 20644 --- [RestaurantManagement] [restartedMain] o.s.s.c.a.web.builders.WebSecurity       : You are asking Spring Security to ignore Mvc [pattern='/resources/**']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2024-06-18T19:12:45.815+02:00  INFO 20644 --- [RestaurantManagement] [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will not secure Mvc [pattern='/resources/**']
+2024-06-18T19:12:45.982+02:00  INFO 20644 --- [RestaurantManagement] [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2024-06-18T19:12:46.009+02:00  INFO 20644 --- [RestaurantManagement] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path ''
+2024-06-18T19:12:46.016+02:00  INFO 20644 --- [RestaurantManagement] [restartedMain] p.p.p.r.RestaurantManagementApplication  : Started RestaurantManagementApplication in 5.469 seconds (process running for 6.333)
+2024-06-18T19:12:49.108+02:00  INFO 20644 --- [RestaurantManagement] [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-06-18T19:12:49.108+02:00  INFO 20644 --- [RestaurantManagement] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2024-06-18T19:12:49.110+02:00  INFO 20644 --- [RestaurantManagement] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 2 ms
+2024-06-18T19:13:13.007+02:00  INFO 20644 --- [RestaurantManagement] [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2024-06-18T19:13:13.010+02:00  INFO 20644 --- [RestaurantManagement] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2024-06-18T19:13:13.013+02:00  INFO 20644 --- [RestaurantManagement] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2024-06-18T19:13:15.493+02:00  INFO 20208 --- [RestaurantManagement] [restartedMain] p.p.p.r.RestaurantManagementApplication  : Starting RestaurantManagementApplication using Java 21.0.2 with PID 20208 (C:\Users\Buzka\IdeaProjects\RestaurantManagement\target\classes started by Buzka in C:\Users\Buzka\IdeaProjects\RestaurantManagement)
+2024-06-18T19:13:15.495+02:00  INFO 20208 --- [RestaurantManagement] [restartedMain] p.p.p.r.RestaurantManagementApplication  : No active profile set, falling back to 1 default profile: "default"
+2024-06-18T19:13:15.541+02:00  INFO 20208 --- [RestaurantManagement] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2024-06-18T19:13:15.541+02:00  INFO 20208 --- [RestaurantManagement] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2024-06-18T19:13:16.190+02:00  INFO 20208 --- [RestaurantManagement] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-06-18T19:13:16.272+02:00  INFO 20208 --- [RestaurantManagement] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 74 ms. Found 8 JPA repository interfaces.
+2024-06-18T19:13:16.736+02:00  INFO 20208 --- [RestaurantManagement] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2024-06-18T19:13:16.745+02:00  INFO 20208 --- [RestaurantManagement] [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2024-06-18T19:13:16.745+02:00  INFO 20208 --- [RestaurantManagement] [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.19]
+2024-06-18T19:13:16.789+02:00  INFO 20208 --- [RestaurantManagement] [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2024-06-18T19:13:16.789+02:00  INFO 20208 --- [RestaurantManagement] [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1247 ms
+2024-06-18T19:13:16.911+02:00  INFO 20208 --- [RestaurantManagement] [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-06-18T19:13:16.962+02:00  INFO 20208 --- [RestaurantManagement] [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.4.4.Final
+2024-06-18T19:13:16.996+02:00  INFO 20208 --- [RestaurantManagement] [restartedMain] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2024-06-18T19:13:17.187+02:00  INFO 20208 --- [RestaurantManagement] [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-06-18T19:13:17.207+02:00  INFO 20208 --- [RestaurantManagement] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2024-06-18T19:13:17.336+02:00  INFO 20208 --- [RestaurantManagement] [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@77ba0bfa
+2024-06-18T19:13:17.337+02:00  INFO 20208 --- [RestaurantManagement] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2024-06-18T19:13:18.247+02:00  INFO 20208 --- [RestaurantManagement] [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-06-18T19:13:18.370+02:00  INFO 20208 --- [RestaurantManagement] [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-06-18T19:13:18.596+02:00  INFO 20208 --- [RestaurantManagement] [restartedMain] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
+2024-06-18T19:13:19.249+02:00  WARN 20208 --- [RestaurantManagement] [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-06-18T19:13:19.264+02:00  WARN 20208 --- [RestaurantManagement] [restartedMain] .s.s.UserDetailsServiceAutoConfiguration : 
+
+Using generated security password: ff02ef8f-3fdc-47ce-8eb5-f3a94d78ae04
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2024-06-18T19:13:19.495+02:00  INFO 20208 --- [RestaurantManagement] [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@60a3a34c, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@64412e4a, org.springframework.security.web.context.SecurityContextHolderFilter@310d035b, org.springframework.security.web.header.HeaderWriterFilter@6a442e4f, org.springframework.security.web.authentication.logout.LogoutFilter@6a5e7b91, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@37606edc, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@1868921f, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@2b720800, org.springframework.security.web.session.SessionManagementFilter@7acd565a, org.springframework.security.web.access.ExceptionTranslationFilter@75b178a3, org.springframework.security.web.access.intercept.AuthorizationFilter@4a99dfe5]
+2024-06-18T19:13:19.500+02:00  WARN 20208 --- [RestaurantManagement] [restartedMain] o.s.s.c.a.web.builders.WebSecurity       : You are asking Spring Security to ignore Mvc [pattern='/resources/**']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2024-06-18T19:13:19.501+02:00  INFO 20208 --- [RestaurantManagement] [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will not secure Mvc [pattern='/resources/**']
+2024-06-18T19:13:19.665+02:00  INFO 20208 --- [RestaurantManagement] [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2024-06-18T19:13:19.691+02:00  INFO 20208 --- [RestaurantManagement] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path ''
+2024-06-18T19:13:19.696+02:00  INFO 20208 --- [RestaurantManagement] [restartedMain] p.p.p.r.RestaurantManagementApplication  : Started RestaurantManagementApplication in 4.596 seconds (process running for 5.194)
+2024-06-18T19:13:29.112+02:00  INFO 20208 --- [RestaurantManagement] [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-06-18T19:13:29.112+02:00  INFO 20208 --- [RestaurantManagement] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2024-06-18T19:13:29.113+02:00  INFO 20208 --- [RestaurantManagement] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2024-06-18T19:15:31.274+02:00  INFO 20208 --- [RestaurantManagement] [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2024-06-18T19:15:31.276+02:00  INFO 20208 --- [RestaurantManagement] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2024-06-18T19:15:31.281+02:00  INFO 20208 --- [RestaurantManagement] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2024-06-18T19:15:33.217+02:00  INFO 4476 --- [RestaurantManagement] [restartedMain] p.p.p.r.RestaurantManagementApplication  : Starting RestaurantManagementApplication using Java 21.0.2 with PID 4476 (C:\Users\Buzka\IdeaProjects\RestaurantManagement\target\classes started by Buzka in C:\Users\Buzka\IdeaProjects\RestaurantManagement)
+2024-06-18T19:15:33.218+02:00  INFO 4476 --- [RestaurantManagement] [restartedMain] p.p.p.r.RestaurantManagementApplication  : No active profile set, falling back to 1 default profile: "default"
+2024-06-18T19:15:33.253+02:00  INFO 4476 --- [RestaurantManagement] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2024-06-18T19:15:33.253+02:00  INFO 4476 --- [RestaurantManagement] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2024-06-18T19:15:33.785+02:00  INFO 4476 --- [RestaurantManagement] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-06-18T19:15:33.850+02:00  INFO 4476 --- [RestaurantManagement] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 59 ms. Found 8 JPA repository interfaces.
+2024-06-18T19:15:34.270+02:00  INFO 4476 --- [RestaurantManagement] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2024-06-18T19:15:34.278+02:00  INFO 4476 --- [RestaurantManagement] [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2024-06-18T19:15:34.279+02:00  INFO 4476 --- [RestaurantManagement] [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.19]
+2024-06-18T19:15:34.318+02:00  INFO 4476 --- [RestaurantManagement] [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2024-06-18T19:15:34.319+02:00  INFO 4476 --- [RestaurantManagement] [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1066 ms
+2024-06-18T19:15:34.430+02:00  INFO 4476 --- [RestaurantManagement] [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-06-18T19:15:34.479+02:00  INFO 4476 --- [RestaurantManagement] [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.4.4.Final
+2024-06-18T19:15:34.509+02:00  INFO 4476 --- [RestaurantManagement] [restartedMain] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2024-06-18T19:15:34.699+02:00  INFO 4476 --- [RestaurantManagement] [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-06-18T19:15:34.721+02:00  INFO 4476 --- [RestaurantManagement] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2024-06-18T19:15:34.856+02:00  INFO 4476 --- [RestaurantManagement] [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@7515538b
+2024-06-18T19:15:34.857+02:00  INFO 4476 --- [RestaurantManagement] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2024-06-18T19:15:35.753+02:00  INFO 4476 --- [RestaurantManagement] [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-06-18T19:15:35.877+02:00  INFO 4476 --- [RestaurantManagement] [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-06-18T19:15:36.114+02:00  INFO 4476 --- [RestaurantManagement] [restartedMain] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
+2024-06-18T19:15:36.730+02:00  WARN 4476 --- [RestaurantManagement] [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-06-18T19:15:36.742+02:00  WARN 4476 --- [RestaurantManagement] [restartedMain] .s.s.UserDetailsServiceAutoConfiguration : 
+
+Using generated security password: 4437eba6-43e3-411c-b5df-11060317c68d
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2024-06-18T19:15:36.933+02:00  INFO 4476 --- [RestaurantManagement] [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@63c79e34, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@23eb0f9b, org.springframework.security.web.context.SecurityContextHolderFilter@1d56c1b7, org.springframework.security.web.header.HeaderWriterFilter@1872c8dc, org.springframework.security.web.authentication.logout.LogoutFilter@13575933, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@7c9604e1, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@7c540312, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@4884915e, org.springframework.security.web.session.SessionManagementFilter@5089d261, org.springframework.security.web.access.ExceptionTranslationFilter@4ee561f7, org.springframework.security.web.access.intercept.AuthorizationFilter@4ae141a6]
+2024-06-18T19:15:36.939+02:00  WARN 4476 --- [RestaurantManagement] [restartedMain] o.s.s.c.a.web.builders.WebSecurity       : You are asking Spring Security to ignore Mvc [pattern='/resources/**']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2024-06-18T19:15:36.939+02:00  INFO 4476 --- [RestaurantManagement] [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will not secure Mvc [pattern='/resources/**']
+2024-06-18T19:15:37.098+02:00  INFO 4476 --- [RestaurantManagement] [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2024-06-18T19:15:37.123+02:00  INFO 4476 --- [RestaurantManagement] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path ''
+2024-06-18T19:15:37.128+02:00  INFO 4476 --- [RestaurantManagement] [restartedMain] p.p.p.r.RestaurantManagementApplication  : Started RestaurantManagementApplication in 4.218 seconds (process running for 4.76)
+2024-06-18T19:15:54.256+02:00  INFO 4476 --- [RestaurantManagement] [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-06-18T19:15:54.256+02:00  INFO 4476 --- [RestaurantManagement] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2024-06-18T19:15:54.257+02:00  INFO 4476 --- [RestaurantManagement] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
