@@ -92,7 +92,7 @@
 }
 
 .credentials {
-    height: 1vh; /* 1/10 of the viewport height *//
+    height: 1vh; /* 1/10 of the viewport height */
     background-color: grey;
     color: white;
     display: flex;
