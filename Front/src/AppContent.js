@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import AuthContent from "./loginPage/AuthContent";
 import LoginForm from "./loginPage/LoginForm";
 import WelcomeContent from "./loginPage/WelcomeContent";
-import {getAuthToken, removeAuthToken, request, setAuthToken} from "./api/axiosConfig";
+import { getAuthToken, removeAuthToken, request, setAuthToken } from "./api/axiosConfig";
 import Buttons from "./loginPage/Buttons";
 import UserComponent from "./loginPage/UserComponent";
 
@@ -21,62 +21,51 @@ export default class AppContent extends Component {
 
     login = () => {
         this.updateIsLoggedInState(() => {
-            if (this.state.isLoggedIn === false) {
-                this.setState({ componentToShow: "login" });
-            } else {
-                this.setState({ componentToShow: "messages" });
-            }
+            this.setState({ componentToShow: this.state.isLoggedIn ? "messages" : "login" });
         });
     };
 
     logout = () => {
-        this.setState({ componentToShow: "welcome", isLoggedIn: false }); // Update isLoggedIn state on logout
         removeAuthToken();
-        this.updateIsLoggedInState();
-        window.location.reload()
-    }
+        this.setState({ componentToShow: "welcome", isLoggedIn: false }, () => {
+            setTimeout(() => window.location.reload(), 100); // Delay to ensure state updates before reload
+        });
+    };
 
     onLogin = (event, login, password) => {
         event.preventDefault();
         request("POST", "/login", { login, password })
             .then((response) => {
                 setAuthToken(response.data.token);
-                this.setState({ componentToShow: "messages" }, () => {
-                    window.location.reload();
+                this.setState({ componentToShow: "messages", isLoggedIn: true }, () => {
+                    setTimeout(() => window.location.reload(), 100); // Delay to ensure state updates before reload
                 });
             })
             .catch(() => {
-                this.setState({ componentToShow: "welcome"});
+                this.setState({ componentToShow: "welcome", isLoggedIn: false });
             });
     };
-
 
     onRegister = (event, name, surname, phoneNumber, login, password) => {
         event.preventDefault();
         request("POST", "/register", { name, surname, phoneNumber, login, password })
             .then((response) => {
-                this.setState({ componentToShow: "messages"}); // Update isLoggedIn state on successful registration
                 setAuthToken(response.data.token);
+                this.setState({ componentToShow: "messages", isLoggedIn: true }, () => {
+                    setTimeout(() => window.location.reload(), 100); // Delay to ensure state updates before reload
+                });
             })
             .catch(() => {
-                this.setState({ componentToShow: "welcome"});
+                this.setState({ componentToShow: "welcome", isLoggedIn: false });
             });
-        this.updateIsLoggedInState();
-        window.location.reload()
-    }
+    };
 
     updateIsLoggedInState = (callback) => {
-        if (getAuthToken() != null) {
-            this.setState({ isLoggedIn: true }, callback);
-            this.setState({ componentToShow: "messages" }, callback);
-        } else {
-            this.setState({ isLoggedIn: false }, callback);
-        }
-    }
-
+        const isLoggedIn = getAuthToken() != null;
+        this.setState({ isLoggedIn, componentToShow: isLoggedIn ? "messages" : "welcome" }, callback);
+    };
 
     render() {
-
         return (
             <div>
                 {this.state.isLoggedIn && <UserComponent />} {/* Render UserComponent only when isLoggedIn is true */}

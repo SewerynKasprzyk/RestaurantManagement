@@ -11,7 +11,6 @@ export default function AddReservation() {
     const [user, setUser] = useState(null);
     const [availableTables, setAvailableTables] = useState([]);
     const [selectedTables, setSelectedTables] = useState([]);
-    const [selectedTableId, setSelectedTableId] = useState('');
     const [error, setError] = useState('');
     const navigate = useNavigate();
 
@@ -53,15 +52,11 @@ export default function AddReservation() {
         }
     };
 
-    const handleAddTable = () => {
-        const selectedTable = availableTables.find(table => table.id === parseInt(selectedTableId, 10));
+    const handleAddTable = (tableId) => {
+        const selectedTable = availableTables.find(table => table.id === tableId);
         if (selectedTable && !selectedTables.some(table => table.id === selectedTable.id)) {
             setSelectedTables([...selectedTables, selectedTable]);
         }
-    };
-
-    const handleTableSelect = (e) => {
-        setSelectedTableId(e.target.value);
     };
 
     const handleRemoveTable = (tableId) => {
@@ -95,7 +90,7 @@ export default function AddReservation() {
         try {
             const response = await request('post', '/api/reservations/add', reservation);
             if (response.status === 200) {
-                navigate('/');
+                navigate('/reservations');
             } else {
                 throw new Error('Błąd dodawania rezerwacji');
             }
@@ -121,83 +116,84 @@ export default function AddReservation() {
     };
 
     return (
-<div className="container" style={{marginTop:"1rem"}}>
-    <div className="row justify-content-center">
-        <div className="col-md-8">
-            <div className="card">
-                <div className="card-body">
-                    <h2 className="card-title mb-3">Dodaj rezerwację</h2>
-                    <form onSubmit={handleSubmit}>
-                        <div className="mb-3">
-                            <label className="form-label">Data rezerwacji:</label>
-                            <input
-                                type='date'
-                                className="form-control"
-                                value={reservationDate}
-                                onChange={(event) => setReservationDate(event.target.value)}
-                                required
-                            />
-                        </div>
-                        <div className="mb-3">
-                            <label className="form-label">Godzina rozpoczęcia:</label>
-                            <input
-                                type='time'
-                                className="form-control"
-                                value={startHour}
-                                onChange={handleStartHourChange}
-                                required
-                            />
-                        </div>
-                        <div className="mb-3">
-                            <label className="form-label">Godzina zakończenia:</label>
-                            <input
-                                type='time'
-                                className="form-control"
-                                value={endHour}
-                                onChange={handleEndHourChange}
-                                required
-                            />
-                        </div>
-                        <div className="mb-3">
-                            <label className="form-label">Uwagi:</label>
-                            <input
-                                type='text'
-                                className="form-control"
-                                value={notes}
-                                onChange={(event) => setNotes(event.target.value)}
-                            />
-                        </div>
-                        <div className="mb-3">
-                            <label className="form-label">Wybierz stolik:</label>
-                            <select className="form-select" onChange={handleTableSelect} value={selectedTableId}>
-                                <option value="" disabled>Wybierz stolik</option>
-                                {availableTables.map((table) => (
-                                    <option key={table.id} value={table.id}>
-                                        {`Stolik ${table.id} : ${table.seatsAmount}`}
-                                    </option>
-                                ))}
-                            </select>
-                            <button type="button" className="btn btn-primary mt-2" onClick={handleAddTable} disabled={!selectedTableId}>Dodaj stolik</button>
-                        </div>
-                        <div>
-                            <h3>Wybrane stoliki:</h3>
-                            {selectedTables.map((table) => (
-                                <div key={table.id} className="mb-2">
-                                    <p>{`Stolik ${table.id}: Liczba miejsc przy stoliku: ${table.seatsAmount || 'Brak opisu'}`}</p>
-                                    <button type="button" className="btn btn-danger" onClick={() => handleRemoveTable(table.id)}>Usuń</button>
+        <div className="container" style={{ marginTop: "1rem" }}>
+            <div className="row justify-content-center">
+                <div className="col-md-8">
+                    <div className="card">
+                        <div className="card-body">
+                            <h2 className="card-title mb-3">Dodaj rezerwację</h2>
+                            <form onSubmit={handleSubmit}>
+                                <div className="mb-3">
+                                    <label className="form-label">Data rezerwacji:</label>
+                                    <input
+                                        type='date'
+                                        className="form-control"
+                                        value={reservationDate}
+                                        onChange={(event) => setReservationDate(event.target.value)}
+                                        required
+                                    />
                                 </div>
-                            ))}
+                                <div className="mb-3">
+                                    <label className="form-label">Godzina rozpoczęcia:</label>
+                                    <input
+                                        type='time'
+                                        className="form-control"
+                                        value={startHour}
+                                        onChange={handleStartHourChange}
+                                        required
+                                    />
+                                </div>
+                                <div className="mb-3">
+                                    <label className="form-label">Godzina zakończenia:</label>
+                                    <input
+                                        type='time'
+                                        className="form-control"
+                                        value={endHour}
+                                        onChange={handleEndHourChange}
+                                        required
+                                    />
+                                </div>
+                                <div className="mb-3">
+                                    <label className="form-label">Uwagi:</label>
+                                    <input
+                                        type='text'
+                                        className="form-control"
+                                        value={notes}
+                                        onChange={(event) => setNotes(event.target.value)}
+                                    />
+                                </div>
+                                <div>
+                                    <h3>Wybierz stolik:</h3>
+                                    <div className="table-selection">
+                                        {availableTables.map((table) => (
+                                            <div
+                                                key={table.id}
+                                                className={`table-item ${selectedTables.some(selectedTable => selectedTable.id === table.id) ? 'selected' : ''}`}
+                                                onClick={() => handleAddTable(table.id)}
+                                                style={{ cursor: 'pointer', border: '1px solid #ccc', borderRadius: '5px', padding: '10px', marginRight: '10px', marginBottom: '10px' }}
+                                            >
+                                                <p>{`Stolik ${table.id}`}</p>
+                                                <p>Liczba miejsc: {table.seatsAmount}</p>
+                                            </div>
+                                        ))}
+                                    </div>
+                                </div>
+                                <div>
+                                    <h3>Wybrane stoliki:</h3>
+                                    {selectedTables.map((table) => (
+                                        <div key={table.id} className="mb-2">
+                                            <p>{`Stolik ${table.id}: Liczba miejsc przy stoliku: ${table.seatsAmount || 'Brak opisu'}`}</p>
+                                            <button type="button" className="btn btn-danger" onClick={() => handleRemoveTable(table.id)}>Usuń</button>
+                                        </div>
+                                    ))}
+                                </div>
+                                <button type='submit' className="btn btn-success mt-3">Dodaj rezerwację</button>
+                            </form>
+                            {error && <div className="error mt-3">{error}</div>}
                         </div>
-                        <button type='submit' className="btn btn-success mt-3">Dodaj rezerwację</button>
-                    </form>
-                    {error && <div className="error mt-3">{error}</div>}
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-</div>
-
-
-
     );
 }
