@@ -1,3 +1,7 @@
 .list-group-item:nth-child(even) {
   background-color: #f8f9fa; /* Jasnoszary kolor, zmień na kolor, który preferujesz */
 }
+.list-group {
+  max-height: 500px;
+  overflow-y: auto;
+}

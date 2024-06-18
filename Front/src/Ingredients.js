@@ -6,8 +6,6 @@ export function Ingredients() {
     const [selectedIngredient, setSelectedIngredient] = useState(null);
     const [ingredientData, setIngredientData] = useState({name: '', amount: '', amountType: ''});
     const [isNewIngredient, setIsNewIngredient] = useState(false);
-    const [currentPage, setCurrentPage] = useState(1);
-    const itemsPerPage = 6;
 
     useEffect(() => {
         fetch('http://localhost:8080/api/ingredient')
@@ -17,22 +15,6 @@ export function Ingredients() {
                 setIngredients(data);
             });
     }, []);
-
-    const indexOfLastItem = currentPage * itemsPerPage;
-    const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-    const currentItems = ingredients.slice(indexOfFirstItem, indexOfLastItem);
-
-    const nextPage = () => {
-        if (indexOfLastItem < ingredients.length) {
-            setCurrentPage(currentPage + 1);
-        }
-    };
-
-    const prevPage = () => {
-        if (indexOfFirstItem > 0) {
-            setCurrentPage(currentPage - 1);
-        }
-    };
 
     const handleEdit = (ingredient) => {
         setIsNewIngredient(false);
@@ -103,7 +85,7 @@ export function Ingredients() {
             <h2 className="text-white text-center mb-4">Składniki</h2>
             <button className="btn btn-primary mb-3" onClick={handleAdd}>Add New Ingredient</button>
             <ul className="list-group">
-                {currentItems.map((ingredient, index) => (
+                {ingredients.map((ingredient, index) => (
                     <li key={index} className="list-group-item d-flex justify-content-between align-items-center">
                         <div>
                             <h5 className="mb-1">{ingredient.name}</h5>
