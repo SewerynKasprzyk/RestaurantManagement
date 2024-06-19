@@ -1,5 +1,7 @@
 package pl.polsl.project.restaurantmanagement.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import jakarta.persistence.*;
@@ -19,6 +21,8 @@ public class TimeSchedule {
 
     @ManyToOne
     @JoinColumn(name = "user_id")
+    @JsonManagedReference // This manages the serialization direction
+    @JsonIgnore
     private User user;
 
     @Enumerated(EnumType.STRING)
@@ -32,8 +36,7 @@ public class TimeSchedule {
     private LocalTime endHour;
 
     @Column(name = "is_active")
-    private Boolean isActive;
+    private Boolean isActive = true;
 
     // Constructors, getters, and setters
 }
-
