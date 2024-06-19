@@ -23,6 +23,16 @@ const SalesByCategoryReport = () => {
     }, []);
 
     const fetchSales = async () => {
+        if (endDate < startDate) {
+            alert('End date cannot be lower than start date');
+            return;
+        }
+
+        if (endHour < startHour) {
+            alert('End hour cannot be lower than start hour');
+            return;
+        }
+
         setLoading(true);
         console.log(`Fetching sales data from ${startDate.toISOString().split('T')[0]} to ${endDate.toISOString().split('T')[0]}`);
         const response = await axios.get(`http://localhost:8080/api/reports/sales-by-category?start=${startDate.toISOString().split('T')[0]}&end=${endDate.toISOString().split('T')[0]}&category=${category}&startHour=${startHour}&endHour=${endHour}`);
@@ -68,7 +78,7 @@ const SalesByCategoryReport = () => {
                                 <input type="time" className="form-control" value={endHour} onChange={e => setEndHour(e.target.value)} />
                             </div>
                             <button className="btn btn-primary mb-3" onClick={fetchSales} disabled={loading}>
-                                {loading ? 'Ładowanie...' : 'Generate report'}
+                                {loading ? 'Loading...' : 'Generate report'}
                             </button>
                             <table className="table" style={{ textAlign: "center" }}>
                                 <thead>

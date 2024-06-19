@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios'; // Dodaj tę linię
+import axios from 'axios';
 import { getAuthToken, request } from "../api/axiosConfig";
 import {useNavigate, useParams} from 'react-router-dom';
 import * as availableTables from "react-bootstrap/ElementChildren";
@@ -176,7 +176,7 @@ export default function EditReservation() {
                     <h3>Wybrane stoliki:</h3>
                     {selectedTables.map((table) => (
                         <div key={table.id}>
-                            <p>{`Stolik ${table.id}: Liczba miejsc przy stoliku: ${table.seatsAmount || 'Brak opisu'}`}</p>
+                            <p>{`Stolik ${table.id}: Liczba miejsc przy stoliku: ${table.seatsAmount || 'No description'}`}</p>
                             <button type="button" onClick={() => handleRemoveTable(table.id)}>Usuń</button>
                         </div>
                     ))}

@@ -12,7 +12,7 @@ const ReservationsReport = () => {
 
     const fetchReservations = async () => {
         if (endDate < startDate) {
-            setErrorMessage('Data końcowa nie może być wcześniejsza niż data początkowa.');
+            setErrorMessage('The end date cannot be earlier than the start date');
             return;
         }
         setErrorMessage('');
@@ -44,7 +44,7 @@ const ReservationsReport = () => {
                             </div>
                             {errorMessage && <p style={{color: 'red'}}>{errorMessage}</p>}
                             <button className="btn btn-primary mb-3" onClick={fetchReservations} disabled={loading}>
-                                {loading ? 'Ładowanie...' : 'Generate report'}
+                                {loading ? 'Loading...' : 'Generate report'}
                             </button>
                             <table className="table" style={{ textAlign: "center" }}>
                                 <thead>

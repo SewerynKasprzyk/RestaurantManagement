@@ -201,8 +201,8 @@ export default function AddReservation() {
                                     <h3>Selected tables:</h3>
                                     {selectedTables.map((table) => (
                                         <div key={table.id} className="mb-2">
-                                            <p>{`Stolik ${table.id}: Number of seats: ${table.seatsAmount || 'Brak opisu'}`}</p>
-                                            <button type="button" className="btn btn-danger" onClick={() => handleRemoveTable(table.id)}>Usuń</button>
+                                            <p>{`Table ${table.id}: Number of seats: ${table.seatsAmount || 'No description'}`}</p>
+                                            <button type="button" className="btn btn-danger" onClick={() => handleRemoveTable(table.id)}>Delete</button>
                                         </div>
                                     ))}
                                 </div>

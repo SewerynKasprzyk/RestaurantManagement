@@ -81,7 +81,7 @@ export default function Reservation() {
                        </div>
                    ))
                ) : (
-                   <p>Brak rezerwacji</p>
+                   <p>No reservatiosc</p>
                )}
            </div>
        </div>
