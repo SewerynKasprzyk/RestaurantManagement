@@ -107,11 +107,11 @@ export default function AddOrder() {
 
     const getCategoryName = (category) => {
         if (category === 'MAIN_COURSE') {
-            return 'Dania główne';
+            return 'Main course';
         } else if (category === 'APPETIZER') {
-            return 'Przystawki';
+            return 'Apetizer';
         } else if (category === 'BEVERAGE') {
-            return 'Napoje';
+            return 'Beverage';
         } else {
             return category;
         }
@@ -131,8 +131,8 @@ export default function AddOrder() {
                                     <div className="card-body">
                                         <h4 className="card-title">{item.name}</h4>
                                         <p className="card-text">{item.description}</p>
-                                        <p className="card-text">Cena: {item.price} PLN</p>
-                                        <button className="btn btn-primary" onClick={() => handleAddItem(item)}>Dodaj</button>
+                                        <p className="card-text">Price: {item.price} PLN</p>
+                                        <button className="btn btn-primary" onClick={() => handleAddItem(item)}>Add</button>
                                     </div>
                                 </div>
                             </div>
@@ -145,10 +145,10 @@ export default function AddOrder() {
 
     return (
 <div className="container mt-4">
-            <h2>Dodaj zamówienie</h2>
+            <h2>Add order</h2>
             {renderMenuItemsByCategory()}
             <div>
-                <h3>Wybrane dania:</h3>
+                <h3>Selected dishes:</h3>
                 {Object.values(selectedItems).map((item) => (
                     <div key={item.id} className="card mb-3">
                         <div className="card-body">
@@ -161,16 +161,16 @@ export default function AddOrder() {
                 ))}
             </div>
             <div>
-                <h3>Łączna kwota: {totalPrice} PLN</h3>
+                <h3>Total price: {totalPrice} PLN</h3>
                 <textarea
                     className="form-control mb-3"
-                    placeholder="Dodaj notatki do zamówienia"
+                    placeholder="Additional information"
                     value={notes}
                     maxLength={50}
                     onChange={(e) => setNotes(e.target.value)}
                 />
             </div>
-            <button className="btn btn-primary mb-3" type='button' onClick={handleAddOrder}>Dodaj zamówienie</button>
+            <button className="btn btn-primary mb-3" type='button' onClick={handleAddOrder}>Add order</button>
             {error && <div className="alert alert-danger">{error}</div>}
         </div>
     );
