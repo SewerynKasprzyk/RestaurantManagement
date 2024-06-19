@@ -104,7 +104,8 @@ const TimeScheduleComponent = () => {
                     {selectedUserId && (
                         <div className="card mb-3">
                             <div className="card-body">
-                                <h3>Time Schedule for user: {selectedUser?.name} {selectedUser?.surname}</h3>
+                                <h3>Time Schedule for
+                                    user: {employees.find(emp => emp.id === parseInt(selectedUserId))?.name}</h3>
                                 <table className="table">
                                     <thead>
                                         <tr>
