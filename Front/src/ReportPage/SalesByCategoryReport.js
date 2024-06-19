@@ -42,17 +42,17 @@ const SalesByCategoryReport = () => {
                 <div className="col-md-8">
                     <div className="card">
                         <div className="card-body">
-                            <h1 className="card-title mb-4">Raport sprzedaży według kategorii</h1>
+                            <h1 className="card-title mb-4">Sales by category report</h1>
                             <div className="mb-3">
-                                <label className="form-label">Data początkowa:</label>
+                                <label className="form-label">Starting date:</label>
                                 <DatePicker className="form-control" selected={startDate} onChange={date => setStartDate(date)} />
                             </div>
                             <div className="mb-3">
-                                <label className="form-label">Data końcowa:</label>
+                                <label className="form-label">Ending date:</label>
                                 <DatePicker className="form-control" selected={endDate} onChange={date => setEndDate(date)} />
                             </div>
                             <div className="mb-3">
-                                <label className="form-label">Kategoria:</label>
+                                <label className="form-label">Category:</label>
                                 <select className="form-control" value={category} onChange={e => setCategory(e.target.value)}>
                                     {categories.map((category, index) => (
                                         <option key={index} value={category}>{category}</option>
@@ -60,22 +60,22 @@ const SalesByCategoryReport = () => {
                                 </select>
                             </div>
                             <div className="mb-3">
-                                <label className="form-label">Godzina początkowa:</label>
+                                <label className="form-label">Start hour:</label>
                                 <input type="time" className="form-control" value={startHour} onChange={e => setStartHour(e.target.value)} />
                             </div>
                             <div className="mb-3">
-                                <label className="form-label">Godzina końcowa:</label>
+                                <label className="form-label">End hour:</label>
                                 <input type="time" className="form-control" value={endHour} onChange={e => setEndHour(e.target.value)} />
                             </div>
                             <button className="btn btn-primary mb-3" onClick={fetchSales} disabled={loading}>
-                                {loading ? 'Ładowanie...' : 'Generuj raport'}
+                                {loading ? 'Ładowanie...' : 'Generate report'}
                             </button>
                             <table className="table" style={{ textAlign: "center" }}>
                                 <thead>
                                 <tr>
-                                    <th>Dzień</th>
-                                    <th>Suma sprzedaży</th>
-                                    <th>Średnia wartość zamówienia</th>
+                                    <th>Day</th>
+                                    <th>Total sales</th>
+                                    <th>Average value</th>
                                 </tr>
                                 </thead>
                                 <tbody>

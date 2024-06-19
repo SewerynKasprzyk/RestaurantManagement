@@ -80,85 +80,105 @@ const TimeScheduleComponent = () => {
     }
 
     return (
-        <div>
-            <div>
-                <label>Select Employee:</label>
-                <select
-                    value={selectedUserId}
-                    onChange={(e) => setSelectedUserId(e.target.value)}
-                    required
-                >
-                    <option value="">Select Employee</option>
-                    {employees.map(employee => (
-                        <option key={employee.id} value={employee.id}>{employee.name} {employee.surname}</option>
-                    ))}
-                </select>
-            </div>
+        <div className="container mt-4">
+            <div className="row justify-content-center">
+                <div className="col-md-8">
+                    <div className="card mb-3">
+                        <div className="card-body">
+                            <label htmlFor="employeeSelect">Select Employee:</label>
+                            <select
+                                id="employeeSelect"
+                                className="form-select"
+                                value={selectedUserId}
+                                onChange={(e) => setSelectedUserId(e.target.value)}
+                                required
+                            >
+                                <option value="">Select Employee</option>
+                                {employees.map(employee => (
+                                    <option key={employee.id} value={employee.id}>{employee.name} {employee.surname}</option>
+                                ))}
+                            </select>
+                        </div>
+                    </div>
 
-            {selectedUserId && (
-                <div>
-                    <h3>Time Schedule for user: {employees.find(emp => emp.id === parseInt(selectedUserId))?.name}</h3>
-                    <table>
-                        <thead>
-                        <tr>
-                            <th>Day</th>
-                            <th>Start Hour</th>
-                            <th>End Hour</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        {userSchedules.map(schedule => (
-                            <tr key={schedule.id}>
-                                <td>{schedule.day}</td>
-                                <td>{schedule.startHour}</td>
-                                <td>{schedule.endHour}</td>
-                            </tr>
-                        ))}
-                        </tbody>
-                    </table>
+                    {selectedUserId && (
+                        <div className="card mb-3">
+                            <div className="card-body">
+                                <h3>Time Schedule for: {employees.find(emp => emp.id === parseInt(selectedUserId))?.name}</h3>
+                                <table className="table">
+                                    <thead>
+                                        <tr>
+                                            <th>Day</th>
+                                            <th>Start Hour</th>
+                                            <th>End Hour</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {userSchedules.map(schedule => (
+                                            <tr key={schedule.id}>
+                                                <td>{schedule.day}</td>
+                                                <td>{schedule.startHour}</td>
+                                                <td>{schedule.endHour}</td>
+                                            </tr>
+                                        ))}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    )}
+
+                    <div className="card">
+                        <div className="card-header">
+                            <h2>Add New Schedule</h2>
+                        </div>
+                        <div className="card-body">
+                            <form onSubmit={handleSubmit}>
+                                <div className="mb-3">
+                                    <label htmlFor="daySelect" className="form-label">Day:</label>
+                                    <select
+                                        id="daySelect"
+                                        className="form-select"
+                                        value={day}
+                                        onChange={(e) => setDay(e.target.value)}
+                                        required
+                                    >
+                                        <option value="">Select Day</option>
+                                        <option value="MONDAY">Monday</option>
+                                        <option value="TUESDAY">Tuesday</option>
+                                        <option value="WEDNESDAY">Wednesday</option>
+                                        <option value="THURSDAY">Thursday</option>
+                                        <option value="FRIDAY">Friday</option>
+                                        <option value="SATURDAY">Saturday</option>
+                                        <option value="SUNDAY">Sunday</option>
+                                    </select>
+                                </div>
+                                <div className="mb-3">
+                                    <label htmlFor="startHour" className="form-label">Start Hour:</label>
+                                    <input
+                                        type="time"
+                                        id="startHour"
+                                        className="form-control"
+                                        value={startHour}
+                                        onChange={(e) => setStartHour(e.target.value)}
+                                        required
+                                    />
+                                </div>
+                                <div className="mb-3">
+                                    <label htmlFor="endHour" className="form-label">End Hour:</label>
+                                    <input
+                                        type="time"
+                                        id="endHour"
+                                        className="form-control"
+                                        value={endHour}
+                                        onChange={(e) => setEndHour(e.target.value)}
+                                        required
+                                    />
+                                </div>
+                                <button type="submit" className="btn btn-primary">Add Schedule</button>
+                            </form>
+                        </div>
+                    </div>
                 </div>
-            )}
-
-            <div>
-                <h2>Add New Schedule</h2>
-                <form onSubmit={handleSubmit}>
-                    <div>
-                        <label>Day:</label>
-                        <select
-                            value={day}
-                            onChange={(e) => setDay(e.target.value)}
-                            required
-                        >
-                            <option value="">Select Day</option>
-                            <option value="MONDAY">Monday</option>
-                            <option value="TUESDAY">Tuesday</option>
-                            <option value="WEDNESDAY">Wednesday</option>
-                            <option value="THURSDAY">Thursday</option>
-                            <option value="FRIDAY">Friday</option>
-                            <option value="SATURDAY">Saturday</option>
-                            <option value="SUNDAY">Sunday</option>
-                        </select>
-                    </div>
-                    <div>
-                        <label>Start Hour:</label>
-                        <input
-                            type="time"
-                            value={startHour}
-                            onChange={(e) => setStartHour(e.target.value)}
-                            required
-                        />
-                    </div>
-                    <div>
-                        <label>End Hour:</label>
-                        <input
-                            type="time"
-                            value={endHour}
-                            onChange={(e) => setEndHour(e.target.value)}
-                            required
-                        />
-                    </div>
-                    <button type="submit">Add Schedule</button>
-                </form>
             </div>
         </div>
     );

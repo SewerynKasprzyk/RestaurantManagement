@@ -69,12 +69,12 @@ export default function UserReservations() {
                <div key={reservation.id} className="col-md-4 mb-4">
                    <div className="card">
                        <div className="card-body">
-                           <h3 className="card-title">Rezerwacja {reservation.id}</h3>
-                           <p className="card-text">Data: {reservation.reservationDate}</p>
-                           <p className="card-text">Godzina rozpoczęcia: {reservation.startHour}</p>
-                           <p className="card-text">Godzina zakończenia: {reservation.endHour}</p>
-                           <p className="card-text">Uwagi: {reservation.notes}</p>
-                           <p className="card-text">Stoliki: {reservation.tables.map(table => `Stolik ${table.id}`).join(', ')}</p>
+                           <h3 className="card-title">Reservation {reservation.id}</h3>
+                           <p className="card-text">Date: {reservation.reservationDate}</p>
+                           <p className="card-text">Start hour: {reservation.startHour}</p>
+                           <p className="card-text">End hour: {reservation.endHour}</p>
+                           <p className="card-text">Additional info: {reservation.notes}</p>
+                           <p className="card-text">Tables: {reservation.tables.map(table => `Table ${table.id}`).join(', ')}</p>
                        </div>
                    </div>
                </div>
