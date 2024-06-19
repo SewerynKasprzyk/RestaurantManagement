@@ -1,5 +1,6 @@
 package pl.polsl.project.restaurantmanagement.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -44,6 +45,7 @@ public class User {
     private Boolean isActive;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    @JsonManagedReference // This prevents recursive serialization
     private List<TimeSchedule> timeSchedules;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)

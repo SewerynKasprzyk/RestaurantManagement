@@ -68,4 +68,8 @@ public class TimeScheduleService {
         timeSchedule.setIsActive(false);
         timeScheduleRepository.save(timeSchedule);
     }
+
+    public List<TimeSchedule> getTimeSchedulesByUserId(Integer userId) {
+        return timeScheduleRepository.findByUserId(userId);
+    }
 }

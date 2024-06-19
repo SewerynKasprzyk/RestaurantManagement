@@ -4,10 +4,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pl.polsl.project.restaurantmanagement.model.DTO.TimeScheduleDTO;
+import pl.polsl.project.restaurantmanagement.model.DTO.TimeScheduleMapper;
+import pl.polsl.project.restaurantmanagement.model.TimeSchedule;
 import pl.polsl.project.restaurantmanagement.services.TimeScheduleService;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/time-schedules")
@@ -19,6 +22,9 @@ public class TimeScheduleController {
     public TimeScheduleController(TimeScheduleService timeScheduleService) {
         this.timeScheduleService = timeScheduleService;
     }
+
+    @Autowired
+    private TimeScheduleMapper timeScheduleMapper; // Ensure this is autowired properly
 
     @GetMapping
     public List<TimeScheduleDTO> getAllTimeSchedules() {
@@ -55,5 +61,13 @@ public class TimeScheduleController {
         } catch (RuntimeException e) {
             return ResponseEntity.notFound().build();
         }
+    }
+
+    @GetMapping("/user/{userId}")
+    public List<TimeScheduleDTO> getTimeSchedulesByUserId(@PathVariable Integer userId) {
+        List<TimeSchedule> timeSchedules = timeScheduleService.getTimeSchedulesByUserId(userId);
+        return timeSchedules.stream()
+                .map(timeScheduleMapper::toTimeScheduleDTO)
+                .collect(Collectors.toList());
     }
 }

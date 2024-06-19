@@ -7,10 +7,19 @@ const TimeScheduleComponent = () => {
     const [endHour, setEndHour] = useState('');
     const [employees, setEmployees] = useState([]);
     const [selectedUserId, setSelectedUserId] = useState('');
+    const [userSchedules, setUserSchedules] = useState([]);
 
     useEffect(() => {
         fetchActiveEmployees();
     }, []);
+
+    useEffect(() => {
+        if (selectedUserId) {
+            fetchUserSchedules(selectedUserId);
+        } else {
+            setUserSchedules([]); // Reset schedules if no user is selected
+        }
+    }, [selectedUserId]);
 
     const fetchActiveEmployees = async () => {
         try {
@@ -22,6 +31,27 @@ const TimeScheduleComponent = () => {
         }
     };
 
+    const fetchUserSchedules = async (userId) => {
+        try {
+            const response = await request('get', `/api/time-schedules/user/${userId}`);
+            const sortedSchedules = sortSchedules(response.data);
+            setUserSchedules(sortedSchedules);
+        } catch (error) {
+            console.error('Error fetching user schedules:', error);
+            // Handle error (e.g., show an error message)
+        }
+    };
+
+    const sortSchedules = (schedules) => {
+        // Define the order of days in the week
+        const dayOrder = ['MONDAY', 'TUESDAY', 'WEDNESDAY', 'THURSDAY', 'FRIDAY', 'SATURDAY', 'SUNDAY'];
+
+        // Sort schedules based on the predefined order of days
+        schedules.sort((a, b) => dayOrder.indexOf(a.day) - dayOrder.indexOf(b.day));
+
+        return schedules;
+    };
+
     const handleSubmit = async (e) => {
         e.preventDefault();
 
@@ -30,71 +60,106 @@ const TimeScheduleComponent = () => {
                 day: day.toUpperCase(),
                 startHour: startHour,
                 endHour: endHour,
-                userId: parseInt(selectedUserId) // Assuming userId is the property name in your backend
+                userId: parseInt(selectedUserId) // Ensures userId is an integer
             });
 
-            console.log('Schedule created:', response.data);
-            // Optionally, redirect to another page or show a success message
+            console.log('Schedule created or updated:', response.data);
+            fetchUserSchedules(selectedUserId); // Refresh the user's schedules
+            setDay('');
+            setStartHour('');
+            setEndHour('');
         } catch (error) {
             console.error('Error creating or updating schedule:', error);
-            // Handle error (e.g., show an error message)
+            // Optionally, handle the error (e.g., show an error message)
         }
     };
 
+    // Handle case where employees is not yet fetched or empty
+    if (!employees || employees.length === 0) {
+        return <div>Loading...</div>; // You can show a loading indicator here
+    }
+
     return (
         <div>
-            <h2>Add New Schedule</h2>
-            <form onSubmit={handleSubmit}>
+            <div>
+                <label>Select Employee:</label>
+                <select
+                    value={selectedUserId}
+                    onChange={(e) => setSelectedUserId(e.target.value)}
+                    required
+                >
+                    <option value="">Select Employee</option>
+                    {employees.map(employee => (
+                        <option key={employee.id} value={employee.id}>{employee.name} {employee.surname}</option>
+                    ))}
+                </select>
+            </div>
+
+            {selectedUserId && (
                 <div>
-                    <label>Day:</label>
-                    <select
-                        value={day}
-                        onChange={(e) => setDay(e.target.value)}
-                        required
-                    >
-                        <option value="">Select Day</option>
-                        <option value="MONDAY">Monday</option>
-                        <option value="TUESDAY">Tuesday</option>
-                        <option value="WEDNESDAY">Wednesday</option>
-                        <option value="THURSDAY">Thursday</option>
-                        <option value="FRIDAY">Friday</option>
-                        <option value="SATURDAY">Saturday</option>
-                        <option value="SUNDAY">Sunday</option>
-                    </select>
-                </div>
-                <div>
-                    <label>Start Hour:</label>
-                    <input
-                        type="time"
-                        value={startHour}
-                        onChange={(e) => setStartHour(e.target.value)}
-                        required
-                    />
-                </div>
-                <div>
-                    <label>End Hour:</label>
-                    <input
-                        type="time"
-                        value={endHour}
-                        onChange={(e) => setEndHour(e.target.value)}
-                        required
-                    />
-                </div>
-                <div>
-                    <label>Select Employee:</label>
-                    <select
-                        value={selectedUserId}
-                        onChange={(e) => setSelectedUserId(e.target.value)}
-                        required
-                    >
-                        <option value="">Select Employee</option>
-                        {employees.map(employee => (
-                            <option key={employee.id} value={employee.id}>{employee.name} {employee.surname}</option>
+                    <h3>Time Schedule for user: {employees.find(emp => emp.id === parseInt(selectedUserId))?.name}</h3>
+                    <table>
+                        <thead>
+                        <tr>
+                            <th>Day</th>
+                            <th>Start Hour</th>
+                            <th>End Hour</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {userSchedules.map(schedule => (
+                            <tr key={schedule.id}>
+                                <td>{schedule.day}</td>
+                                <td>{schedule.startHour}</td>
+                                <td>{schedule.endHour}</td>
+                            </tr>
                         ))}
-                    </select>
+                        </tbody>
+                    </table>
                 </div>
-                <button type="submit">Add Schedule</button>
-            </form>
+            )}
+
+            <div>
+                <h2>Add New Schedule</h2>
+                <form onSubmit={handleSubmit}>
+                    <div>
+                        <label>Day:</label>
+                        <select
+                            value={day}
+                            onChange={(e) => setDay(e.target.value)}
+                            required
+                        >
+                            <option value="">Select Day</option>
+                            <option value="MONDAY">Monday</option>
+                            <option value="TUESDAY">Tuesday</option>
+                            <option value="WEDNESDAY">Wednesday</option>
+                            <option value="THURSDAY">Thursday</option>
+                            <option value="FRIDAY">Friday</option>
+                            <option value="SATURDAY">Saturday</option>
+                            <option value="SUNDAY">Sunday</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label>Start Hour:</label>
+                        <input
+                            type="time"
+                            value={startHour}
+                            onChange={(e) => setStartHour(e.target.value)}
+                            required
+                        />
+                    </div>
+                    <div>
+                        <label>End Hour:</label>
+                        <input
+                            type="time"
+                            value={endHour}
+                            onChange={(e) => setEndHour(e.target.value)}
+                            required
+                        />
+                    </div>
+                    <button type="submit">Add Schedule</button>
+                </form>
+            </div>
         </div>
     );
 };
