@@ -74,8 +74,8 @@ export default function Orders() {
 
     return (
        <div className='container mt-4'>
-                   <h2>Twoje zamówienia</h2>
-                   <button className='btn btn-primary mb-3' onClick={() => navigate('/orders/add')}>Dodaj zamówienie</button>
+                   <h2>Your orders</h2>
+                   <button className='btn btn-primary mb-3' onClick={() => navigate('/orders/add')}>Add order</button>
 
                    {error && <div className="alert alert-danger">{error}</div>}
 
@@ -85,17 +85,17 @@ export default function Orders() {
                                <div className='col-md-4 mb-4' key={order.id}>
                                    <div className='card'>
                                        <div className='card-body'>
-                                           <h5 className='card-title'>Data: {order.orderDate}</h5>
-                                           <h6 className='card-subtitle mb-2 text-muted'>Godzina: {formatTime(order.orderTime)}</h6>
-                                           <p className='card-text'>Uwagi: {order.notes}</p>
-                                           <p className='card-text'>Kwota: {order.totalPrice} zł</p>
-                                           <p className='card-text'>Zamówione pozycje:</p>
+                                           <h5 className='card-title'>Date: {order.orderDate}</h5>
+                                           <h6 className='card-subtitle mb-2 text-muted'>Time: {formatTime(order.orderTime)}</h6>
+                                           <p className='card-text'>Info: {order.notes}</p>
+                                           <p className='card-text'>Price: {order.totalPrice} zł</p>
+                                           <p className='card-text'>Selected dishes:</p>
                                            <ul className='list-group list-group-flush'>
                                                {order.orderItems.map((item, index) => (
                                                    <li key={index} className='list-group-item'>
-                                                       <p>Nazwa: {item.menuItem.name}</p>
-                                                       <p>Cena: {item.menuItem.price} zł</p>
-                                                       <p>Ilość: {item.quantity}</p>
+                                                       <p>Name: {item.menuItem.name}</p>
+                                                       <p>Price: {item.menuItem.price} zł</p>
+                                                       <p>Amount: {item.quantity}</p>
                                                    </li>
                                                ))}
                                            </ul>
@@ -105,7 +105,7 @@ export default function Orders() {
                            ))}
                        </div>
                    ) : (
-                       <p>Brak zamówień</p>
+                       <p>No orders</p>
                    )}
                </div>
     );
