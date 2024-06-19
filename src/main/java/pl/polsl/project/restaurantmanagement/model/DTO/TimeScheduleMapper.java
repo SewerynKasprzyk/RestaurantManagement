@@ -7,7 +7,6 @@ import org.mapstruct.Named;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import pl.polsl.project.restaurantmanagement.configuration.UserMapper;
-import pl.polsl.project.restaurantmanagement.model.DTO.TimeScheduleDTO;
 import pl.polsl.project.restaurantmanagement.model.TimeSchedule;
 import pl.polsl.project.restaurantmanagement.model.User;
 import pl.polsl.project.restaurantmanagement.repositories.UserRepository;
@@ -34,3 +33,4 @@ public interface TimeScheduleMapper {
         }
     }
 }
+

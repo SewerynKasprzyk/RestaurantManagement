@@ -9,6 +9,7 @@ import pl.polsl.project.restaurantmanagement.repositories.TimeScheduleRepository
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class TimeScheduleService {
@@ -22,8 +23,11 @@ public class TimeScheduleService {
         this.timeScheduleMapper = timeScheduleMapper;
     }
 
-    public List<TimeSchedule> getAllTimeSchedules() {
-        return timeScheduleRepository.findAll();
+    public List<TimeScheduleDTO> getAllTimeSchedules() {
+        List<TimeSchedule> timeSchedules = timeScheduleRepository.findAll();
+        return timeSchedules.stream()
+                .map(timeScheduleMapper::toTimeScheduleDTO)
+                .collect(Collectors.toList());
     }
 
     public Optional<TimeScheduleDTO> getTimeScheduleById(Integer id) {
@@ -31,8 +35,18 @@ public class TimeScheduleService {
                 .map(timeScheduleMapper::toTimeScheduleDTO);
     }
 
-    public TimeScheduleDTO createTimeSchedule(TimeScheduleDTO timeScheduleDTO) {
-        TimeSchedule timeSchedule = timeScheduleMapper.toTimeSchedule(timeScheduleDTO);
+    public TimeScheduleDTO createOrUpdateTimeSchedule(TimeScheduleDTO timeScheduleDTO) {
+        Optional<TimeSchedule> existingSchedule = timeScheduleRepository.findByUserIdAndDay(timeScheduleDTO.getUserId(), timeScheduleDTO.getDay());
+
+        TimeSchedule timeSchedule;
+        if (existingSchedule.isPresent()) {
+            timeSchedule = existingSchedule.get();
+            timeSchedule.setStartHour(timeScheduleDTO.getStartHour());
+            timeSchedule.setEndHour(timeScheduleDTO.getEndHour());
+        } else {
+            timeSchedule = timeScheduleMapper.toTimeSchedule(timeScheduleDTO);
+        }
+
         TimeSchedule savedTimeSchedule = timeScheduleRepository.save(timeSchedule);
         return timeScheduleMapper.toTimeScheduleDTO(savedTimeSchedule);
     }

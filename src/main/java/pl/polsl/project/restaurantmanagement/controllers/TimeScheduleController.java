@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pl.polsl.project.restaurantmanagement.model.DTO.TimeScheduleDTO;
-import pl.polsl.project.restaurantmanagement.model.TimeSchedule;
 import pl.polsl.project.restaurantmanagement.services.TimeScheduleService;
 
 import java.util.List;
@@ -22,7 +21,7 @@ public class TimeScheduleController {
     }
 
     @GetMapping
-    public List<TimeSchedule> getAllTimeSchedules() {
+    public List<TimeScheduleDTO> getAllTimeSchedules() {
         return timeScheduleService.getAllTimeSchedules();
     }
 
@@ -33,9 +32,9 @@ public class TimeScheduleController {
     }
 
     @PostMapping
-    public ResponseEntity<TimeScheduleDTO> createTimeSchedule(@RequestBody TimeScheduleDTO timeScheduleDTO) {
-        TimeScheduleDTO createdTimeSchedule = timeScheduleService.createTimeSchedule(timeScheduleDTO);
-        return ResponseEntity.ok(createdTimeSchedule);
+    public ResponseEntity<TimeScheduleDTO> createOrUpdateTimeSchedule(@RequestBody TimeScheduleDTO timeScheduleDTO) {
+        TimeScheduleDTO createdOrUpdatedTimeSchedule = timeScheduleService.createOrUpdateTimeSchedule(timeScheduleDTO);
+        return ResponseEntity.ok(createdOrUpdatedTimeSchedule);
     }
 
     @PutMapping("/{id}")

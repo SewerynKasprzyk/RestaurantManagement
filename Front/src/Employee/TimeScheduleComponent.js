@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import {request} from "../api/axiosConfig";
+import { request } from "../api/axiosConfig";
 
 const TimeScheduleComponent = () => {
     const [day, setDay] = useState('');
@@ -36,7 +36,7 @@ const TimeScheduleComponent = () => {
             console.log('Schedule created:', response.data);
             // Optionally, redirect to another page or show a success message
         } catch (error) {
-            console.error('Error creating schedule:', error);
+            console.error('Error creating or updating schedule:', error);
             // Handle error (e.g., show an error message)
         }
     };
