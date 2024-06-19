@@ -66,6 +66,8 @@ export default function AddReservation() {
     const handleSubmit = async (event) => {
         event.preventDefault();
 
+        const start = startHour.split(':').reduce((acc,time) => (60 * acc) + +time);
+        const end = endHour.split(':').reduce((acc,time) => (60 * acc) + +time);
 
         if (!user) {
             setError('Nie można dodać rezerwacji bez zalogowanego użytkownika.');
@@ -74,6 +76,11 @@ export default function AddReservation() {
 
         if(endHour < startHour) {
             setError('The end time of the reservation cannot be earlier than the start time.');
+            return;
+        }
+
+        if(end - start < 30) {
+            setError('The end time of the reservation must be at least 30 minutes greater than the start time.');
             return;
         }
 
@@ -121,6 +128,10 @@ export default function AddReservation() {
         }
     };
 
+    const todayDate = new Date();
+    todayDate.setHours(0, 0, 0, 0);
+    const adjustedDate = new Date(todayDate.getTime() - (todayDate.getTimezoneOffset() * 60000)).toISOString().split('T')[0];
+
     return (
         <div className="container" style={{ marginTop: "1rem" }}>
             <div className="row justify-content-center">
@@ -135,6 +146,7 @@ export default function AddReservation() {
                                         type='date'
                                         className="form-control"
                                         value={reservationDate}
+                                        min={adjustedDate}
                                         onChange={(event) => setReservationDate(event.target.value)}
                                         required
                                     />

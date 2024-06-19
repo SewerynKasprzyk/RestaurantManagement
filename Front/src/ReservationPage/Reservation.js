@@ -13,6 +13,9 @@ export default function Reservation() {
     const navigate = useNavigate();
     const [availableTables, setAvailableTables] = useState([]);
 
+
+
+
     useEffect(() => {
         const fetchUser = async () => {
             try {
@@ -55,18 +58,7 @@ export default function Reservation() {
 
     const handleEdit = (id) => {
         navigate(`/reservations/edit/${id}`);
-    }
-
-    const handleSubmit = (event) => {
-        event.preventDefault();
-
-        if (endHour < startHour) {
-            setError('End time cannot be earlier than start time');
-            return;
-        }
-
-        // Continue with form submission
-    }
+    };
 
     return (
         <div>
