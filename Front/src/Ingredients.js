@@ -82,7 +82,7 @@ export function Ingredients() {
 
     return (
         <div className="container my-4">
-            <h2 className="text-white text-center mb-4">Składniki</h2>
+            <h2 className="text-white text-center mb-4">Ingredients</h2>
             <button className="btn btn-primary mb-3" onClick={handleAdd}>Add New Ingredient</button>
             <ul className="list-group">
                 {ingredients.map((ingredient, index) => (

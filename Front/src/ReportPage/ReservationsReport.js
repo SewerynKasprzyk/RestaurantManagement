@@ -27,24 +27,24 @@ const ReservationsReport = () => {
                 <div className="col-md-8">
                     <div className="card">
                         <div className="card-body">
-                            <h1 className="card-title mb-4">Raport okresowy rezerwacji</h1>
+                            <h1 className="card-title mb-4">Periodic booking report</h1>
                             <div className="mb-3">
-                                <label className="form-label">Data początkowa:</label>
+                                <label className="form-label">Starting date:</label>
                                 <DatePicker className="form-control" selected={startDate} onChange={date => setStartDate(date)} />
                             </div>
                             <div className="mb-3">
-                                <label className="form-label">Data końcowa:</label>
+                                <label className="form-label">Ending date:</label>
                                 <DatePicker className="form-control" selected={endDate} onChange={date => setEndDate(date)} />
                             </div>
                             <button className="btn btn-primary mb-3" onClick={fetchReservations} disabled={loading}>
-                                {loading ? 'Ładowanie...' : 'Generuj raport'}
+                                {loading ? 'Ładowanie...' : 'Generate report'}
                             </button>
                             <table className="table" style={{ textAlign: "center" }}>
                                 <thead>
                                     <tr>
-                                        <th>Data</th>
-                                        <th>Ilość rezerwacji</th>
-                                        <th>Średnia ilość godzin rezerwacji</th>
+                                        <th>Date</th>
+                                        <th>Amount of reservations</th>
+                                        <th>Average reservation duration</th>
                                     </tr>
                                 </thead>
                                 <tbody>

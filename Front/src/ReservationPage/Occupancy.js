@@ -39,7 +39,7 @@ const Occupancy = () => {
                 <DatePicker selected={selectedDate} onChange={date => setSelectedDate(date)} className="form-control mb-3" />
             </div>
             <div className="d-flex justify-content-center">
-                <button className="btn btn-primary mb-3" onClick={() => setFetch(true)}>Pokaż rezerwacje</button>
+                <button className="btn btn-primary mb-3" onClick={() => setFetch(true)}>Show reservations</button>
                 {error && <div className="alert alert-danger">{error}</div>}
             </div>
 
@@ -48,13 +48,13 @@ const Occupancy = () => {
                     <div key={reservation.id} className="col-md-4 mb-4">
                         <div className="card">
                             <div className="card-body">
-                                <p className="card-text">Data: {reservation.reservationDate}</p>
-                                <p className="card-text">Godzina rozpoczęcia: {reservation.startHour}</p>
-                                <p className="card-text">Godzina zakończenia: {reservation.endHour}</p>
-                                <p className="card-text">Zarezerwowane stoliki: {reservation.tables.map(table => `Stolik ${table.id}`).join(', ')}</p>
-                                {reservation.user && <p className="card-text">Imię użytkownika: {reservation.user.name}</p>}
-                                {reservation.user && <p className="card-text">Nazwisko użytkownika: {reservation.user.surname}</p>}
-                                <p className="card-text">Uwagi: {reservation.notes}</p>
+                                <p className="card-text">Date: {reservation.reservationDate}</p>
+                                <p className="card-text">Start hour: {reservation.startHour}</p>
+                                <p className="card-text">End hour: {reservation.endHour}</p>
+                                <p className="card-text">Selected tables: {reservation.tables.map(table => `Table ${table.id}`).join(', ')}</p>
+                                {reservation.user && <p className="card-text">Guest's name: {reservation.user.name}</p>}
+                                {reservation.user && <p className="card-text">Guest's surname: {reservation.user.surname}</p>}
+                                <p className="card-text">Additional info: {reservation.notes}</p>
                             </div>
                         </div>
                     </div>
