@@ -15,6 +15,6 @@ import java.util.Optional;
 public interface TimeScheduleRepository extends JpaRepository<TimeSchedule, Integer> {
     Optional<TimeSchedule> findByUserIdAndDay(Integer userId, DayOfWeek day);
     List<TimeSchedule> findByUserId(Integer userId);
-    @Query("SELECT DISTINCT ts.user FROM TimeSchedule ts WHERE ts.day = :day")
+    @Query("SELECT DISTINCT ts.user FROM TimeSchedule ts WHERE ts.day = :day AND ts.user.isActive = true")
     List<User> findEmployeesWithSchedulesForDay(@Param("day") DayOfWeek day);
 }
