@@ -4,6 +4,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import jakarta.persistence.*;
 
+import java.time.DayOfWeek;
 import java.time.LocalTime;
 
 @Entity
@@ -32,8 +33,7 @@ public class TimeSchedule {
     private LocalTime endHour;
 
     @Column(name = "is_active")
-    private Boolean isActive;
+    private Boolean isActive = true;
 
     // Constructors, getters, and setters
 }
-

@@ -2,6 +2,8 @@ package pl.polsl.project.restaurantmanagement.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import pl.polsl.project.restaurantmanagement.model.DTO.TimeScheduleDTO;
+import pl.polsl.project.restaurantmanagement.model.DTO.TimeScheduleMapper;
 import pl.polsl.project.restaurantmanagement.model.TimeSchedule;
 import pl.polsl.project.restaurantmanagement.repositories.TimeScheduleRepository;
 
@@ -12,35 +14,44 @@ import java.util.Optional;
 public class TimeScheduleService {
 
     private final TimeScheduleRepository timeScheduleRepository;
+    private final TimeScheduleMapper timeScheduleMapper;
 
     @Autowired
-    public TimeScheduleService(TimeScheduleRepository timeScheduleRepository) {
+    public TimeScheduleService(TimeScheduleRepository timeScheduleRepository, TimeScheduleMapper timeScheduleMapper) {
         this.timeScheduleRepository = timeScheduleRepository;
+        this.timeScheduleMapper = timeScheduleMapper;
     }
 
     public List<TimeSchedule> getAllTimeSchedules() {
         return timeScheduleRepository.findAll();
     }
 
-    public Optional<TimeSchedule> getTimeScheduleById(Integer id) {
-        return timeScheduleRepository.findById(id);
+    public Optional<TimeScheduleDTO> getTimeScheduleById(Integer id) {
+        return timeScheduleRepository.findById(id)
+                .map(timeScheduleMapper::toTimeScheduleDTO);
     }
 
-    public TimeSchedule createTimeSchedule(TimeSchedule timeSchedule) {
-        return timeScheduleRepository.save(timeSchedule);
+    public TimeScheduleDTO createTimeSchedule(TimeScheduleDTO timeScheduleDTO) {
+        TimeSchedule timeSchedule = timeScheduleMapper.toTimeSchedule(timeScheduleDTO);
+        TimeSchedule savedTimeSchedule = timeScheduleRepository.save(timeSchedule);
+        return timeScheduleMapper.toTimeScheduleDTO(savedTimeSchedule);
     }
 
-    public TimeSchedule updateTimeSchedule(Integer id, TimeSchedule updatedTimeSchedule) {
-        Optional<TimeSchedule> existingTimeScheduleOptional = timeScheduleRepository.findById(id);
-        if (existingTimeScheduleOptional.isPresent()) {
-            updatedTimeSchedule.setId(id);
-            return timeScheduleRepository.save(updatedTimeSchedule);
-        } else {
-            throw new RuntimeException("TimeSchedule with id " + id + " not found.");
-        }
+    public TimeScheduleDTO updateTimeSchedule(Integer id, TimeScheduleDTO updatedTimeScheduleDTO) {
+        TimeSchedule timeSchedule = timeScheduleRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("TimeSchedule with id " + id + " not found."));
+
+        timeScheduleMapper.updateTimeScheduleFromDTO(updatedTimeScheduleDTO, timeSchedule);
+
+        TimeSchedule savedTimeSchedule = timeScheduleRepository.save(timeSchedule);
+        return timeScheduleMapper.toTimeScheduleDTO(savedTimeSchedule);
     }
 
-    public void deleteTimeSchedule(Integer id) {
-        timeScheduleRepository.deleteById(id);
+    public void softDeleteTimeSchedule(Integer id) {
+        TimeSchedule timeSchedule = timeScheduleRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("TimeSchedule with id " + id + " not found."));
+
+        timeSchedule.setIsActive(false);
+        timeScheduleRepository.save(timeSchedule);
     }
 }
