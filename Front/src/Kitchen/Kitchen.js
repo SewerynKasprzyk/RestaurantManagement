@@ -49,6 +49,9 @@ export default function Kitchen() {
     return (
         <div className="container my-4">
             <h2 className="text-white text-center mb-4">Kitchen</h2>
+            {orders.length === 0 ? (
+                <p className="text-white text-center">Currently no new orders</p>
+            ) : (
             <div className="row">
                 {orders.map(order => (
                     <div key={order.id} className="col-md-6 mb-4">
@@ -86,6 +89,7 @@ export default function Kitchen() {
                     </div>
                 ))}
             </div>
+                )}
         </div>
     );
 }
