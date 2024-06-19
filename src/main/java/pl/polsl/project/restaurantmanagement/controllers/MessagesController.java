@@ -12,6 +12,6 @@ public class MessagesController {
 
     @GetMapping("/messages")
     public ResponseEntity<List<String>> messages() {
-        return ResponseEntity.ok(Arrays.asList("Witaj w naszej resteuracji!", "Zalogowano pomyślnie"));
+        return ResponseEntity.ok(Arrays.asList("Welcome to our Restaurant!", "Logged in successfully!"));
     }
 }
