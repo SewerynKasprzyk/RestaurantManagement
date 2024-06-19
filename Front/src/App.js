@@ -24,6 +24,8 @@ import Home from "./HomePage/Home";
 import Occupancy from './ReservationPage/Occupancy';
 import './globalStyles.css';
 import Kitchen from "./Kitchen/Kitchen";
+import TimeScheduleComponent from "./Employee/TimeScheduleComponent";
+import WorkingEmployeesTodayComponent from "./Employee/WorkingEmployeesTodayComponent";
 
 
 // Main application component
@@ -54,6 +56,8 @@ function App() {
                         <Route path="/reservations/edit/:id" element={<PrivateRoute element={<EditReservation />} roles={['ADMIN', 'EMPLOYEE']} />} />
                         <Route path="/occupancy" element={<PrivateRoute element={<Occupancy />} roles={['ADMIN', 'EMPLOYEE']} />} />
                         <Route path="/orders/kitchen" element={<PrivateRoute element={<Kitchen />} roles={['ADMIN', 'EMPLOYEE']} />} />
+                        <Route path="/time-schedule" element={<PrivateRoute element={<TimeScheduleComponent />} roles={['ADMIN']} />} />
+                        <Route path="/time-schedule-today" element={<PrivateRoute element={<WorkingEmployeesTodayComponent />} roles={['ADMIN', 'EMPLOYEE']} />} />
                     </Routes>
                 </div>
             </BrowserRouter>
